@@ -37,6 +37,33 @@ function DiscoverStudents() {
     fetchStudents();
   }, []);
 
+  const handleConnect = async (userId) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(
+      `http://localhost:5000/api/connections/${userId}`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert("Connection request sent successfully");
+    } else {
+      alert(data.message);
+    }
+  } catch (error) {
+    console.error("Connection error:", error);
+    alert("Unable to send connection request");
+  }
+};
+
   // Search students
   const filteredStudents = students.filter((student) => {
     const searchText = search.toLowerCase();
@@ -106,8 +133,7 @@ function DiscoverStudents() {
               {student.interests?.join(", ") || "No interests added"}
             </p>
 
-            <button>Connect</button>
-
+<button onClick={() => handleConnect(student._id)}>Connect</button>
             <hr />
           </div>
         ))
