@@ -32,7 +32,7 @@ function Connections() {
         <p>No connections yet.</p>
       ) : (
 connections.map((connection) => {
-  const currentUserId = JSON.parse(localStorage.getItem("user"))._id;
+  const currentUserId = JSON.parse(localStorage.getItem("user")).id;
 
   const otherUser =
     connection.sender._id === currentUserId
