@@ -1,0 +1,53 @@
+.opportunity-page {
+    padding: 30px;
+}
+
+.opportunity-page h1 {
+    margin-bottom: 20px;
+}
+
+.opportunity-filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.opportunity-filters input,
+.opportunity-filters select {
+    padding: 10px;
+    font-size: 16px;
+}
+
+.opportunity-list {
+    display: grid;
+    gap: 20px;
+}
+
+.opportunity-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white;
+}
+
+.opportunity-card h2 {
+    margin-top: 0;
+}
+
+.opportunity-card p {
+    margin: 8px 0;
+}
+
+.opportunity-type {
+    font-weight: bold;
+}
+
+.opportunity-card a {
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+.opportunity-card a:hover {
+    text-decoration: underline;
+}

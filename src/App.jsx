@@ -5,6 +5,9 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import DiscoverStudents from "./pages/DiscoverStudents";
 import Connections from "./pages/Connections";
+import Opportunities from "./pages/Opportunities";
+import CreateOpportunity from "./pages/CreateOpportunity";
+import CollaborationHub from "./pages/CollaborationHub";
 
 function App() {
   return (
@@ -16,6 +19,9 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/discover-students" element={<DiscoverStudents />} />
         <Route path="/connections" element={<Connections />} />
+        <Route path="/opportunities" element={<Opportunities />} />
+        <Route path="/create-opportunity" element={<CreateOpportunity />} />
+        <Route path="/collaborations" element={<CollaborationHub />}/>
         
 
       </Routes>
