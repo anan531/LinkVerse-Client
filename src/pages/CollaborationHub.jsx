@@ -156,6 +156,15 @@ function CollaborationHub() {
                             {collaboration.status}
                         </p>
 
+                        <p>
+    <strong>Team Members:</strong>{" "}
+    {collaboration.members.length === 0
+        ? "No members yet"
+        : collaboration.members
+            .map((member) => member.name)
+            .join(", ")}
+</p>
+
                         <hr />
                     </div>
                 ))

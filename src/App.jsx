@@ -8,6 +8,7 @@ import Connections from "./pages/Connections";
 import Opportunities from "./pages/Opportunities";
 import CreateOpportunity from "./pages/CreateOpportunity";
 import CollaborationHub from "./pages/CollaborationHub";
+import Chat from "./pages/Chat";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/opportunities" element={<Opportunities />} />
         <Route path="/create-opportunity" element={<CreateOpportunity />} />
         <Route path="/collaborations" element={<CollaborationHub />}/>
+        <Route path="/chat" element={<Chat />}/>
         
 
       </Routes>
