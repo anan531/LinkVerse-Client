@@ -9,6 +9,8 @@ import Opportunities from "./pages/Opportunities";
 import CreateOpportunity from "./pages/CreateOpportunity";
 import CollaborationHub from "./pages/CollaborationHub";
 import Chat from "./pages/Chat";
+import StudentFeed from "./pages/StudentFeed";
+import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
         <Route path="/create-opportunity" element={<CreateOpportunity />} />
         <Route path="/collaborations" element={<CollaborationHub />}/>
         <Route path="/chat" element={<Chat />}/>
+        <Route path="/feed" element={<StudentFeed />}/>
+        <Route path="/admin-dashboard" element={<AdminDashboard />}/>
         
 
       </Routes>
