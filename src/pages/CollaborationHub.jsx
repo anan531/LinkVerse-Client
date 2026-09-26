@@ -2,12 +2,20 @@ import { useEffect, useState } from "react";
 
 function CollaborationHub() {
     const [collaborations, setCollaborations] = useState([]);
+    const [joinRequests, setJoinRequests] = useState([]);
+    const [requestedCollaborations, setRequestedCollaborations] = useState([]);
 
     const [formData, setFormData] = useState({
         title: "",
         description: "",
         requiredSkills: "",
     });
+
+    const storedUser = JSON.parse(
+        localStorage.getItem("user") || "null"
+    );
+
+    const currentUserId = storedUser?._id || storedUser?.id;
 
     const fetchCollaborations = () => {
         const token = localStorage.getItem("token");
@@ -22,12 +30,43 @@ function CollaborationHub() {
                 setCollaborations(data);
             })
             .catch((error) => {
-                console.error("Error fetching collaborations:", error);
+                console.error(
+                    "Error fetching collaborations:",
+                    error
+                );
+            });
+    };
+
+    const fetchJoinRequests = () => {
+        const token = localStorage.getItem("token");
+
+        fetch(
+            "http://localhost:5000/api/collaboration-requests/my-requests",
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        )
+            .then((response) => response.json())
+            .then((data) => {
+                if (Array.isArray(data)) {
+                    setJoinRequests(data);
+                } else {
+                    setJoinRequests([]);
+                }
+            })
+            .catch((error) => {
+                console.error(
+                    "Error fetching join requests:",
+                    error
+                );
             });
     };
 
     useEffect(() => {
         fetchCollaborations();
+        fetchJoinRequests();
     }, []);
 
     const handleChange = (e) => {
@@ -76,11 +115,119 @@ function CollaborationHub() {
                 });
 
                 fetchCollaborations();
+                fetchJoinRequests();
             } else {
                 alert(data.message);
             }
         } catch (error) {
-            console.error("Error creating collaboration:", error);
+            console.error(
+                "Error creating collaboration:",
+                error
+            );
+
+            alert("Unable to connect to server");
+        }
+    };
+
+    const handleJoinRequest = async (collaborationId) => {
+        const token = localStorage.getItem("token");
+
+        try {
+            const response = await fetch(
+                `http://localhost:5000/api/collaboration-requests/${collaborationId}`,
+                {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+
+            const data = await response.json();
+
+            if (response.ok) {
+                alert(data.message);
+
+                setRequestedCollaborations([
+                    ...requestedCollaborations,
+                    collaborationId,
+                ]);
+            } else {
+                alert(data.message);
+            }
+        } catch (error) {
+            console.error(
+                "Error sending join request:",
+                error
+            );
+
+            alert("Unable to connect to server");
+        }
+    };
+
+    const handleAccept = async (requestId) => {
+        const token = localStorage.getItem("token");
+
+        try {
+            const response = await fetch(
+                `http://localhost:5000/api/collaboration-requests/${requestId}/accept`,
+                {
+                    method: "PUT",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+
+            const data = await response.json();
+
+            if (response.ok) {
+                alert(data.message);
+
+                fetchJoinRequests();
+                fetchCollaborations();
+            } else {
+                alert(data.message);
+            }
+        } catch (error) {
+            console.error(
+                "Error accepting join request:",
+                error
+            );
+
+            alert("Unable to connect to server");
+        }
+    };
+
+    const handleReject = async (requestId) => {
+        const token = localStorage.getItem("token");
+
+        try {
+            const response = await fetch(
+                `http://localhost:5000/api/collaboration-requests/${requestId}/reject`,
+                {
+                    method: "PUT",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+
+            const data = await response.json();
+
+            if (response.ok) {
+                alert(data.message);
+
+                fetchJoinRequests();
+            } else {
+                alert(data.message);
+            }
+        } catch (error) {
+            console.error(
+                "Error rejecting join request:",
+                error
+            );
+
             alert("Unable to connect to server");
         }
     };
@@ -101,7 +248,8 @@ function CollaborationHub() {
                     required
                 />
 
-                <br /><br />
+                <br />
+                <br />
 
                 <textarea
                     name="description"
@@ -111,7 +259,8 @@ function CollaborationHub() {
                     required
                 />
 
-                <br /><br />
+                <br />
+                <br />
 
                 <input
                     type="text"
@@ -121,7 +270,8 @@ function CollaborationHub() {
                     onChange={handleChange}
                 />
 
-                <br /><br />
+                <br />
+                <br />
 
                 <button type="submit">
                     Create Collaboration
@@ -135,35 +285,114 @@ function CollaborationHub() {
             {collaborations.length === 0 ? (
                 <p>No collaborations available.</p>
             ) : (
-                collaborations.map((collaboration) => (
-                    <div key={collaboration._id}>
-                        <h3>{collaboration.title}</h3>
+                collaborations.map((collaboration) => {
+                    const isCreator =
+                        collaboration.createdBy._id === currentUserId;
 
-                        <p>{collaboration.description}</p>
+                    const hasRequested =
+                        requestedCollaborations.includes(
+                            collaboration._id
+                        );
 
+                    return (
+                        <div key={collaboration._id}>
+                            <h3>{collaboration.title}</h3>
+
+                            <p>{collaboration.description}</p>
+
+                            <p>
+                                <strong>Required Skills:</strong>{" "}
+                                {collaboration.requiredSkills.join(
+                                    ", "
+                                )}
+                            </p>
+
+                            <p>
+                                <strong>Posted by:</strong>{" "}
+                                {collaboration.createdBy.name}
+                            </p>
+
+                            <p>
+                                <strong>Status:</strong>{" "}
+                                {collaboration.status}
+                            </p>
+
+                            <p>
+                                <strong>Team Members:</strong>{" "}
+                                {collaboration.members.length === 0
+                                    ? "No members yet"
+                                    : collaboration.members
+                                          .map(
+                                              (member) =>
+                                                  member.name
+                                          )
+                                          .join(", ")}
+                            </p>
+
+                            {!isCreator &&
+                                !hasRequested &&
+                                collaboration.status === "open" && (
+                                    <button
+                                        onClick={() =>
+                                            handleJoinRequest(
+                                                collaboration._id
+                                            )
+                                        }
+                                    >
+                                        Request to Join
+                                    </button>
+                                )}
+
+                            {!isCreator && hasRequested && (
+                                <p>
+                                    <strong>
+                                        Join request sent
+                                    </strong>
+                                </p>
+                            )}
+
+                            <hr />
+                        </div>
+                    );
+                })
+            )}
+
+            <h2>Pending Join Requests</h2>
+
+            {joinRequests.length === 0 ? (
+                <p>No pending join requests.</p>
+            ) : (
+                joinRequests.map((request) => (
+                    <div key={request._id}>
                         <p>
-                            <strong>Required Skills:</strong>{" "}
-                            {collaboration.requiredSkills.join(", ")}
+                            <strong>
+                                {request.sender.name}
+                            </strong>{" "}
+                            requested to join{" "}
+                            <strong>
+                                {request.collaboration.title}
+                            </strong>
                         </p>
 
                         <p>
-                            <strong>Posted by:</strong>{" "}
-                            {collaboration.createdBy.name}
+                            Email: {request.sender.email}
                         </p>
 
-                        <p>
-                            <strong>Status:</strong>{" "}
-                            {collaboration.status}
-                        </p>
+                        <button
+                            onClick={() =>
+                                handleAccept(request._id)
+                            }
+                        >
+                            Accept
+                        </button>
 
-                        <p>
-    <strong>Team Members:</strong>{" "}
-    {collaboration.members.length === 0
-        ? "No members yet"
-        : collaboration.members
-            .map((member) => member.name)
-            .join(", ")}
-</p>
+                        <button
+                            onClick={() =>
+                                handleReject(request._id)
+                            }
+                        >
+                            Reject
+                        </button>
 
                         <hr />
                     </div>

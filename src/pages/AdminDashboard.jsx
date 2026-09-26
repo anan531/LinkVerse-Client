@@ -10,6 +10,7 @@ function AdminDashboard() {
 
     const [students, setStudents] = useState([]);
     const [posts, setPosts] = useState([]);
+    const [opportunities, setOpportunities] = useState([]);
 
     const fetchDashboard = async () => {
         const token = localStorage.getItem("token");
@@ -83,6 +84,35 @@ function AdminDashboard() {
             }
         } catch (error) {
             console.error("Error fetching posts:", error);
+        }
+    };
+
+    // Fetch opportunities
+    const fetchOpportunities = async () => {
+        const token = localStorage.getItem("token");
+
+        try {
+            const response = await fetch(
+                "http://localhost:5000/api/opportunities",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            const data = await response.json();
+
+            if (response.ok) {
+                setOpportunities(data);
+            } else {
+                alert(data.message);
+            }
+        } catch (error) {
+            console.error(
+                "Error fetching opportunities:",
+                error
+            );
         }
     };
 
@@ -160,10 +190,53 @@ function AdminDashboard() {
         }
     };
 
+    // Delete opportunity
+    const deleteOpportunity = async (opportunityId) => {
+        const confirmDelete = window.confirm(
+            "Are you sure you want to delete this opportunity?"
+        );
+
+        if (!confirmDelete) {
+            return;
+        }
+
+        const token = localStorage.getItem("token");
+
+        try {
+            const response = await fetch(
+                `http://localhost:5000/api/opportunities/${opportunityId}`,
+                {
+                    method: "DELETE",
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            const data = await response.json();
+
+            if (response.ok) {
+                alert(data.message);
+                fetchOpportunities();
+                fetchDashboard();
+            } else {
+                alert(data.message);
+            }
+        } catch (error) {
+            console.error(
+                "Error deleting opportunity:",
+                error
+            );
+
+            alert("Unable to delete opportunity");
+        }
+    };
+
     useEffect(() => {
         fetchDashboard();
         fetchStudents();
         fetchPosts();
+        fetchOpportunities();
     }, []);
 
     return (
@@ -239,6 +312,62 @@ function AdminDashboard() {
                             }
                         >
                             Delete Post
+                        </button>
+
+                        <hr />
+                    </div>
+                ))
+            )}
+
+            <h2>Opportunity Management</h2>
+
+            {opportunities.length === 0 ? (
+                <p>No opportunities found.</p>
+            ) : (
+                opportunities.map((opportunity) => (
+                    <div key={opportunity._id}>
+                        <h3>{opportunity.title}</h3>
+
+                        <p>
+                            <strong>Type:</strong>{" "}
+                            {opportunity.type}
+                        </p>
+
+                        <p>
+                            <strong>Organization:</strong>{" "}
+                            {opportunity.organization}
+                        </p>
+
+                        <p>
+                            <strong>Description:</strong>{" "}
+                            {opportunity.description}
+                        </p>
+
+                        <p>
+                            <strong>Location:</strong>{" "}
+                            {opportunity.location || "Not specified"}
+                        </p>
+
+                        <p>
+                            <strong>Deadline:</strong>{" "}
+                            {opportunity.deadline || "Not specified"}
+                        </p>
+
+                        {opportunity.link && (
+                            <p>
+                                <strong>Link:</strong>{" "}
+                                {opportunity.link}
+                            </p>
+                        )}
+
+                        <button
+                            onClick={() =>
+                                deleteOpportunity(
+                                    opportunity._id
+                                )
+                            }
+                        >
+                            Delete Opportunity
                         </button>
 
                         <hr />

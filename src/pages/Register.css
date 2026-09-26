@@ -1,0 +1,497 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+
+/* =========================
+   REGISTER PAGE
+========================= */
+
+.register-page {
+    min-height: 100vh;
+    display: flex;
+
+    background: #C2E8FF;
+
+    font-family: "DM Sans", sans-serif;
+    color: #011023;
+}
+
+
+/* =========================
+   LEFT PANEL
+========================= */
+
+.register-left {
+    width: 45%;
+    min-height: 100vh;
+
+    background: #011023;
+    color: white;
+
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+
+    padding: 50px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   BRAND
+========================= */
+
+.register-brand {
+    position: absolute;
+
+    top: 35px;
+    left: 45px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 23px;
+    font-weight: 700;
+
+    z-index: 5;
+}
+
+.register-brand-mark {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #C2E8FF;
+    color: #011023;
+
+    border-radius: 10px;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+/* =========================
+   WELCOME CONTENT
+========================= */
+
+.register-welcome {
+    position: relative;
+    z-index: 3;
+
+    width: 100%;
+    max-width: 430px;
+
+    margin-top: 30px;
+}
+
+.register-small-text {
+    margin: 0 0 18px;
+
+    color: #7C9DC6;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 2.5px;
+}
+
+
+/* Main heading */
+
+.register-welcome h1 {
+    margin: 0 0 24px;
+
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 45px;
+    line-height: 1.3;
+
+    font-weight: 700;
+
+    letter-spacing: -0.5px;
+}
+
+.register-welcome h1 span {
+    color: #7C9DC6;
+}
+
+
+/* Description */
+
+.register-welcome > p:last-child {
+    margin: 0;
+
+    max-width: 390px;
+
+    color: #C2E8FF;
+
+    font-size: 15px;
+    line-height: 1.65;
+}
+
+
+/* =========================
+   DECORATIVE SHAPES
+========================= */
+
+.register-decoration {
+    position: absolute;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+.register-decoration-one {
+    width: 230px;
+    height: 230px;
+
+    background: #042558;
+
+    right: -115px;
+    top: -80px;
+}
+
+.register-decoration-two {
+    width: 150px;
+    height: 150px;
+
+    border: 24px solid #042558;
+
+    right: 45px;
+    bottom: -85px;
+}
+
+.register-decoration-three {
+    width: 60px;
+    height: 60px;
+
+    background: #507CA9;
+
+    right: 70px;
+    top: 45%;
+
+    opacity: 0.25;
+}
+
+
+/* =========================
+   RIGHT PANEL
+========================= */
+
+.register-right {
+    width: 55%;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   REGISTER CARD
+========================= */
+
+.register-box {
+    width: 100%;
+    max-width: 450px;
+
+    background: white;
+
+    padding: 35px 42px;
+
+    box-sizing: border-box;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 18px 40px rgba(1, 16, 35, 0.14);
+
+    border: 1px solid rgba(80, 124, 169, 0.15);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.register-header {
+    margin-bottom: 25px;
+}
+
+.register-header h2 {
+    margin: 0 0 7px;
+
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 29px;
+    font-weight: 700;
+
+    color: #011023;
+}
+
+.register-header p {
+    margin: 0;
+
+    color: #507CA9;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.register-form-group {
+    margin-bottom: 15px;
+}
+
+.register-form-group label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #011023;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.register-form-group input,
+.register-form-group select,
+.register-form-group textarea {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 11px 14px;
+
+    border: 1.5px solid #7C9DC6;
+
+    border-radius: 10px;
+
+    background: #f8fcff;
+
+    color: #011023;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.2s ease;
+}
+
+.register-form-group input::placeholder,
+.register-form-group textarea::placeholder {
+    color: #7C9DC6;
+}
+
+.register-form-group input:focus,
+.register-form-group select:focus,
+.register-form-group textarea:focus {
+    background: white;
+
+    border-color: #042558;
+
+    box-shadow:
+        0 0 0 3px rgba(80, 124, 169, 0.12);
+}
+
+
+/* =========================
+   REGISTER BUTTON
+========================= */
+
+.register-submit {
+    width: 100%;
+
+    padding: 13px;
+
+    margin-top: 6px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #042558;
+
+    color: white;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.register-submit:hover {
+    background: #011023;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 6px 15px rgba(1, 16, 35, 0.18);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.register-footer {
+    margin-top: 20px;
+
+    text-align: center;
+
+    color: #507CA9;
+
+    font-size: 13px;
+}
+
+.register-footer p {
+    margin: 0;
+}
+
+.register-login-link {
+    padding: 0;
+
+    border: none;
+
+    background: none;
+
+    color: #042558;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.register-login-link:hover {
+    color: #507CA9;
+
+    text-decoration: underline;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+    .register-page {
+        flex-direction: column;
+    }
+
+    .register-left {
+        width: 100%;
+        min-height: 360px;
+
+        padding: 45px 40px;
+    }
+
+    .register-brand {
+        top: 28px;
+        left: 35px;
+    }
+
+    .register-welcome {
+        margin-top: 45px;
+    }
+
+    .register-welcome h1 {
+        font-size: 40px;
+    }
+
+    .register-right {
+        width: 100%;
+        min-height: auto;
+
+        padding: 35px 25px;
+    }
+
+    .register-box {
+        max-width: 450px;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 500px) {
+
+    .register-left {
+        min-height: 330px;
+
+        padding: 30px 25px;
+    }
+
+    .register-brand {
+        left: 25px;
+        top: 25px;
+
+        font-size: 21px;
+    }
+
+    .register-brand-mark {
+        width: 35px;
+        height: 35px;
+
+        font-size: 18px;
+    }
+
+    .register-welcome {
+        margin-top: 45px;
+    }
+
+    .register-welcome h1 {
+        font-size: 34px;
+        line-height: 1.25;
+    }
+
+    .register-welcome > p:last-child {
+        font-size: 13px;
+    }
+
+    .register-right {
+        padding: 25px 18px;
+    }
+
+    .register-box {
+        max-width: 390px;
+
+        padding: 30px 25px;
+
+        border-radius: 18px;
+    }
+
+    .register-header h2 {
+        font-size: 26px;
+    }
+}

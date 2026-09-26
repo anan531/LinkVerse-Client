@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -42,8 +43,12 @@ function Login() {
 
         alert("Login successful!");
 
-        // Go to Dashboard
-        navigate("/dashboard");
+        // Redirect based on user role
+        if (data.user.role === "admin") {
+          navigate("/admin-dashboard");
+        } else {
+          navigate("/dashboard");
+        }
       } else {
         alert(data.message);
       }
@@ -54,29 +59,105 @@ function Login() {
   };
 
   return (
-    <div>
-      <h1>LinkVerse</h1>
-      <h2>Login</h2>
+    <div className="login-page">
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-        />
+      {/* Left Side */}
+      <div className="login-left">
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-        />
+        <div className="login-brand">
+          <div className="login-brand-mark">L</div>
+          <span>LinkVerse</span>
+        </div>
 
-        <button type="submit">Login</button>
-      </form>
+        <div className="login-welcome">
+          <p className="login-small-text">WELCOME BACK</p>
+
+          <h1>
+            Connect.
+            <br />
+            Collaborate.
+            <br />
+            <span>Grow.</span>
+          </h1>
+
+          <p>
+            Connect with students, discover opportunities,
+            collaborate on projects, and build your network.
+          </p>
+        </div>
+
+        <div className="login-decoration decoration-one"></div>
+        <div className="login-decoration decoration-two"></div>
+        <div className="login-decoration decoration-three"></div>
+
+      </div>
+
+      {/* Right Side */}
+      <div className="login-right">
+
+        <div className="login-box">
+
+          <div className="login-header">
+            <h2>Welcome Back</h2>
+            <p>Login to continue to LinkVerse</p>
+          </div>
+
+          <form onSubmit={handleSubmit}>
+
+            <div className="login-form-group">
+              <label htmlFor="email">Email Address</label>
+
+              <input
+                id="email"
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="login-form-group">
+              <label htmlFor="password">Password</label>
+
+              <input
+                id="password"
+                type="password"
+                name="password"
+                placeholder="Enter your password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="login-submit"
+            >
+              Login
+            </button>
+
+          </form>
+
+          <div className="login-footer">
+            <p>
+              Don't have an account?{" "}
+              <button
+                type="button"
+                onClick={() => navigate("/register")}
+                className="login-register-link"
+              >
+                Create Account
+              </button>
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
   );
 }
