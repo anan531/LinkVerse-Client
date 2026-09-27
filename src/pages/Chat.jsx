@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./Chat.css";
 
 function Chat() {
     const [students, setStudents] = useState([]);
@@ -23,15 +24,15 @@ function Chat() {
 
             const data = await response.json();
 
-if (response.ok) {
-    setStudents(data.students);
+            if (response.ok) {
+                setStudents(data.students);
 
-    // Select the first student automatically
-    if (data.students.length > 0) {
-        setReceiverId(data.students[0]._id);
-        setReceiverName(data.students[0].name);
-    }
-} else {
+                // Select first student automatically
+                if (data.students.length > 0) {
+                    setReceiverId(data.students[0]._id);
+                    setReceiverName(data.students[0].name);
+                }
+            } else {
                 console.error(data.message);
             }
         } catch (error) {
@@ -133,58 +134,233 @@ if (response.ok) {
     };
 
     return (
-        <div>
-            <h1>Chat</h1>
+        <div className="chat-page">
 
-            <label>
-                Chat with:{" "}
-            </label>
+            {/* Top Bar */}
+            <header className="chat-topbar">
+                <div className="chat-brand">
+                    <div className="chat-logo-box">L</div>
 
-            <select
-                value={receiverId}
-                onChange={handleStudentChange}
-            >
-                {students.map((student) => (
-                    <option
-                        key={student._id}
-                        value={student._id}
-                    >
-                        {student.name}
-                    </option>
-                ))}
-            </select>
+                    <div>
+                        <h2>LinkVerse</h2>
+                        <span>Student Networking Platform</span>
+                    </div>
+                </div>
+            </header>
 
-            <h2>Chat with {receiverName}</h2>
+            {/* Hero */}
+            <section className="chat-hero">
+                <div>
+                    <p className="chat-eyebrow">MESSAGES</p>
 
-            <div>
-                {messages.length === 0 ? (
-                    <p>No messages yet.</p>
-                ) : (
-                    messages.map((msg) => (
-                        <div key={msg._id}>
-                            <strong>{msg.sender.name}:</strong>{" "}
-                            {msg.message}
+                    <h1>Stay Connected</h1>
+
+                    <p>
+                        Communicate with fellow students and build meaningful
+                        academic connections.
+                    </p>
+                </div>
+            </section>
+
+            {/* Main Chat */}
+            <main className="chat-main">
+
+                <div className="chat-container">
+
+                    {/* Sidebar */}
+                    <aside className="chat-sidebar">
+
+                        <div className="chat-sidebar-header">
+                            <div>
+                                <h3>Students</h3>
+                                <p>Select someone to chat with</p>
+                            </div>
+
+                            <span className="chat-student-count">
+                                {students.length}
+                            </span>
                         </div>
-                    ))
-                )}
-            </div>
 
-            <br />
+                        <div className="chat-student-list">
 
-            <form onSubmit={sendMessage}>
-                <input
-                    type="text"
-                    placeholder="Type a message..."
-                    value={message}
-                    onChange={(e) =>
-                        setMessage(e.target.value)
-                    }
-                />
+                            {students.length === 0 ? (
+                                <div className="chat-empty-students">
+                                    <div className="chat-empty-icon">
+                                        👥
+                                    </div>
 
-                <button type="submit">
-                    Send
-                </button>
-            </form>
+                                    <p>No students available.</p>
+                                </div>
+                            ) : (
+                                students.map((student) => (
+                                    <button
+                                        key={student._id}
+                                        className={`chat-student ${
+                                            receiverId === student._id
+                                                ? "active"
+                                                : ""
+                                        }`}
+                                        onClick={() => {
+                                            setReceiverId(student._id);
+                                            setReceiverName(student.name);
+                                        }}
+                                    >
+                                        <div className="chat-avatar">
+                                            {student.name
+                                                .charAt(0)
+                                                .toUpperCase()}
+                                        </div>
+
+                                        <div className="chat-student-info">
+                                            <strong>
+                                                {student.name}
+                                            </strong>
+
+                                            <span>
+                                                {student.email}
+                                            </span>
+                                        </div>
+
+                                        {receiverId === student._id && (
+                                            <span className="chat-active-dot">
+                                                ●
+                                            </span>
+                                        )}
+                                    </button>
+                                ))
+                            )}
+
+                        </div>
+
+                    </aside>
+
+                    {/* Chat Area */}
+                    <section className="chat-window">
+
+                        <div className="chat-window-header">
+
+                            <div className="chat-current-user">
+
+                                <div className="chat-large-avatar">
+                                    {receiverName
+                                        ? receiverName
+                                              .charAt(0)
+                                              .toUpperCase()
+                                        : "?"}
+                                </div>
+
+                                <div>
+                                    <h2>
+                                        {receiverName || "Select a student"}
+                                    </h2>
+
+                                    <span>
+                                        {receiverName
+                                            ? "Student connection"
+                                            : "Choose someone from the list"}
+                                    </span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        {/* Messages */}
+                        <div className="chat-messages">
+
+                            {!receiverId ? (
+                                <div className="chat-welcome">
+                                    <div className="chat-welcome-icon">
+                                        💬
+                                    </div>
+
+                                    <h3>Select a student</h3>
+
+                                    <p>
+                                        Choose a student from the left to
+                                        start chatting.
+                                    </p>
+                                </div>
+                            ) : messages.length === 0 ? (
+                                <div className="chat-welcome">
+                                    <div className="chat-welcome-icon">
+                                        ✉
+                                    </div>
+
+                                    <h3>No messages yet</h3>
+
+                                    <p>
+                                        Start the conversation with{" "}
+                                        <strong>{receiverName}</strong>.
+                                    </p>
+                                </div>
+                            ) : (
+                                messages.map((msg) => (
+                                    <div
+                                        key={msg._id}
+                                        className={`chat-message ${
+                                            msg.sender._id === receiverId
+                                                ? "received"
+                                                : "sent"
+                                        }`}
+                                    >
+                                        <div className="chat-message-bubble">
+                                            <span className="chat-message-sender">
+                                                {msg.sender.name}
+                                            </span>
+
+                                            <p>{msg.message}</p>
+
+                                            <small>
+                                                {new Date(
+                                                    msg.createdAt
+                                                ).toLocaleTimeString([], {
+                                                    hour: "2-digit",
+                                                    minute: "2-digit",
+                                                })}
+                                            </small>
+                                        </div>
+                                    </div>
+                                ))
+                            )}
+
+                        </div>
+
+                        {/* Message Form */}
+                        <form
+                            className="chat-input-area"
+                            onSubmit={sendMessage}
+                        >
+                            <input
+                                type="text"
+                                placeholder={
+                                    receiverName
+                                        ? `Message ${receiverName}...`
+                                        : "Select a student first..."
+                                }
+                                value={message}
+                                onChange={(e) =>
+                                    setMessage(e.target.value)
+                                }
+                                disabled={!receiverId}
+                            />
+
+                            <button
+                                type="submit"
+                                disabled={
+                                    !receiverId || message.trim() === ""
+                                }
+                            >
+                                <span>Send</span>
+                                <span className="chat-send-icon">➤</span>
+                            </button>
+                        </form>
+
+                    </section>
+
+                </div>
+
+            </main>
         </div>
     );
 }

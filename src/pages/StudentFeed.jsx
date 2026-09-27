@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./StudentFeed.css";
 
 function StudentFeed() {
     const [posts, setPosts] = useState([]);
@@ -39,7 +40,7 @@ function StudentFeed() {
         const user = JSON.parse(localStorage.getItem("user"));
 
         if (user) {
-            setCurrentUserId(user._id);
+            setCurrentUserId(user._id || user.id);
         }
 
         fetchPosts();
@@ -183,147 +184,324 @@ function StudentFeed() {
     };
 
     return (
-        <div>
-            <h1>Student Feed</h1>
+        <div className="feed-page">
 
-            <h2>Create a Post</h2>
-
-            <form onSubmit={createPost}>
-                <textarea
-                    placeholder="Write something..."
-                    value={content}
-                    onChange={(e) =>
-                        setContent(e.target.value)
-                    }
-                />
-
-                <br />
-
-                <button type="submit">
-                    Post
-                </button>
-            </form>
-
-            <hr />
-
-            <h2>Posts</h2>
-
-            {posts.length === 0 ? (
-                <p>No posts yet.</p>
-            ) : (
-                posts.map((post) => (
-                    <div key={post._id}>
-                        <h3>{post.createdBy.name}</h3>
-
-                        <p>{post.content}</p>
-
-                        <small>
-                            {new Date(
-                                post.createdAt
-                            ).toLocaleString()}
-                        </small>
-
-                        <br />
-                        <br />
-
-                        <button
-                            onClick={() =>
-                                likePost(post._id)
-                            }
-                        >
-                            {post.likes &&
-                            post.likes.includes(currentUserId)
-                                ? "Unlike"
-                                : "Like"}
-                        </button>
-
-                        <span>
-                            {" "}
-                            {post.likes
-                                ? post.likes.length
-                                : 0}{" "}
-                            likes
-                        </span>
-
-                        <br />
-                        <br />
-
-                        <button
-                            onClick={() =>
-                                fetchComments(post._id)
-                            }
-                        >
-                            Show Comments
-                        </button>
-
-                        {comments[post._id] && (
-                            <div>
-                                <h4>Comments</h4>
-
-                                {comments[post._id].length ===
-                                0 ? (
-                                    <p>
-                                        No comments yet.
-                                    </p>
-                                ) : (
-                                    comments[post._id].map(
-                                        (comment) => (
-                                            <p
-                                                key={
-                                                    comment._id
-                                                }
-                                            >
-                                                <strong>
-                                                    {
-                                                        comment
-                                                            .createdBy
-                                                            .name
-                                                    }
-                                                    :
-                                                </strong>{" "}
-                                                {
-                                                    comment.content
-                                                }
-                                            </p>
-                                        )
-                                    )
-                                )}
-
-                                <input
-                                    type="text"
-                                    placeholder="Write a comment..."
-                                    value={
-                                        commentText[
-                                            post._id
-                                        ] || ""
-                                    }
-                                    onChange={(e) =>
-                                        setCommentText(
-                                            (prev) => ({
-                                                ...prev,
-                                                [post._id]:
-                                                    e.target.value,
-                                            })
-                                        )
-                                    }
-                                />
-
-                                <button
-                                    onClick={() =>
-                                        addComment(
-                                            post._id
-                                        )
-                                    }
-                                >
-                                    Comment
-                                </button>
-                            </div>
-                        )}
-
-                        <hr />
+            {/* Top Bar */}
+            <header className="feed-topbar">
+                <div className="feed-brand">
+                    <div className="feed-logo-box">
+                        L
                     </div>
-                ))
-            )}
+
+                    <div>
+                        <h2>LinkVerse</h2>
+                        <span>Student Networking Platform</span>
+                    </div>
+                </div>
+            </header>
+
+            {/* Hero */}
+            <section className="feed-hero">
+                <div className="feed-hero-content">
+                    <p className="feed-eyebrow">
+                        STUDENT COMMUNITY
+                    </p>
+
+                    <h1>Student Feed</h1>
+
+                    <p>
+                        Share ideas, updates and experiences with
+                        your fellow students.
+                    </p>
+                </div>
+            </section>
+
+            {/* Main */}
+            <main className="feed-main">
+
+                {/* Create Post */}
+                <section className="create-post-card">
+
+                    <div className="feed-section-heading">
+                        <div className="feed-heading-icon">
+                            ✎
+                        </div>
+
+                        <div>
+                            <h2>Create a Post</h2>
+                            <p>
+                                Share something with the LinkVerse community.
+                            </p>
+                        </div>
+                    </div>
+
+                    <form onSubmit={createPost}>
+                        <textarea
+                            placeholder="What's on your mind?"
+                            value={content}
+                            onChange={(e) =>
+                                setContent(e.target.value)
+                            }
+                        />
+
+                        <div className="create-post-footer">
+                            <span>
+                                {content.length} characters
+                            </span>
+
+                            <button type="submit">
+                                Post
+                                <span>→</span>
+                            </button>
+                        </div>
+                    </form>
+
+                </section>
+
+                {/* Feed Heading */}
+                <div className="feed-title-row">
+                    <div>
+                        <h2>Community Posts</h2>
+                        <p>
+                            See what students are sharing.
+                        </p>
+                    </div>
+
+                    <span className="post-count">
+                        {posts.length}{" "}
+                        {posts.length === 1
+                            ? "post"
+                            : "posts"}
+                    </span>
+                </div>
+
+                {/* Posts */}
+                {posts.length === 0 ? (
+                    <div className="feed-empty">
+
+                        <div className="feed-empty-icon">
+                            ✦
+                        </div>
+
+                        <h3>No posts yet</h3>
+
+                        <p>
+                            Be the first student to share something
+                            with the community.
+                        </p>
+
+                    </div>
+                ) : (
+                    <div className="posts-list">
+
+                        {posts.map((post) => {
+
+                            const isLiked =
+                                post.likes &&
+                                post.likes.some(
+                                    (like) =>
+                                        like === currentUserId ||
+                                        like?._id === currentUserId
+                                );
+
+                            return (
+                                <article
+                                    className="post-card"
+                                    key={post._id}
+                                >
+
+                                    {/* Post Header */}
+                                    <div className="post-header">
+
+                                        <div className="post-user-avatar">
+                                            {post.createdBy.name
+                                                .charAt(0)
+                                                .toUpperCase()}
+                                        </div>
+
+                                        <div className="post-user-info">
+                                            <h3>
+                                                {post.createdBy.name}
+                                            </h3>
+
+                                            <span>
+                                                {new Date(
+                                                    post.createdAt
+                                                ).toLocaleString()}
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+                                    {/* Post Content */}
+                                    <div className="post-content">
+                                        {post.content}
+                                    </div>
+
+                                    {/* Post Actions */}
+                                    <div className="post-actions">
+
+                                        <button
+                                            className={
+                                                isLiked
+                                                    ? "liked"
+                                                    : ""
+                                            }
+                                            onClick={() =>
+                                                likePost(post._id)
+                                            }
+                                        >
+                                            <span>
+                                                {isLiked
+                                                    ? "♥"
+                                                    : "♡"}
+                                            </span>
+
+                                            {isLiked
+                                                ? "Unlike"
+                                                : "Like"}
+                                        </button>
+
+                                        <span className="like-count">
+                                            {post.likes
+                                                ? post.likes.length
+                                                : 0}{" "}
+                                            {post.likes &&
+                                            post.likes.length === 1
+                                                ? "like"
+                                                : "likes"}
+                                        </span>
+
+                                        <button
+                                            className="comment-toggle"
+                                            onClick={() =>
+                                                fetchComments(
+                                                    post._id
+                                                )
+                                            }
+                                        >
+                                            💬 Comments
+                                        </button>
+
+                                    </div>
+
+                                    {/* Comments */}
+                                    {comments[post._id] && (
+                                        <div className="comments-section">
+
+                                            <div className="comments-heading">
+                                                Comments
+                                            </div>
+
+                                            {comments[post._id].length ===
+                                            0 ? (
+                                                <p className="no-comments">
+                                                    No comments yet.
+                                                </p>
+                                            ) : (
+                                                <div className="comments-list">
+
+                                                    {comments[
+                                                        post._id
+                                                    ].map(
+                                                        (comment) => (
+                                                            <div
+                                                                className="comment"
+                                                                key={
+                                                                    comment._id
+                                                                }
+                                                            >
+
+                                                                <div className="comment-avatar">
+                                                                    {comment
+                                                                        .createdBy
+                                                                        .name
+                                                                        .charAt(
+                                                                            0
+                                                                        )
+                                                                        .toUpperCase()}
+                                                                </div>
+
+                                                                <div className="comment-body">
+                                                                    <strong>
+                                                                        {
+                                                                            comment
+                                                                                .createdBy
+                                                                                .name
+                                                                        }
+                                                                    </strong>
+
+                                                                    <p>
+                                                                        {
+                                                                            comment.content
+                                                                        }
+                                                                    </p>
+                                                                </div>
+
+                                                            </div>
+                                                        )
+                                                    )}
+
+                                                </div>
+                                            )}
+
+                                            {/* Add Comment */}
+                                            <div className="comment-input-area">
+
+                                                <input
+                                                    type="text"
+                                                    placeholder="Write a comment..."
+                                                    value={
+                                                        commentText[
+                                                            post._id
+                                                        ] || ""
+                                                    }
+                                                    onChange={(e) =>
+                                                        setCommentText(
+                                                            (prev) => ({
+                                                                ...prev,
+                                                                [post._id]:
+                                                                    e.target
+                                                                        .value,
+                                                            })
+                                                        )
+                                                    }
+                                                    onKeyDown={(e) => {
+                                                        if (
+                                                            e.key ===
+                                                            "Enter"
+                                                        ) {
+                                                            e.preventDefault();
+                                                            addComment(
+                                                                post._id
+                                                            );
+                                                        }
+                                                    }}
+                                                />
+
+                                                <button
+                                                    onClick={() =>
+                                                        addComment(
+                                                            post._id
+                                                        )
+                                                    }
+                                                >
+                                                    Comment
+                                                </button>
+
+                                            </div>
+
+                                        </div>
+                                    )}
+
+                                </article>
+                            );
+                        })}
+
+                    </div>
+                )}
+
+            </main>
         </div>
     );
 }

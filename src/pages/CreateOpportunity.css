@@ -1,0 +1,437 @@
+/* ================================
+   CREATE OPPORTUNITY PAGE
+================================ */
+
+.create-opportunity-page {
+    min-height: 100vh;
+    background: #f5f9fd;
+    color: #011023;
+}
+
+
+/* ================================
+   TOP BAR
+================================ */
+
+.create-opportunity-topbar {
+    height: 72px;
+    padding: 0 7%;
+    background: #011023;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.create-opportunity-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.create-logo-box {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: #C2E8FF;
+    color: #042558;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.create-opportunity-brand h2 {
+    margin: 0;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.create-opportunity-brand span {
+    display: block;
+    margin-top: 2px;
+    color: #7C9DC6;
+    font-size: 11px;
+}
+
+.back-opportunity-button {
+    border: 1px solid #507CA9;
+    background: transparent;
+    color: #C2E8FF;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.back-opportunity-button:hover {
+    background: #042558;
+    border-color: #7C9DC6;
+}
+
+
+/* ================================
+   HERO
+================================ */
+
+.create-opportunity-hero {
+    background: linear-gradient(
+        135deg,
+        #042558,
+        #507CA9
+    );
+    padding: 45px 7% 48px;
+}
+
+.create-opportunity-hero-content {
+    max-width: 1150px;
+    margin: auto;
+}
+
+.create-opportunity-eyebrow {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: #C2E8FF;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+}
+
+.create-opportunity-hero h1 {
+    margin: 0;
+    color: white;
+    font-size: 34px;
+    font-weight: 750;
+}
+
+.create-opportunity-hero p {
+    max-width: 650px;
+    margin: 12px 0 0;
+    color: #dceeff;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* ================================
+   MAIN
+================================ */
+
+.create-opportunity-main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 38px 24px 60px;
+}
+
+
+/* ================================
+   FORM CARD
+================================ */
+
+.create-opportunity-card {
+    background: white;
+    border: 1px solid #dce8f2;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(1, 16, 35, 0.07);
+    overflow: hidden;
+}
+
+
+/* ================================
+   FORM HEADING
+================================ */
+
+.create-form-heading {
+    padding: 25px 28px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid #e5edf4;
+    background: #fbfdff;
+}
+
+.create-form-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+    background: #C2E8FF;
+    color: #042558;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.create-form-heading h2 {
+    margin: 0;
+    color: #011023;
+    font-size: 19px;
+}
+
+.create-form-heading p {
+    margin: 5px 0 0;
+    color: #6d8298;
+    font-size: 12px;
+}
+
+
+/* ================================
+   FORM
+================================ */
+
+.create-opportunity-form {
+    padding: 28px;
+}
+
+.create-form-section {
+    padding-bottom: 27px;
+    margin-bottom: 27px;
+    border-bottom: 1px solid #e7eef5;
+}
+
+.create-form-section:last-of-type {
+    margin-bottom: 0;
+}
+
+.create-form-section h3 {
+    margin: 0 0 18px;
+    color: #042558;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.create-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.create-form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.create-form-group label {
+    margin-bottom: 7px;
+    color: #314a63;
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.create-form-group input,
+.create-form-group select,
+.create-form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #d3e0eb;
+    border-radius: 8px;
+    background: #fbfdff;
+    color: #011023;
+    padding: 11px 12px;
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.create-form-group input,
+.create-form-group select {
+    height: 43px;
+}
+
+.create-form-group textarea {
+    resize: vertical;
+    min-height: 130px;
+    line-height: 1.6;
+}
+
+.create-form-group input::placeholder,
+.create-form-group textarea::placeholder {
+    color: #9aabba;
+}
+
+.create-form-group input:focus,
+.create-form-group select:focus,
+.create-form-group textarea:focus {
+    border-color: #507CA9;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(80, 124, 169, 0.12);
+}
+
+
+/* ================================
+   FORM FOOTER
+================================ */
+
+.create-form-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 5px;
+}
+
+.cancel-opportunity-button,
+.create-opportunity-button {
+    height: 42px;
+    padding: 0 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.cancel-opportunity-button {
+    background: white;
+    border: 1px solid #cbd9e5;
+    color: #456078;
+}
+
+.cancel-opportunity-button:hover {
+    background: #f2f7fb;
+}
+
+.create-opportunity-button {
+    border: none;
+    background: #042558;
+    color: white;
+}
+
+.create-opportunity-button:hover {
+    background: #507CA9;
+    transform: translateY(-1px);
+}
+
+
+/* ================================
+   ACCESS DENIED
+================================ */
+
+.create-access-denied {
+    min-height: 100vh;
+    background: #f5f9fd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.access-denied-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 40px;
+    text-align: center;
+    background: white;
+    border: 1px solid #dce8f2;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(1, 16, 35, 0.08);
+}
+
+.access-denied-icon {
+    width: 46px;
+    height: 46px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    background: #C2E8FF;
+    color: #042558;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.access-denied-card h2 {
+    margin: 0;
+    color: #011023;
+    font-size: 21px;
+}
+
+.access-denied-card p {
+    margin: 10px 0 22px;
+    color: #6d8298;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.access-denied-card button {
+    border: none;
+    background: #042558;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.access-denied-card button:hover {
+    background: #507CA9;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 700px) {
+
+    .create-opportunity-topbar {
+        padding: 0 20px;
+    }
+
+    .create-opportunity-brand span {
+        display: none;
+    }
+
+    .back-opportunity-button {
+        padding: 8px 11px;
+        font-size: 12px;
+    }
+
+    .create-opportunity-hero {
+        padding: 35px 20px 38px;
+    }
+
+    .create-opportunity-hero h1 {
+        font-size: 28px;
+    }
+
+    .create-opportunity-main {
+        padding: 25px 15px 45px;
+    }
+
+    .create-form-heading {
+        padding: 20px;
+    }
+
+    .create-opportunity-form {
+        padding: 20px;
+    }
+
+    .create-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .create-form-group.full-width {
+        grid-column: auto;
+    }
+
+    .create-form-footer {
+        flex-direction: column-reverse;
+    }
+
+    .cancel-opportunity-button,
+    .create-opportunity-button {
+        width: 100%;
+    }
+}

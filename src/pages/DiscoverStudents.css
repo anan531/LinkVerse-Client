@@ -1,0 +1,629 @@
+* {
+  box-sizing: border-box;
+}
+
+.discover-page {
+  min-height: 100vh;
+  background: #f3f7fb;
+  color: #011023;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+
+/* =========================
+   TOP BAR
+   ========================= */
+
+.discover-topbar {
+  height: 72px;
+  background: #011023;
+  padding: 0 55px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: white;
+}
+
+.discover-logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.discover-logo-box {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #c2e8ff;
+  color: #011023;
+
+  border-radius: 10px;
+
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.discover-topbar-text {
+  color: #7c9dc6;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* =========================
+   HERO
+   ========================= */
+
+.discover-hero {
+  background: linear-gradient(
+    135deg,
+    #011023 0%,
+    #042558 100%
+  );
+
+  padding: 48px 55px 52px;
+
+  color: white;
+}
+
+.discover-hero-content {
+  max-width: 1150px;
+  margin: auto;
+}
+
+.discover-eyebrow {
+  margin: 0 0 10px;
+
+  color: #7c9dc6;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+}
+
+.discover-hero h1 {
+  margin: 0;
+
+  font-size: 38px;
+  line-height: 1.2;
+
+  font-weight: 700;
+}
+
+.discover-description {
+  max-width: 600px;
+
+  margin: 12px 0 0;
+
+  color: #c2e8ff;
+
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+
+/* =========================
+   MAIN
+   ========================= */
+
+.discover-main {
+  max-width: 1150px;
+  margin: -25px auto 0;
+
+  padding: 0 25px 60px;
+}
+
+
+/* =========================
+   SEARCH CARD
+   ========================= */
+
+.discover-search-card {
+  background: white;
+
+  border: 1px solid #dce7f0;
+  border-radius: 15px;
+
+  padding: 19px 21px;
+
+  box-shadow: 0 8px 25px rgba(1, 16, 35, 0.08);
+
+  margin-bottom: 32px;
+}
+
+.discover-search-label {
+  color: #042558;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  margin-bottom: 9px;
+}
+
+.discover-search {
+  width: 100%;
+  height: 48px;
+
+  padding: 0 15px;
+
+  border: 1px solid #d5e2ec;
+  border-radius: 9px;
+
+  outline: none;
+
+  background: #f9fbfd;
+
+  color: #011023;
+
+  font-size: 13px;
+
+  transition: 0.2s ease;
+}
+
+.discover-search::placeholder {
+  color: #91a5b8;
+}
+
+.discover-search:focus {
+  background: white;
+
+  border-color: #507ca9;
+
+  box-shadow: 0 0 0 3px rgba(80, 124, 169, 0.12);
+}
+
+
+/* =========================
+   RESULTS HEADER
+   ========================= */
+
+.discover-results-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 18px;
+}
+
+.discover-results-header h2 {
+  margin: 0 0 4px;
+
+  color: #011023;
+
+  font-size: 21px;
+}
+
+.discover-results-header p {
+  margin: 0;
+
+  color: #71859a;
+
+  font-size: 12px;
+}
+
+.discover-count {
+  min-width: 38px;
+  height: 34px;
+
+  padding: 0 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: #c2e8ff;
+  color: #042558;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+/* =========================
+   STUDENT GRID
+   ========================= */
+
+.discover-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 18px;
+}
+
+
+/* =========================
+   STUDENT CARD
+   ========================= */
+
+.discover-card {
+  background: white;
+
+  border: 1px solid #dfe9f1;
+
+  border-radius: 16px;
+
+  padding: 20px;
+
+  box-shadow: 0 5px 18px rgba(1, 16, 35, 0.05);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.discover-card:hover {
+  transform: translateY(-4px);
+
+  border-color: #7c9dc6;
+
+  box-shadow: 0 12px 28px rgba(1, 16, 35, 0.1);
+}
+
+
+/* =========================
+   CARD HEADER
+   ========================= */
+
+.discover-card-header {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding-bottom: 16px;
+
+  border-bottom: 1px solid #edf2f6;
+
+  margin-bottom: 16px;
+}
+
+.discover-avatar {
+  width: 48px;
+  height: 48px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+
+  background: #042558;
+  color: #c2e8ff;
+
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.discover-user-info h3 {
+  margin: 0 0 4px;
+
+  color: #011023;
+
+  font-size: 16px;
+}
+
+.discover-user-info p {
+  margin: 0;
+
+  color: #507ca9;
+
+  font-size: 12px;
+}
+
+
+/* =========================
+   BASIC INFO
+   ========================= */
+
+.discover-basic-info {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 12px;
+
+  margin-bottom: 17px;
+}
+
+.discover-basic-info div {
+  background: #f6f9fc;
+
+  padding: 10px;
+
+  border-radius: 8px;
+}
+
+.discover-basic-info span,
+.discover-info-section > span {
+  display: block;
+
+  color: #7c9dc6;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+.discover-basic-info p {
+  margin: 4px 0 0;
+
+  color: #34495e;
+
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+
+/* =========================
+   INFORMATION SECTIONS
+   ========================= */
+
+.discover-info-section {
+  margin-bottom: 15px;
+}
+
+.discover-info-section > p {
+  margin: 5px 0 0;
+
+  color: #53687b;
+
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+
+/* =========================
+   TAGS
+   ========================= */
+
+.discover-tags {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 6px;
+
+  margin-top: 7px;
+}
+
+.discover-tag {
+  display: inline-block;
+
+  padding: 5px 8px;
+
+  border-radius: 6px;
+
+  background: #e8f3fa;
+
+  color: #042558;
+
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.discover-interest {
+  background: #eef1f8;
+
+  color: #507ca9;
+}
+
+
+/* =========================
+   CONNECT BUTTON
+   ========================= */
+
+.discover-connect {
+  width: 100%;
+
+  height: 40px;
+
+  margin-top: 4px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #042558;
+  color: white;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.discover-connect:hover {
+  background: #011023;
+
+  box-shadow: 0 5px 12px rgba(1, 16, 35, 0.15);
+}
+
+.discover-connect:active {
+  transform: scale(0.98);
+}
+
+
+/* =========================
+   EMPTY STATE
+   ========================= */
+
+.discover-empty {
+  background: white;
+
+  border: 1px solid #dfe9f1;
+
+  border-radius: 16px;
+
+  padding: 55px 25px;
+
+  text-align: center;
+
+  box-shadow: 0 5px 18px rgba(1, 16, 35, 0.05);
+}
+
+.discover-empty-icon {
+  width: 48px;
+  height: 48px;
+
+  margin: 0 auto 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+
+  background: #c2e8ff;
+  color: #042558;
+
+  font-weight: 700;
+}
+
+.discover-empty h3 {
+  margin: 0 0 7px;
+
+  font-size: 17px;
+}
+
+.discover-empty p {
+  margin: 0;
+
+  color: #7c9dc6;
+
+  font-size: 12px;
+}
+
+
+/* =========================
+   LOADING
+   ========================= */
+
+.discover-loading {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f3f7fb;
+}
+
+.discover-loading-box {
+  background: white;
+
+  padding: 18px 25px;
+
+  border-radius: 12px;
+
+  color: #507ca9;
+
+  font-size: 14px;
+
+  box-shadow: 0 5px 18px rgba(1, 16, 35, 0.08);
+}
+
+
+/* =========================
+   TABLET
+   ========================= */
+
+@media (max-width: 1000px) {
+
+  .discover-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .discover-topbar {
+    padding: 0 30px;
+  }
+
+  .discover-hero {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 650px) {
+
+  .discover-topbar {
+    height: 64px;
+
+    padding: 0 18px;
+  }
+
+  .discover-logo {
+    font-size: 19px;
+  }
+
+  .discover-topbar-text {
+    display: none;
+  }
+
+  .discover-hero {
+    padding: 38px 20px 45px;
+  }
+
+  .discover-hero h1 {
+    font-size: 30px;
+  }
+
+  .discover-description {
+    font-size: 13px;
+  }
+
+  .discover-main {
+    padding: 0 14px 45px;
+  }
+
+  .discover-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+   ========================= */
+
+@media (max-width: 420px) {
+
+  .discover-hero h1 {
+    font-size: 26px;
+  }
+
+  .discover-search-card {
+    padding: 15px;
+  }
+
+  .discover-card {
+    padding: 17px;
+  }
+
+}

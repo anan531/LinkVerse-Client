@@ -1,0 +1,907 @@
+* {
+  box-sizing: border-box;
+}
+
+.collab-page {
+  min-height: 100vh;
+  background: #f3f7fb;
+  color: #011023;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+
+/* =========================
+   TOP BAR
+   ========================= */
+
+.collab-topbar {
+  height: 72px;
+
+  background: #011023;
+
+  padding: 0 55px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: white;
+}
+
+.collab-logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.collab-logo-box {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: #c2e8ff;
+  color: #011023;
+
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.collab-topbar-text {
+  color: #7c9dc6;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* =========================
+   HERO
+   ========================= */
+
+.collab-hero {
+  background: linear-gradient(
+    135deg,
+    #011023 0%,
+    #042558 100%
+  );
+
+  padding: 48px 55px 52px;
+
+  color: white;
+}
+
+.collab-hero-content {
+  max-width: 1150px;
+  margin: auto;
+}
+
+.collab-eyebrow {
+  margin: 0 0 10px;
+
+  color: #7c9dc6;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+}
+
+.collab-hero h1 {
+  margin: 0;
+
+  font-size: 38px;
+  line-height: 1.2;
+
+  font-weight: 700;
+}
+
+.collab-description {
+  max-width: 620px;
+
+  margin: 12px 0 0;
+
+  color: #c2e8ff;
+
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+
+/* =========================
+   MAIN
+   ========================= */
+
+.collab-main {
+  max-width: 1150px;
+
+  margin: -25px auto 0;
+
+  padding: 0 25px 60px;
+}
+
+
+/* =========================
+   CREATE CARD
+   ========================= */
+
+.collab-create-card {
+  background: white;
+
+  border: 1px solid #dce7f0;
+
+  border-radius: 16px;
+
+  padding: 25px;
+
+  margin-bottom: 30px;
+
+  box-shadow: 0 8px 25px rgba(1, 16, 35, 0.08);
+}
+
+.collab-section-heading {
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid #edf2f6;
+
+  margin-bottom: 22px;
+}
+
+.collab-section-heading > div:first-child > span,
+.collab-section-title span {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #507ca9;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+}
+
+.collab-section-heading h2,
+.collab-section-title h2 {
+  margin: 0;
+
+  color: #011023;
+
+  font-size: 21px;
+}
+
+.collab-section-heading p,
+.collab-section-title p {
+  margin: 7px 0 0;
+
+  color: #71859a;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.collab-create-icon {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: #c2e8ff;
+  color: #042558;
+
+  font-size: 23px;
+  font-weight: 700;
+}
+
+
+/* =========================
+   FORM
+   ========================= */
+
+.collab-form {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 18px;
+}
+
+.collab-form-group {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.collab-form-group:nth-child(2) {
+  grid-column: span 2;
+}
+
+.collab-form-group label {
+  color: #042558;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.collab-form-group input,
+.collab-form-group textarea {
+  width: 100%;
+
+  border: 1px solid #d5e2ec;
+
+  border-radius: 9px;
+
+  background: #f9fbfd;
+
+  color: #011023;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  outline: none;
+
+  transition: 0.2s ease;
+}
+
+.collab-form-group input {
+  height: 46px;
+
+  padding: 0 14px;
+}
+
+.collab-form-group textarea {
+  min-height: 105px;
+
+  padding: 12px 14px;
+
+  resize: vertical;
+}
+
+.collab-form-group input::placeholder,
+.collab-form-group textarea::placeholder {
+  color: #91a5b8;
+}
+
+.collab-form-group input:focus,
+.collab-form-group textarea:focus {
+  background: white;
+
+  border-color: #507ca9;
+
+  box-shadow: 0 0 0 3px rgba(80, 124, 169, 0.12);
+}
+
+.collab-form-group small {
+  color: #91a5b8;
+
+  font-size: 10px;
+}
+
+.collab-create-button {
+  grid-column: span 2;
+
+  height: 43px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #042558;
+  color: white;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.collab-create-button:hover {
+  background: #011023;
+
+  box-shadow: 0 5px 14px rgba(1, 16, 35, 0.15);
+}
+
+
+/* =========================
+   GENERAL SECTION
+   ========================= */
+
+.collab-section {
+  background: white;
+
+  border: 1px solid #dfe9f1;
+
+  border-radius: 16px;
+
+  padding: 24px;
+
+  margin-bottom: 25px;
+
+  box-shadow: 0 5px 18px rgba(1, 16, 35, 0.05);
+}
+
+.collab-section-title {
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding-bottom: 18px;
+
+  border-bottom: 1px solid #edf2f6;
+
+  margin-bottom: 20px;
+}
+
+.collab-count {
+  min-width: 38px;
+  height: 34px;
+
+  padding: 0 11px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: #c2e8ff;
+  color: #042558;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+/* =========================
+   COLLABORATION GRID
+   ========================= */
+
+.collab-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 18px;
+}
+
+
+/* =========================
+   COLLABORATION CARD
+   ========================= */
+
+.collab-card {
+  border: 1px solid #dfe9f1;
+
+  border-radius: 14px;
+
+  padding: 20px;
+
+  background: #fbfdff;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.collab-card:hover {
+  transform: translateY(-3px);
+
+  border-color: #7c9dc6;
+
+  box-shadow: 0 10px 23px rgba(1, 16, 35, 0.08);
+}
+
+.collab-card-top {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 15px;
+}
+
+.collab-project-icon {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+
+  background: #042558;
+  color: #c2e8ff;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.collab-status {
+  padding: 5px 9px;
+
+  border-radius: 15px;
+
+  background: #e6f4ec;
+  color: #456f59;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+}
+
+.collab-card-title {
+  margin: 0 0 8px;
+
+  color: #011023;
+
+  font-size: 17px;
+}
+
+.collab-card-description {
+  min-height: 42px;
+
+  margin: 0 0 17px;
+
+  color: #5b6f82;
+
+  font-size: 12px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================
+   CARD DETAILS
+   ========================= */
+
+.collab-card-detail {
+  margin-bottom: 15px;
+}
+
+.collab-card-detail > span,
+.collab-team > span {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #7c9dc6;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+.collab-card-detail > p,
+.collab-team > p {
+  margin: 0;
+
+  color: #34495e;
+
+  font-size: 11px;
+}
+
+.collab-tags {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 6px;
+}
+
+.collab-tag {
+  padding: 5px 8px;
+
+  border-radius: 6px;
+
+  background: #e8f3fa;
+  color: #042558;
+
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.collab-no-data {
+  color: #91a5b8;
+
+  font-size: 10px;
+}
+
+.collab-team {
+  padding-top: 13px;
+
+  border-top: 1px solid #edf2f6;
+
+  margin-bottom: 16px;
+}
+
+
+/* =========================
+   JOIN BUTTON
+   ========================= */
+
+.collab-join-button {
+  width: 100%;
+
+  height: 40px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #042558;
+  color: white;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.collab-join-button:hover {
+  background: #011023;
+
+  box-shadow: 0 5px 12px rgba(1, 16, 35, 0.15);
+}
+
+
+/* =========================
+   REQUEST STATES
+   ========================= */
+
+.collab-requested {
+  width: 100%;
+
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: #eef5fa;
+  color: #507ca9;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.collab-owner {
+  width: 100%;
+
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: #c2e8ff;
+  color: #042558;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+
+/* =========================
+   REQUEST LIST
+   ========================= */
+
+.collab-request-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+.collab-request-card {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 15px;
+
+  border: 1px solid #dfe9f1;
+
+  border-radius: 12px;
+
+  background: #fbfdff;
+}
+
+.collab-request-avatar {
+  width: 43px;
+  height: 43px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: #042558;
+  color: #c2e8ff;
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.collab-request-info {
+  flex: 1;
+}
+
+.collab-request-info h3 {
+  margin: 0 0 3px;
+
+  color: #011023;
+
+  font-size: 14px;
+}
+
+.collab-request-info p {
+  margin: 0 0 5px;
+
+  color: #507ca9;
+
+  font-size: 11px;
+}
+
+.collab-request-info span {
+  color: #71859a;
+
+  font-size: 10px;
+}
+
+.collab-request-info strong {
+  color: #042558;
+}
+
+.collab-request-actions {
+  display: flex;
+
+  gap: 7px;
+}
+
+.collab-request-actions button {
+  height: 34px;
+
+  padding: 0 13px;
+
+  border-radius: 8px;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.collab-accept {
+  border: none;
+
+  background: #042558;
+  color: white;
+}
+
+.collab-accept:hover {
+  background: #011023;
+}
+
+.collab-reject {
+  border: 1px solid #d5e2ec;
+
+  background: white;
+  color: #507ca9;
+}
+
+.collab-reject:hover {
+  background: #eef5fa;
+}
+
+
+/* =========================
+   EMPTY STATES
+   ========================= */
+
+.collab-empty {
+  padding: 48px 20px;
+
+  text-align: center;
+
+  border: 1px dashed #cbdbe8;
+
+  border-radius: 12px;
+
+  background: #fbfdff;
+}
+
+.collab-empty.small {
+  padding: 32px 20px;
+}
+
+.collab-empty-icon {
+  width: 48px;
+  height: 48px;
+
+  margin: 0 auto 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+
+  background: #c2e8ff;
+  color: #042558;
+
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.collab-empty h3 {
+  margin: 0 0 7px;
+
+  color: #011023;
+
+  font-size: 16px;
+}
+
+.collab-empty p {
+  margin: 0;
+
+  color: #7c9dc6;
+
+  font-size: 11px;
+}
+
+
+/* =========================
+   TABLET
+   ========================= */
+
+@media (max-width: 950px) {
+
+  .collab-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .collab-topbar {
+    padding: 0 30px;
+  }
+
+  .collab-hero {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 650px) {
+
+  .collab-topbar {
+    height: 64px;
+
+    padding: 0 18px;
+  }
+
+  .collab-logo {
+    font-size: 19px;
+  }
+
+  .collab-topbar-text {
+    display: none;
+  }
+
+  .collab-hero {
+    padding: 38px 20px 45px;
+  }
+
+  .collab-hero h1 {
+    font-size: 29px;
+  }
+
+  .collab-description {
+    font-size: 13px;
+  }
+
+  .collab-main {
+    padding: 0 14px 45px;
+  }
+
+  .collab-create-card,
+  .collab-section {
+    padding: 18px;
+  }
+
+  .collab-form {
+    grid-template-columns: 1fr;
+  }
+
+  .collab-form-group:nth-child(2) {
+    grid-column: span 1;
+  }
+
+  .collab-create-button {
+    grid-column: span 1;
+  }
+
+  .collab-request-card {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .collab-request-actions {
+    width: 100%;
+  }
+
+  .collab-request-actions button {
+    flex: 1;
+  }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+   ========================= */
+
+@media (max-width: 420px) {
+
+  .collab-hero h1 {
+    font-size: 26px;
+  }
+
+  .collab-section-heading h2,
+  .collab-section-title h2 {
+    font-size: 18px;
+  }
+
+  .collab-card {
+    padding: 17px;
+  }
+
+}

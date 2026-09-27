@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./CollaborationHub.css";
 
 function CollaborationHub() {
     const [collaborations, setCollaborations] = useState([]);
@@ -233,171 +234,498 @@ function CollaborationHub() {
     };
 
     return (
-        <div>
-            <h1>Collaboration Hub</h1>
+        <div className="collab-page">
 
-            <h2>Create Collaboration</h2>
+            {/* TOP BAR */}
 
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    name="title"
-                    placeholder="Collaboration Title"
-                    value={formData.title}
-                    onChange={handleChange}
-                    required
-                />
+            <header className="collab-topbar">
 
-                <br />
-                <br />
+                <div className="collab-logo">
+                    <div className="collab-logo-box">
+                        L
+                    </div>
 
-                <textarea
-                    name="description"
-                    placeholder="Describe your project or collaboration"
-                    value={formData.description}
-                    onChange={handleChange}
-                    required
-                />
+                    <span>LinkVerse</span>
+                </div>
 
-                <br />
-                <br />
+                <div className="collab-topbar-text">
+                    Collaboration Hub
+                </div>
 
-                <input
-                    type="text"
-                    name="requiredSkills"
-                    placeholder="Required skills (e.g. Python, React, MongoDB)"
-                    value={formData.requiredSkills}
-                    onChange={handleChange}
-                />
+            </header>
 
-                <br />
-                <br />
 
-                <button type="submit">
-                    Create Collaboration
-                </button>
-            </form>
+            {/* HERO */}
 
-            <hr />
+            <section className="collab-hero">
 
-            <h2>Available Collaborations</h2>
+                <div className="collab-hero-content">
 
-            {collaborations.length === 0 ? (
-                <p>No collaborations available.</p>
-            ) : (
-                collaborations.map((collaboration) => {
-                    const isCreator =
-                        collaboration.createdBy._id === currentUserId;
+                    <p className="collab-eyebrow">
+                        LINKVERSE COLLABORATION
+                    </p>
 
-                    const hasRequested =
-                        requestedCollaborations.includes(
-                            collaboration._id
-                        );
+                    <h1>
+                        Build Something Together
+                    </h1>
 
-                    return (
-                        <div key={collaboration._id}>
-                            <h3>{collaboration.title}</h3>
+                    <p className="collab-description">
+                        Create projects, find students with the
+                        right skills, and build collaborative teams.
+                    </p>
 
-                            <p>{collaboration.description}</p>
+                </div>
+
+            </section>
+
+
+            {/* MAIN */}
+
+            <main className="collab-main">
+
+
+                {/* CREATE COLLABORATION */}
+
+                <section className="collab-create-card">
+
+                    <div className="collab-section-heading">
+
+                        <div>
+                            <span>
+                                START A PROJECT
+                            </span>
+
+                            <h2>
+                                Create Collaboration
+                            </h2>
 
                             <p>
-                                <strong>Required Skills:</strong>{" "}
-                                {collaboration.requiredSkills.join(
-                                    ", "
-                                )}
+                                Share your idea and find students
+                                who can help bring it to life.
                             </p>
+                        </div>
+
+                        <div className="collab-create-icon">
+                            +
+                        </div>
+
+                    </div>
+
+
+                    <form
+                        className="collab-form"
+                        onSubmit={handleSubmit}
+                    >
+
+                        <div className="collab-form-group">
+
+                            <label>
+                                Collaboration Title
+                            </label>
+
+                            <input
+                                type="text"
+                                name="title"
+                                placeholder="e.g. AI Student Project"
+                                value={formData.title}
+                                onChange={handleChange}
+                                required
+                            />
+
+                        </div>
+
+
+                        <div className="collab-form-group">
+
+                            <label>
+                                Project Description
+                            </label>
+
+                            <textarea
+                                name="description"
+                                placeholder="Describe your project or collaboration..."
+                                value={formData.description}
+                                onChange={handleChange}
+                                required
+                            />
+
+                        </div>
+
+
+                        <div className="collab-form-group">
+
+                            <label>
+                                Required Skills
+                            </label>
+
+                            <input
+                                type="text"
+                                name="requiredSkills"
+                                placeholder="e.g. Python, React, MongoDB"
+                                value={formData.requiredSkills}
+                                onChange={handleChange}
+                            />
+
+                            <small>
+                                Separate multiple skills with commas.
+                            </small>
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            className="collab-create-button"
+                        >
+                            Create Collaboration
+                        </button>
+
+                    </form>
+
+                </section>
+
+
+                {/* AVAILABLE COLLABORATIONS */}
+
+                <section className="collab-section">
+
+                    <div className="collab-section-title">
+
+                        <div>
+                            <span>
+                                EXPLORE PROJECTS
+                            </span>
+
+                            <h2>
+                                Available Collaborations
+                            </h2>
 
                             <p>
-                                <strong>Posted by:</strong>{" "}
-                                {collaboration.createdBy.name}
+                                Find projects that match your skills
+                                and interests.
                             </p>
+                        </div>
+
+                        <div className="collab-count">
+                            {collaborations.length}
+                        </div>
+
+                    </div>
+
+
+                    {collaborations.length === 0 ? (
+
+                        <div className="collab-empty">
+
+                            <div className="collab-empty-icon">
+                                +
+                            </div>
+
+                            <h3>
+                                No collaborations available
+                            </h3>
 
                             <p>
-                                <strong>Status:</strong>{" "}
-                                {collaboration.status}
+                                Create the first collaboration
+                                and start building your team.
                             </p>
 
-                            <p>
-                                <strong>Team Members:</strong>{" "}
-                                {collaboration.members.length === 0
-                                    ? "No members yet"
-                                    : collaboration.members
-                                          .map(
-                                              (member) =>
-                                                  member.name
-                                          )
-                                          .join(", ")}
-                            </p>
+                        </div>
 
-                            {!isCreator &&
-                                !hasRequested &&
-                                collaboration.status === "open" && (
-                                    <button
-                                        onClick={() =>
-                                            handleJoinRequest(
-                                                collaboration._id
-                                            )
-                                        }
-                                    >
-                                        Request to Join
-                                    </button>
-                                )}
+                    ) : (
 
-                            {!isCreator && hasRequested && (
-                                <p>
-                                    <strong>
-                                        Join request sent
-                                    </strong>
-                                </p>
+                        <div className="collab-grid">
+
+                            {collaborations.map(
+                                (collaboration) => {
+
+                                    const isCreator =
+                                        collaboration.createdBy._id ===
+                                        currentUserId;
+
+                                    const hasRequested =
+                                        requestedCollaborations.includes(
+                                            collaboration._id
+                                        );
+
+                                    return (
+
+                                        <div
+                                            className="collab-card"
+                                            key={collaboration._id}
+                                        >
+
+                                            <div className="collab-card-top">
+
+                                                <div className="collab-project-icon">
+                                                    {collaboration.title
+                                                        ? collaboration.title
+                                                            .charAt(0)
+                                                            .toUpperCase()
+                                                        : "P"}
+                                                </div>
+
+                                                <div className="collab-status">
+                                                    {collaboration.status}
+                                                </div>
+
+                                            </div>
+
+
+                                            <h3 className="collab-card-title">
+                                                {collaboration.title}
+                                            </h3>
+
+
+                                            <p className="collab-card-description">
+                                                {collaboration.description}
+                                            </p>
+
+
+                                            <div className="collab-card-detail">
+
+                                                <span>
+                                                    POSTED BY
+                                                </span>
+
+                                                <p>
+                                                    {collaboration.createdBy.name}
+                                                </p>
+
+                                            </div>
+
+
+                                            <div className="collab-card-detail">
+
+                                                <span>
+                                                    REQUIRED SKILLS
+                                                </span>
+
+                                                <div className="collab-tags">
+
+                                                    {collaboration.requiredSkills
+                                                        .length === 0 ? (
+
+                                                        <span className="collab-no-data">
+                                                            No skills specified
+                                                        </span>
+
+                                                    ) : (
+
+                                                        collaboration.requiredSkills.map(
+                                                            (skill, index) => (
+
+                                                                <span
+                                                                    className="collab-tag"
+                                                                    key={index}
+                                                                >
+                                                                    {skill}
+                                                                </span>
+
+                                                            )
+                                                        )
+
+                                                    )}
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <div className="collab-team">
+
+                                                <span>
+                                                    TEAM MEMBERS
+                                                </span>
+
+                                                <p>
+
+                                                    {collaboration.members.length === 0
+                                                        ? "No members yet"
+                                                        : collaboration.members
+                                                            .map(
+                                                                (member) =>
+                                                                    member.name
+                                                            )
+                                                            .join(", ")}
+
+                                                </p>
+
+                                            </div>
+
+
+                                            {!isCreator &&
+                                                !hasRequested &&
+                                                collaboration.status ===
+                                                "open" && (
+
+                                                    <button
+                                                        className="collab-join-button"
+                                                        onClick={() =>
+                                                            handleJoinRequest(
+                                                                collaboration._id
+                                                            )
+                                                        }
+                                                    >
+                                                        Request to Join
+                                                    </button>
+
+                                                )}
+
+
+                                            {!isCreator &&
+                                                hasRequested && (
+
+                                                    <div className="collab-requested">
+                                                        ✓ Join request sent
+                                                    </div>
+
+                                                )}
+
+
+                                            {isCreator && (
+
+                                                <div className="collab-owner">
+                                                    Your Collaboration
+                                                </div>
+
+                                            )}
+
+                                        </div>
+
+                                    );
+                                }
                             )}
 
-                            <hr />
                         </div>
-                    );
-                })
-            )}
 
-            <h2>Pending Join Requests</h2>
+                    )}
 
-            {joinRequests.length === 0 ? (
-                <p>No pending join requests.</p>
-            ) : (
-                joinRequests.map((request) => (
-                    <div key={request._id}>
-                        <p>
-                            <strong>
-                                {request.sender.name}
-                            </strong>{" "}
-                            requested to join{" "}
-                            <strong>
-                                {request.collaboration.title}
-                            </strong>
-                        </p>
+                </section>
 
-                        <p>
-                            Email: {request.sender.email}
-                        </p>
 
-                        <button
-                            onClick={() =>
-                                handleAccept(request._id)
-                            }
-                        >
-                            Accept
-                        </button>
+                {/* PENDING REQUESTS */}
 
-                        <button
-                            onClick={() =>
-                                handleReject(request._id)
-                            }
-                        >
-                            Reject
-                        </button>
+                <section className="collab-section">
 
-                        <hr />
+                    <div className="collab-section-title">
+
+                        <div>
+                            <span>
+                                TEAM MANAGEMENT
+                            </span>
+
+                            <h2>
+                                Pending Join Requests
+                            </h2>
+
+                            <p>
+                                Review students who want to join
+                                your collaborations.
+                            </p>
+                        </div>
+
+                        <div className="collab-count">
+                            {joinRequests.length}
+                        </div>
+
                     </div>
-                ))
-            )}
+
+
+                    {joinRequests.length === 0 ? (
+
+                        <div className="collab-empty small">
+
+                            <h3>
+                                No pending join requests
+                            </h3>
+
+                            <p>
+                                New requests will appear here.
+                            </p>
+
+                        </div>
+
+                    ) : (
+
+                        <div className="collab-request-list">
+
+                            {joinRequests.map(
+                                (request) => (
+
+                                    <div
+                                        className="collab-request-card"
+                                        key={request._id}
+                                    >
+
+                                        <div className="collab-request-avatar">
+                                            {request.sender.name
+                                                ? request.sender.name
+                                                    .charAt(0)
+                                                    .toUpperCase()
+                                                : "U"}
+                                        </div>
+
+
+                                        <div className="collab-request-info">
+
+                                            <h3>
+                                                {request.sender.name}
+                                            </h3>
+
+                                            <p>
+                                                {request.sender.email}
+                                            </p>
+
+                                            <span>
+                                                Requested to join{" "}
+                                                <strong>
+                                                    {request.collaboration.title}
+                                                </strong>
+                                            </span>
+
+                                        </div>
+
+
+                                        <div className="collab-request-actions">
+
+                                            <button
+                                                className="collab-accept"
+                                                onClick={() =>
+                                                    handleAccept(
+                                                        request._id
+                                                    )
+                                                }
+                                            >
+                                                Accept
+                                            </button>
+
+                                            <button
+                                                className="collab-reject"
+                                                onClick={() =>
+                                                    handleReject(
+                                                        request._id
+                                                    )
+                                                }
+                                            >
+                                                Reject
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+
+                                )
+                            )}
+
+                        </div>
+
+                    )}
+
+                </section>
+
+            </main>
+
         </div>
     );
 }

@@ -1,0 +1,484 @@
+* {
+  box-sizing: border-box;
+}
+
+.connections-page {
+  min-height: 100vh;
+  background: #f3f7fb;
+  color: #011023;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+
+/* =========================
+   TOP BAR
+   ========================= */
+
+.connections-topbar {
+  height: 72px;
+
+  background: #011023;
+
+  padding: 0 55px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: white;
+}
+
+.connections-logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.connections-logo-box {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: #c2e8ff;
+  color: #011023;
+
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.connections-topbar-text {
+  color: #7c9dc6;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* =========================
+   HERO
+   ========================= */
+
+.connections-hero {
+  background: linear-gradient(
+    135deg,
+    #011023 0%,
+    #042558 100%
+  );
+
+  padding: 48px 55px 52px;
+
+  color: white;
+}
+
+.connections-hero-content {
+  max-width: 1150px;
+  margin: auto;
+}
+
+.connections-eyebrow {
+  margin: 0 0 10px;
+
+  color: #7c9dc6;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+}
+
+.connections-hero h1 {
+  margin: 0;
+
+  font-size: 38px;
+  line-height: 1.2;
+
+  font-weight: 700;
+}
+
+.connections-description {
+  max-width: 600px;
+
+  margin: 12px 0 0;
+
+  color: #c2e8ff;
+
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+
+/* =========================
+   MAIN
+   ========================= */
+
+.connections-main {
+  max-width: 1150px;
+
+  margin: -25px auto 0;
+
+  padding: 0 25px 60px;
+}
+
+
+/* =========================
+   RESULTS HEADER
+   ========================= */
+
+.connections-results-header {
+  background: white;
+
+  border: 1px solid #dce7f0;
+
+  border-radius: 15px;
+
+  padding: 20px 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+
+  box-shadow: 0 8px 25px rgba(1, 16, 35, 0.07);
+}
+
+.connections-results-header h2 {
+  margin: 0 0 4px;
+
+  color: #011023;
+
+  font-size: 20px;
+}
+
+.connections-results-header p {
+  margin: 0;
+
+  color: #71859a;
+
+  font-size: 12px;
+}
+
+.connections-count {
+  min-width: 38px;
+  height: 34px;
+
+  padding: 0 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: #c2e8ff;
+  color: #042558;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+/* =========================
+   CONNECTION GRID
+   ========================= */
+
+.connections-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 18px;
+}
+
+
+/* =========================
+   CONNECTION CARD
+   ========================= */
+
+.connection-card {
+  background: white;
+
+  border: 1px solid #dfe9f1;
+
+  border-radius: 16px;
+
+  padding: 21px;
+
+  box-shadow: 0 5px 18px rgba(1, 16, 35, 0.05);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.connection-card:hover {
+  transform: translateY(-4px);
+
+  border-color: #7c9dc6;
+
+  box-shadow: 0 12px 28px rgba(1, 16, 35, 0.1);
+}
+
+
+/* =========================
+   CARD HEADER
+   ========================= */
+
+.connection-card-header {
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  padding-bottom: 17px;
+
+  border-bottom: 1px solid #edf2f6;
+}
+
+.connection-avatar {
+  width: 50px;
+  height: 50px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: #042558;
+  color: #c2e8ff;
+
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.connection-user-info h3 {
+  margin: 0 0 5px;
+
+  color: #011023;
+
+  font-size: 17px;
+}
+
+.connection-user-info span {
+  color: #507ca9;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+
+/* =========================
+   DETAILS
+   ========================= */
+
+.connection-details {
+  padding: 18px 0;
+}
+
+.connection-detail span {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #7c9dc6;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+.connection-detail p {
+  margin: 0;
+
+  color: #34495e;
+
+  font-size: 12px;
+
+  word-break: break-word;
+}
+
+
+/* =========================
+   CONNECTION STATUS
+   ========================= */
+
+.connection-status {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding-top: 13px;
+
+  border-top: 1px solid #edf2f6;
+
+  color: #507ca9;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.connection-status-dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #547eb0;
+}
+
+
+/* =========================
+   EMPTY STATE
+   ========================= */
+
+.connections-empty {
+  background: white;
+
+  border: 1px solid #dfe9f1;
+
+  border-radius: 16px;
+
+  padding: 60px 25px;
+
+  text-align: center;
+
+  box-shadow: 0 5px 18px rgba(1, 16, 35, 0.05);
+}
+
+.connections-empty-icon {
+  width: 50px;
+  height: 50px;
+
+  margin: 0 auto 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: #c2e8ff;
+  color: #042558;
+
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.connections-empty h3 {
+  margin: 0 0 8px;
+
+  color: #011023;
+
+  font-size: 18px;
+}
+
+.connections-empty p {
+  max-width: 430px;
+
+  margin: 0 auto;
+
+  color: #7c9dc6;
+
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+
+/* =========================
+   TABLET
+   ========================= */
+
+@media (max-width: 1000px) {
+
+  .connections-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .connections-topbar {
+    padding: 0 30px;
+  }
+
+  .connections-hero {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 650px) {
+
+  .connections-topbar {
+    height: 64px;
+
+    padding: 0 18px;
+  }
+
+  .connections-logo {
+    font-size: 19px;
+  }
+
+  .connections-topbar-text {
+    display: none;
+  }
+
+  .connections-hero {
+    padding: 38px 20px 45px;
+  }
+
+  .connections-hero h1 {
+    font-size: 30px;
+  }
+
+  .connections-description {
+    font-size: 13px;
+  }
+
+  .connections-main {
+    padding: 0 14px 45px;
+  }
+
+  .connections-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+   ========================= */
+
+@media (max-width: 420px) {
+
+  .connections-hero h1 {
+    font-size: 26px;
+  }
+
+  .connections-results-header {
+    padding: 17px;
+  }
+
+  .connection-card {
+    padding: 18px;
+  }
+
+}

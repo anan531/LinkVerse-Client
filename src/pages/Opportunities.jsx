@@ -6,8 +6,8 @@ function Opportunities() {
     const [search, setSearch] = useState("");
     const [type, setType] = useState("All");
 
+    const user = JSON.parse(localStorage.getItem("user"));
 
-    const user = JSON.parse(localStorage.getItem("user"));  
     useEffect(() => {
         fetch("http://localhost:5000/api/opportunities")
             .then((response) => response.json())
@@ -21,8 +21,12 @@ function Opportunities() {
 
     const filteredOpportunities = opportunities.filter((opportunity) => {
         const matchesSearch =
-            opportunity.title.toLowerCase().includes(search.toLowerCase()) ||
-            opportunity.organization.toLowerCase().includes(search.toLowerCase());
+            opportunity.title
+                .toLowerCase()
+                .includes(search.toLowerCase()) ||
+            opportunity.organization
+                .toLowerCase()
+                .includes(search.toLowerCase());
 
         const matchesType =
             type === "All" || opportunity.type === type;
@@ -30,84 +34,236 @@ function Opportunities() {
         return matchesSearch && matchesType;
     });
 
-return (
-    <div className="opportunity-page">
-        <h1>Opportunity Board</h1>
-        {user && user.role === "admin" && (
-    <button onClick={() => window.location.href = "/create-opportunity"}>
-        Create Opportunity
-    </button>
-)}
+    return (
+        <div className="opportunity-page">
 
-        <div className="opportunity-filters">
-            <input
-                type="text"
-                placeholder="Search opportunities..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-            />
-
-            <select
-                value={type}
-                onChange={(e) => setType(e.target.value)}
-            >
-                <option value="All">All</option>
-                <option value="Internship">Internship</option>
-                <option value="Workshop">Workshop</option>
-                <option value="Hackathon">Hackathon</option>
-                <option value="Scholarship">Scholarship</option>
-                <option value="Exchange">Exchange</option>
-            </select>
-        </div>
-
-        {filteredOpportunities.length === 0 ? (
-            <p>No opportunities found.</p>
-        ) : (
-            <div className="opportunity-list">
-                {filteredOpportunities.map((opportunity) => (
-                    <div
-                        className="opportunity-card"
-                        key={opportunity._id}
-                    >
-                        <h2>{opportunity.title}</h2>
-
-                        <p className="opportunity-type">
-                            {opportunity.type}
-                        </p>
-
-                        <p>
-                            <strong>Organization:</strong>{" "}
-                            {opportunity.organization}
-                        </p>
-
-                        <p>
-                            <strong>Description:</strong>{" "}
-                            {opportunity.description}
-                        </p>
-
-                        <p>
-                            <strong>Location:</strong>{" "}
-                            {opportunity.location}
-                        </p>
-
-                        <p>
-                            <strong>Deadline:</strong>{" "}
-                            {opportunity.deadline}
-                        </p>
-
-                        <a
-                            href={opportunity.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            View Opportunity
-                        </a>
+            {/* Top Bar */}
+            <header className="opportunity-topbar">
+                <div className="opportunity-brand">
+                    <div className="opportunity-logo-box">
+                        L
                     </div>
-                ))}
-            </div>
-        )}
-    </div>
-);
+
+                    <div>
+                        <h2>LinkVerse</h2>
+                        <span>Student Networking Platform</span>
+                    </div>
+                </div>
+            </header>
+
+            {/* Hero */}
+            <section className="opportunity-hero">
+                <div className="opportunity-hero-content">
+
+                    <p className="opportunity-eyebrow">
+                        OPPORTUNITY BOARD
+                    </p>
+
+                    <h1>
+                        Discover Your Next Opportunity
+                    </h1>
+
+                    <p>
+                        Explore internships, workshops, hackathons,
+                        scholarships and other opportunities designed
+                        to help you grow.
+                    </p>
+
+                </div>
+            </section>
+
+            {/* Main Content */}
+            <main className="opportunity-main">
+
+                {/* Header */}
+                <div className="opportunity-heading">
+
+                    <div>
+                        <h2>Explore Opportunities</h2>
+
+                        <p>
+                            Find opportunities that match your interests
+                            and career goals.
+                        </p>
+                    </div>
+
+                    {user && user.role === "admin" && (
+                        <button
+                            className="create-opportunity-button"
+                            onClick={() =>
+                                window.location.href =
+                                    "/create-opportunity"
+                            }
+                        >
+                            + Create Opportunity
+                        </button>
+                    )}
+
+                </div>
+
+                {/* Filters */}
+                <div className="opportunity-filter-card">
+
+                    <div className="search-wrapper">
+                        <span className="search-icon">
+                            🔍
+                        </span>
+
+                        <input
+                            type="text"
+                            placeholder="Search by title or organization..."
+                            value={search}
+                            onChange={(e) =>
+                                setSearch(e.target.value)
+                            }
+                        />
+                    </div>
+
+                    <select
+                        value={type}
+                        onChange={(e) =>
+                            setType(e.target.value)
+                        }
+                    >
+                        <option value="All">All Types</option>
+                        <option value="Internship">
+                            Internship
+                        </option>
+                        <option value="Workshop">
+                            Workshop
+                        </option>
+                        <option value="Hackathon">
+                            Hackathon
+                        </option>
+                        <option value="Scholarship">
+                            Scholarship
+                        </option>
+                        <option value="Exchange">
+                            Exchange
+                        </option>
+                    </select>
+
+                </div>
+
+                {/* Results Count */}
+                <div className="opportunity-result-info">
+                    <span>
+                        {filteredOpportunities.length}{" "}
+                        {filteredOpportunities.length === 1
+                            ? "opportunity"
+                            : "opportunities"}{" "}
+                        found
+                    </span>
+                </div>
+
+                {/* Opportunities */}
+                {filteredOpportunities.length === 0 ? (
+                    <div className="opportunity-empty">
+
+                        <div className="opportunity-empty-icon">
+                            🔎
+                        </div>
+
+                        <h3>No opportunities found</h3>
+
+                        <p>
+                            Try changing your search or selecting
+                            another opportunity type.
+                        </p>
+
+                    </div>
+                ) : (
+                    <div className="opportunity-list">
+
+                        {filteredOpportunities.map(
+                            (opportunity) => (
+                                <div
+                                    className="opportunity-card"
+                                    key={opportunity._id}
+                                >
+
+                                    <div className="opportunity-card-top">
+
+                                        <div className="opportunity-icon">
+                                            {opportunity.type ===
+                                            "Internship"
+                                                ? "💼"
+                                                : opportunity.type ===
+                                                  "Workshop"
+                                                ? "🎓"
+                                                : opportunity.type ===
+                                                  "Hackathon"
+                                                ? "💻"
+                                                : opportunity.type ===
+                                                  "Scholarship"
+                                                ? "🏆"
+                                                : "🌍"}
+                                        </div>
+
+                                        <span className="opportunity-type">
+                                            {opportunity.type}
+                                        </span>
+
+                                    </div>
+
+                                    <h2>
+                                        {opportunity.title}
+                                    </h2>
+
+                                    <p className="opportunity-organization">
+                                        {opportunity.organization}
+                                    </p>
+
+                                    <p className="opportunity-description">
+                                        {opportunity.description}
+                                    </p>
+
+                                    <div className="opportunity-details">
+
+                                        <div className="opportunity-detail">
+                                            <span className="detail-label">
+                                                Location
+                                            </span>
+
+                                            <span className="detail-value">
+                                                {opportunity.location ||
+                                                    "Not specified"}
+                                            </span>
+                                        </div>
+
+                                        <div className="opportunity-detail">
+                                            <span className="detail-label">
+                                                Deadline
+                                            </span>
+
+                                            <span className="detail-value">
+                                                {opportunity.deadline ||
+                                                    "Not specified"}
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+                                    <a
+                                        className="view-opportunity-button"
+                                        href={opportunity.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        View Opportunity
+                                        <span>→</span>
+                                    </a>
+
+                                </div>
+                            )
+                        )}
+
+                    </div>
+                )}
+
+            </main>
+        </div>
+    );
 }
 
 export default Opportunities;
