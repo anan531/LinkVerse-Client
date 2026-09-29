@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Ooportunities.css";
 
 function Opportunities() {
+    const navigate = useNavigate();
+
     const [opportunities, setOpportunities] = useState([]);
     const [search, setSearch] = useState("");
     const [type, setType] = useState("All");
@@ -37,62 +40,87 @@ function Opportunities() {
     return (
         <div className="opportunity-page">
 
-            {/* Top Bar */}
+            {/* ================================
+                TOP BAR
+            ================================= */}
+
             <header className="opportunity-topbar">
+
                 <div className="opportunity-brand">
+
                     <div className="opportunity-logo-box">
                         L
                     </div>
 
                     <div>
                         <h2>LinkVerse</h2>
-                        <span>Student Networking Platform</span>
+
+                        <span>
+                            Student Networking Platform
+                        </span>
                     </div>
+
                 </div>
+
             </header>
 
-            {/* Hero */}
+
+            {/* ================================
+                HERO
+            ================================= */}
+
             <section className="opportunity-hero">
+
                 <div className="opportunity-hero-content">
 
                     <p className="opportunity-eyebrow">
-                        OPPORTUNITY BOARD
+                        EXPLORE & GROW
                     </p>
 
                     <h1>
-                        Discover Your Next Opportunity
+                        Opportunities
                     </h1>
 
                     <p>
-                        Explore internships, workshops, hackathons,
-                        scholarships and other opportunities designed
-                        to help you grow.
+                        Discover internships, workshops,
+                        hackathons, scholarships and other
+                        opportunities to grow your career.
                     </p>
 
                 </div>
+
             </section>
 
-            {/* Main Content */}
+
+            {/* ================================
+                MAIN
+            ================================= */}
+
             <main className="opportunity-main">
 
-                {/* Header */}
+                {/* Heading */}
+
                 <div className="opportunity-heading">
 
                     <div>
-                        <h2>Explore Opportunities</h2>
+                        <h2>
+                            Available Opportunities
+                        </h2>
 
                         <p>
-                            Find opportunities that match your interests
-                            and career goals.
+                            Find opportunities that match
+                            your interests and career goals.
                         </p>
                     </div>
+
+
+                    {/* Admin Create Button */}
 
                     {user && user.role === "admin" && (
                         <button
                             className="create-opportunity-button"
                             onClick={() =>
-                                window.location.href =
-                                    "/create-opportunity"
+                                navigate("/create-opportunity")
                             }
                         >
                             + Create Opportunity
@@ -101,23 +129,30 @@ function Opportunities() {
 
                 </div>
 
-                {/* Filters */}
+
+                {/* ================================
+                    FILTERS
+                ================================= */}
+
                 <div className="opportunity-filter-card">
 
                     <div className="search-wrapper">
+
                         <span className="search-icon">
                             🔍
                         </span>
 
                         <input
                             type="text"
-                            placeholder="Search by title or organization..."
+                            placeholder="Search opportunities or organizations..."
                             value={search}
                             onChange={(e) =>
                                 setSearch(e.target.value)
                             }
                         />
+
                     </div>
+
 
                     <select
                         value={type}
@@ -125,79 +160,89 @@ function Opportunities() {
                             setType(e.target.value)
                         }
                     >
-                        <option value="All">All Types</option>
+
+                        <option value="All">
+                            All Types
+                        </option>
+
                         <option value="Internship">
                             Internship
                         </option>
+
                         <option value="Workshop">
                             Workshop
                         </option>
+
                         <option value="Hackathon">
                             Hackathon
                         </option>
+
                         <option value="Scholarship">
                             Scholarship
                         </option>
+
                         <option value="Exchange">
                             Exchange
                         </option>
+
                     </select>
 
                 </div>
 
-                {/* Results Count */}
+
+                {/* Result count */}
+
                 <div className="opportunity-result-info">
-                    <span>
-                        {filteredOpportunities.length}{" "}
-                        {filteredOpportunities.length === 1
-                            ? "opportunity"
-                            : "opportunities"}{" "}
-                        found
-                    </span>
+
+                    Showing {filteredOpportunities.length}{" "}
+                    {filteredOpportunities.length === 1
+                        ? "opportunity"
+                        : "opportunities"}
+
                 </div>
 
-                {/* Opportunities */}
+
+                {/* ================================
+                    OPPORTUNITY LIST
+                ================================= */}
+
                 {filteredOpportunities.length === 0 ? (
+
                     <div className="opportunity-empty">
 
                         <div className="opportunity-empty-icon">
-                            🔎
+                            ◎
                         </div>
 
-                        <h3>No opportunities found</h3>
+                        <h3>
+                            No opportunities found
+                        </h3>
 
                         <p>
-                            Try changing your search or selecting
-                            another opportunity type.
+                            Try changing your search or
+                            filter.
                         </p>
 
                     </div>
+
                 ) : (
+
                     <div className="opportunity-list">
 
                         {filteredOpportunities.map(
                             (opportunity) => (
+
                                 <div
                                     className="opportunity-card"
                                     key={opportunity._id}
                                 >
 
+                                    {/* Card top */}
+
                                     <div className="opportunity-card-top">
 
                                         <div className="opportunity-icon">
-                                            {opportunity.type ===
-                                            "Internship"
-                                                ? "💼"
-                                                : opportunity.type ===
-                                                  "Workshop"
-                                                ? "🎓"
-                                                : opportunity.type ===
-                                                  "Hackathon"
-                                                ? "💻"
-                                                : opportunity.type ===
-                                                  "Scholarship"
-                                                ? "🏆"
-                                                : "🌍"}
+                                            ✦
                                         </div>
 
                                         <span className="opportunity-type">
@@ -205,6 +250,9 @@ function Opportunities() {
                                         </span>
 
                                     </div>
+
+
+                                    {/* Content */}
 
                                     <h2>
                                         {opportunity.title}
@@ -218,9 +266,13 @@ function Opportunities() {
                                         {opportunity.description}
                                     </p>
 
+
+                                    {/* Details */}
+
                                     <div className="opportunity-details">
 
                                         <div className="opportunity-detail">
+
                                             <span className="detail-label">
                                                 Location
                                             </span>
@@ -229,9 +281,12 @@ function Opportunities() {
                                                 {opportunity.location ||
                                                     "Not specified"}
                                             </span>
+
                                         </div>
 
+
                                         <div className="opportunity-detail">
+
                                             <span className="detail-label">
                                                 Deadline
                                             </span>
@@ -240,28 +295,64 @@ function Opportunities() {
                                                 {opportunity.deadline ||
                                                     "Not specified"}
                                             </span>
+
                                         </div>
 
                                     </div>
 
-                                    <a
-                                        className="view-opportunity-button"
-                                        href={opportunity.link}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        View Opportunity
-                                        <span>→</span>
-                                    </a>
+
+                                    {/* ================================
+                                        ACTION BUTTONS
+                                    ================================= */}
+
+                                    <div className="opportunity-card-actions">
+
+                                        <a
+                                            className="view-opportunity-button"
+                                            href={opportunity.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            View Opportunity
+
+                                            <span>
+                                                →
+                                            </span>
+
+                                        </a>
+
+
+                                        {/* ADMIN EDIT BUTTON */}
+
+                                        {user && user.role === "admin" && (
+
+                                            <button
+                                                type="button"
+                                                className="edit-opportunity-button"
+                                                onClick={() =>
+                                                    navigate(
+                                                        `/edit-opportunity/${opportunity._id}`
+                                                    )
+                                                }
+                                            >
+                                                Edit
+                                            </button>
+
+                                        )}
+
+                                    </div>
 
                                 </div>
+
                             )
                         )}
 
                     </div>
+
                 )}
 
             </main>
+
         </div>
     );
 }

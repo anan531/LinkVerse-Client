@@ -5,6 +5,12 @@ import "./AdminDashboard.css";
 function AdminDashboard() {
     const navigate = useNavigate();
 
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        navigate("/login");
+    };
+
     const [activeSection, setActiveSection] = useState("dashboard");
 
     const [stats, setStats] = useState({
@@ -221,6 +227,10 @@ function AdminDashboard() {
             console.error("Error deleting opportunity:", error);
             alert("Unable to delete opportunity");
         }
+    };
+
+    const editOpportunity = (opportunityId) => {
+        navigate(`/edit-opportunity/${opportunityId}`);
     };
 
     useEffect(() => {
@@ -672,7 +682,20 @@ function AdminDashboard() {
                                     </a>
                                 )}
 
+                                {/* OPPORTUNITY ACTIONS */}
+
                                 <div className="admin-opportunity-actions">
+
+                                    <button
+                                        className="admin-edit-button"
+                                        onClick={() =>
+                                            editOpportunity(
+                                                opportunity._id
+                                            )
+                                        }
+                                    >
+                                        Edit Opportunity
+                                    </button>
 
                                     <button
                                         className="admin-delete-button"
@@ -703,9 +726,11 @@ function AdminDashboard() {
         <div className="admin-dashboard">
 
             {/* SIDEBAR */}
+
             <aside className="admin-sidebar">
 
                 <div className="admin-brand">
+
                     <div className="admin-brand-mark">
                         L
                     </div>
@@ -713,6 +738,7 @@ function AdminDashboard() {
                     <span>
                         LinkVerse
                     </span>
+
                 </div>
 
                 <div className="admin-sidebar-content">
@@ -790,15 +816,25 @@ function AdminDashboard() {
                 </div>
 
                 <div className="admin-sidebar-footer">
+
                     <span>
                         Administrator
                     </span>
+
+                    <button
+                        className="admin-logout-button"
+                        onClick={handleLogout}
+                    >
+                        ↪ Logout
+                    </button>
+
                 </div>
 
             </aside>
 
 
             {/* MAIN CONTENT */}
+
             <main className="admin-main">
 
                 {activeSection === "dashboard" &&

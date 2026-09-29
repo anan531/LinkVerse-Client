@@ -16,7 +16,7 @@ function Dashboard() {
       {
         method: "PUT",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`, 
         },
       }
     )

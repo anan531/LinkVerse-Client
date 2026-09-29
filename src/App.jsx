@@ -19,153 +19,182 @@ import Recommendations from "./pages/Recommendations";
 import StudentProfile from "./pages/StudentProfile";
 
 import Layout from "./components/Layout";
+import ProtectedRoute from "./components/ProtectedRoute";
+import EditOpportunity from "./pages/EditOpportunity";
 
 function App() {
-  return (
-    <BrowserRouter>
+    return (
+        <BrowserRouter>
+            <Routes>
 
-      <Routes>
+                {/* PUBLIC PAGES */}
 
-        {/* =========================
-            PUBLIC PAGES
-        ========================= */}
+                <Route
+                    path="/"
+                    element={<Home />}
+                />
 
-        <Route path="/" element={<Home />} />
+                <Route
+                    path="/login"
+                    element={<Login />}
+                />
 
-        <Route
-          path="/login"
-          element={<Login />}
-        />
-
-        <Route
-          path="/register"
-          element={<Register />}
-        />
+                <Route
+                    path="/register"
+                    element={<Register />}
+                />
 
 
-        {/* =========================
-            STUDENT PAGES
-            Shared Sidebar/Layout
-        ========================= */}
+                {/* PROTECTED STUDENT PAGES */}
 
-        <Route
-          path="/dashboard"
-          element={
+                <Route
+                    path="/dashboard"
+                    element={
+                        <ProtectedRoute>
+                            <Layout>
+                                <Dashboard />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/profile"
+                    element={
+                        <ProtectedRoute>
+                            <Layout>
+                                <Profile />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/profile/:studentId"
+                    element={
+                        <ProtectedRoute>
+                            <Layout>
+                                <StudentProfile />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/discover-students"
+                    element={
+                        <ProtectedRoute>
+                            <Layout>
+                                <DiscoverStudents />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/connections"
+                    element={
+                        <ProtectedRoute>
+                            <Layout>
+                                <Connections />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/opportunities"
+                    element={
+                        <ProtectedRoute>
+                            <Layout>
+                                <Opportunities />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
+
+
+                <Route
+    path="/edit-opportunity/:opportunityId"
+    element={
+        <ProtectedRoute>
             <Layout>
-              <Dashboard />
+                <EditOpportunity />
             </Layout>
-          }
-        />
-
-        <Route
-          path="/profile"
-          element={
-            <Layout>
-              <Profile />
-            </Layout>
-          }
-        />
-
-        <Route
-  path="/profile/:studentId"
-  element={
-    <Layout>
-      <StudentProfile />
-    </Layout>
-  }
+        </ProtectedRoute>
+    }
 />
 
-        <Route
-          path="/discover-students"
-          element={
-            <Layout>
-              <DiscoverStudents />
-            </Layout>
-          }
-        />
+                <Route
+                    path="/create-opportunity"
+                    element={
+                        <ProtectedRoute>
+                            <Layout>
+                                <CreateOpportunity />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
 
-        <Route
-          path="/connections"
-          element={
-            <Layout>
-              <Connections />
-            </Layout>
-          }
-        />
+                <Route
+                    path="/collaborations"
+                    element={
+                        <ProtectedRoute>
+                            <Layout>
+                                <CollaborationHub />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
 
-        <Route
-          path="/collaborations"
-          element={
-            <Layout>
-              <CollaborationHub />
-            </Layout>
-          }
-        />
+                <Route
+                    path="/chat"
+                    element={
+                        <ProtectedRoute>
+                            <Layout>
+                                <Chat />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
 
-        <Route
-          path="/chat"
-          element={
-            <Layout>
-              <Chat />
-            </Layout>
-          }
-        />
+                <Route
+                    path="/feed"
+                    element={
+                        <ProtectedRoute>
+                            <Layout>
+                                <StudentFeed />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
 
-        <Route
-          path="/opportunities"
-          element={
-            <Layout>
-              <Opportunities />
-            </Layout>
-          }
-        />
+                <Route
+                    path="/recommendations"
+                    element={
+                        <ProtectedRoute>
+                            <Layout>
+                                <Recommendations />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
 
-        <Route
-          path="/create-opportunity"
-          element={
-            <Layout>
-              <CreateOpportunity />
-            </Layout>
-          }
-        />
 
-        <Route
-          path="/feed"
-          element={
-            <Layout>
-              <StudentFeed />
-            </Layout>
-          }
-        />
+                {/* ADMIN PAGE */}
 
-        <Route
-  path="/recommendations"
-  element={
-    <Layout>
-      <Recommendations />
-    </Layout>
-  }
+<Route
+    path="/admin-dashboard"
+    element={
+        <ProtectedRoute adminOnly={true}>
+            <AdminDashboard />
+        </ProtectedRoute>
+    }
 />
 
-
-
-
-
-        {/* =========================
-            ADMIN
-        ========================= */}
-
-        <Route
-          path="/admin-dashboard"
-          element={<AdminDashboard />}
-        />
-
-      </Routes>
-
-      
-
-    </BrowserRouter>
-  );
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
 export default App;
