@@ -1,0 +1,602 @@
+/* =========================================
+   AI RECOMMENDATIONS PAGE
+========================================= */
+
+.recommendations-page {
+  min-height: 100vh;
+  background: #f4f8fc;
+  color: #011023;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.recommendations-header {
+  min-height: 230px;
+
+  padding: 42px 45px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+
+  background: linear-gradient(
+    120deg,
+    #011023,
+    #042558
+  );
+
+  color: white;
+}
+
+.recommendations-eyebrow {
+  margin: 0 0 9px;
+
+  color: #c2e8ff;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+}
+
+.recommendations-header h1 {
+  margin: 0;
+
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.recommendations-header p:last-child {
+  max-width: 620px;
+
+  margin: 12px 0 0;
+
+  color: #c2e8ff;
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+
+/* =========================================
+   BACK TO DASHBOARD
+========================================= */
+
+.recommendations-back {
+  flex-shrink: 0;
+
+  padding: 11px 16px;
+
+  border: 1px solid rgba(194, 232, 255, 0.25);
+
+  border-radius: 8px;
+
+  background: rgba(194, 232, 255, 0.08);
+
+  color: white;
+
+  font-family: inherit;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.recommendations-back:hover {
+  background: #c2e8ff;
+  color: #042558;
+}
+
+
+/* =========================================
+   MAIN
+========================================= */
+
+.recommendations-main {
+  padding: 34px 35px 60px;
+}
+
+
+/* =========================================
+   INTRO
+========================================= */
+
+.recommendations-intro {
+  display: flex;
+
+  align-items: flex-end;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+}
+
+.recommendations-intro p {
+  margin: 0 0 5px;
+
+  color: #507ca9;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+}
+
+.recommendations-intro h2 {
+  margin: 0;
+
+  color: #011023;
+
+  font-size: 21px;
+}
+
+.recommendations-intro > span {
+  color: #7c9dc6;
+
+  font-size: 11px;
+}
+
+
+/* =========================================
+   RECOMMENDATION GRID
+========================================= */
+
+.recommendation-grid {
+  display: grid;
+
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(280px, 1fr)
+  );
+
+  gap: 18px;
+}
+
+
+/* =========================================
+   RECOMMENDATION CARD
+========================================= */
+
+.recommendation-card {
+  padding: 21px;
+
+  background: white;
+
+  border: 1px solid #dce8f2;
+
+  border-radius: 15px;
+
+  box-shadow:
+    0 6px 20px rgba(1, 16, 35, 0.05);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.recommendation-card:hover {
+  transform: translateY(-4px);
+
+  border-color: #7c9dc6;
+
+  box-shadow:
+    0 12px 28px rgba(1, 16, 35, 0.09);
+}
+
+
+/* =========================================
+   CARD TOP
+========================================= */
+
+.recommendation-card-top {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 15px;
+}
+
+.recommendation-avatar {
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #042558;
+
+  color: #c2e8ff;
+
+  font-size: 20px;
+  font-weight: 700;
+}
+
+
+/* =========================================
+   MATCH SCORE
+========================================= */
+
+.match-score {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-end;
+}
+
+.match-score strong {
+  color: #042558;
+
+  font-size: 22px;
+
+  line-height: 1;
+}
+
+.match-score span {
+  margin-top: 4px;
+
+  color: #7c9dc6;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+}
+
+
+/* =========================================
+   STUDENT INFO
+========================================= */
+
+.recommendation-student h3 {
+  margin: 0;
+
+  color: #011023;
+
+  font-size: 17px;
+}
+
+.recommendation-student p {
+  margin: 5px 0 0;
+
+  color: #54708f;
+
+  font-size: 11px;
+}
+
+.recommendation-student span {
+  display: inline-block;
+
+  margin-top: 5px;
+
+  color: #7c9dc6;
+
+  font-size: 10px;
+}
+
+
+/* =========================================
+   BIO
+========================================= */
+
+.recommendation-bio {
+  margin: 15px 0 0;
+
+  padding: 12px;
+
+  border-radius: 8px;
+
+  background: #f4f8fc;
+
+  color: #64778c;
+
+  font-size: 11px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================
+   RECOMMENDATION REASONS
+========================================= */
+
+.recommendation-reasons {
+  margin-top: 17px;
+
+  padding-top: 15px;
+
+  border-top: 1px solid #e3edf4;
+}
+
+.recommendation-reasons h4 {
+  margin: 0 0 10px;
+
+  color: #042558;
+
+  font-size: 11px;
+
+  font-weight: 700;
+}
+
+.reason-row {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 8px;
+
+  margin-bottom: 7px;
+
+  color: #64778c;
+
+  font-size: 10px;
+
+  line-height: 1.4;
+}
+
+.reason-icon {
+  width: 17px;
+  height: 17px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #e5f3fc;
+
+  color: #042558;
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.reason-row strong {
+  color: #042558;
+}
+
+
+/* =========================================
+   VIEW PROFILE BUTTON
+========================================= */
+
+.view-profile-button {
+  width: 100%;
+
+  margin-top: 15px;
+
+  padding: 10px 14px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #042558;
+
+  color: white;
+
+  font-family: inherit;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.view-profile-button:hover {
+  background: #507ca9;
+}
+
+.view-profile-button span {
+  margin-left: 8px;
+
+  font-size: 14px;
+}
+
+
+/* =========================================
+   EMPTY / ERROR STATE
+========================================= */
+
+.recommendation-empty {
+  max-width: 600px;
+
+  margin: 30px auto;
+
+  padding: 50px 35px;
+
+  text-align: center;
+
+  background: white;
+
+  border: 1px dashed #cbdce9;
+
+  border-radius: 15px;
+}
+
+.recommendation-empty-icon {
+  width: 50px;
+  height: 50px;
+
+  margin: 0 auto 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: #e5f3fc;
+
+  color: #042558;
+
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.recommendation-empty h3 {
+  margin: 0;
+
+  color: #011023;
+
+  font-size: 16px;
+}
+
+.recommendation-empty p {
+  margin: 8px 0 18px;
+
+  color: #7c9dc6;
+
+  font-size: 11px;
+
+  line-height: 1.6;
+}
+
+.recommendation-empty button {
+  padding: 10px 16px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #042558;
+
+  color: white;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.recommendation-empty button:hover {
+  background: #507ca9;
+}
+
+
+/* =========================================
+   LOADING
+========================================= */
+
+.recommendation-loading {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f4f8fc;
+}
+
+.recommendation-loading-card {
+  width: 290px;
+
+  padding: 35px;
+
+  text-align: center;
+
+  background: white;
+
+  border: 1px solid #dce8f2;
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 6px 20px rgba(1, 16, 35, 0.06);
+}
+
+.recommendation-loading-icon {
+  width: 48px;
+  height: 48px;
+
+  margin: 0 auto 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+
+  background: #042558;
+
+  color: #c2e8ff;
+
+  font-size: 21px;
+}
+
+.recommendation-loading-card h3 {
+  margin: 0;
+
+  color: #011023;
+
+  font-size: 15px;
+}
+
+.recommendation-loading-card p {
+  margin: 6px 0 0;
+
+  color: #7c9dc6;
+
+  font-size: 11px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 800px) {
+
+  .recommendations-header {
+    padding: 35px 25px;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .recommendations-main {
+    padding: 30px 20px 50px;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .recommendations-header h1 {
+    font-size: 27px;
+  }
+
+  .recommendations-intro {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 8px;
+  }
+
+  .recommendation-grid {
+    grid-template-columns: 1fr;
+  }
+}

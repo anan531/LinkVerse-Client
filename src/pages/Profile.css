@@ -80,9 +80,9 @@
     color: white;
 }
 
-.profile-hero-content {
-    max-width: 1100px;
-    margin: auto;
+.profile-hero-content { 
+    max-width: 1350px; 
+    margin: auto; 
 }
 
 .profile-eyebrow {
@@ -115,14 +115,11 @@
    MAIN
 ================================ */
 
-.profile-main {
-    max-width: 1100px;
-
-    margin: 0 auto;
-
-    padding: 34px 25px 55px;
+.profile-main { 
+    max-width: 1350px; 
+    margin: 0 auto; 
+    padding: 34px 25px 55px; 
 }
-
 .profile-layout {
     display: grid;
 
@@ -501,9 +498,9 @@
         padding: 0 25px;
     }
 
-    .profile-hero {
-        padding: 40px 25px;
-    }
+.profile-hero {
+    padding: 46px 25px;
+}
 
     .profile-main {
         padding-left: 18px;
