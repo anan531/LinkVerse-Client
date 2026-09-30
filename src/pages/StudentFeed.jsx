@@ -88,6 +88,44 @@ const [editContent, setEditContent] = useState("");
         }
     };
 
+    // Edit a post
+const editPost = async (postId) => {
+    if (editContent.trim() === "") {
+        return;
+    }
+
+    const token = localStorage.getItem("token");
+
+    try {
+        const response = await fetch(
+            `http://localhost:5000/api/posts/${postId}`,
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    content: editContent,
+                }),
+            }
+        );
+
+        const data = await response.json();
+
+        if (response.ok) {
+            setEditingPostId(null);
+            setEditContent("");
+            fetchPosts();
+        } else {
+            alert(data.message);
+        }
+    } catch (error) {
+        console.error("Error editing post:", error);
+        alert("Unable to edit post");
+    }
+};
+
     // Like or unlike a post
     const likePost = async (postId) => {
         const token = localStorage.getItem("token");
@@ -336,35 +374,84 @@ const [editContent, setEditContent] = useState("");
 
                                     </div>
 
-                                    {/* Post Content */}
-                                    <div className="post-content">
-                                        {post.content}
-                                    </div>
+{/* Post Content */}
+<div className="post-content">
 
-                                    {/* Post Actions */}
-                                    <div className="post-actions">
+    {editingPostId === post._id ? (
+        <div className="edit-post-area">
 
-                                        <button
-                                            className={
-                                                isLiked
-                                                    ? "liked"
-                                                    : ""
-                                            }
-                                            onClick={() =>
-                                                likePost(post._id)
-                                            }
-                                        >
-                                            <span>
-                                                {isLiked
-                                                    ? "♥"
-                                                    : "♡"}
-                                            </span>
+            <textarea
+                value={editContent}
+                onChange={(e) =>
+                    setEditContent(e.target.value)
+                }
+            />
 
-                                            {isLiked
-                                                ? "Unlike"
-                                                : "Like"}
-                                        </button>
+            <div className="edit-post-buttons">
 
+                <button
+                    className="save-edit-button"
+                    onClick={() =>
+                        editPost(post._id)
+                    }
+                >
+                    Save
+                </button>
+
+                <button
+                    className="cancel-edit-button"
+                    onClick={() => {
+                        setEditingPostId(null);
+                        setEditContent("");
+                    }}
+                >
+                    Cancel
+                </button>
+
+            </div>
+
+        </div>
+    ) : (
+        post.content
+    )}
+
+</div>
+
+                                  {/* Post Actions */}
+<div className="post-actions">
+
+    {post.createdBy._id === currentUserId && (
+        <button
+            className="edit-post-button"
+            onClick={() => {
+                setEditingPostId(post._id);
+                setEditContent(post.content);
+            }}
+        >
+            ✎ Edit
+        </button>
+    )}
+
+    <button
+        className={
+            isLiked
+                ? "liked"
+                : ""
+        }
+        onClick={() =>
+            likePost(post._id)
+        }
+    >
+        <span>
+            {isLiked
+                ? "♥"
+                : "♡"}
+        </span>
+
+        {isLiked
+            ? "Unlike"
+            : "Like"}
+    </button>
                                         <span className="like-count">
                                             {post.likes
                                                 ? post.likes.length

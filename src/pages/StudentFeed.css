@@ -696,4 +696,75 @@
     .comment-input-area button {
         min-height: 34px;
     }
+    /* Edit Post */
+
+.edit-post-area {
+    width: 100%;
+}
+
+.edit-post-area textarea {
+    width: 100%;
+    min-height: 110px;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    border: 1px solid #d5e2ee;
+    border-radius: 9px;
+    background: #fbfdff;
+    color: #011023;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: vertical;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.edit-post-area textarea:focus {
+    border-color: #547eb0;
+    box-shadow: 0 0 0 3px rgba(84, 126, 176, 0.12);
+    background: white;
+}
+
+.edit-post-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.edit-post-buttons button {
+    border: none;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.save-edit-button {
+    background: #042558;
+    color: white;
+}
+
+.save-edit-button:hover {
+    background: #011023;
+}
+
+.cancel-edit-button {
+    background: #eef4f9;
+    color: #042558;
+}
+
+.cancel-edit-button:hover {
+    background: #dceaf5;
+}
+
+.edit-post-button {
+    color: #042558;
+}
+
+.edit-post-button:hover {
+    color: #547eb0;
+}
 }

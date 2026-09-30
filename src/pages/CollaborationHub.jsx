@@ -575,18 +575,7 @@ function CollaborationHub() {
 
                                                 )}
 
-
-                                            {!isCreator &&
-                                                hasRequested && (
-
-                                                    <div className="collab-requested">
-                                                        ✓ Join request sent
-                                                    </div>
-
-                                                )}
-
-
-                                       {isCreator && (
+{isCreator && (
 
     <div className="collab-owner-area">
 
@@ -605,7 +594,36 @@ function CollaborationHub() {
             Edit Collaboration
         </button>
 
+        <button
+            className="collab-chat-button"
+            onClick={() =>
+                navigate(
+                    `/collaboration-chat/${collaboration._id}`
+                )
+            }
+        >
+            Open Group Chat
+        </button>
+
     </div>
+
+)}
+
+{!isCreator &&
+    collaboration.members.some(
+        (member) => member._id === currentUserId
+    ) && (
+
+        <button
+            className="collab-chat-button"
+            onClick={() =>
+                navigate(
+                    `/collaboration-chat/${collaboration._id}`
+                )
+            }
+        >
+            Open Group Chat
+        </button>
 
 )}
 

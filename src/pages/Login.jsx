@@ -17,6 +17,7 @@ function Login() {
     });
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -130,6 +131,13 @@ function Login() {
                 onChange={handleChange}
                 required
               />
+              <button
+  type="button"
+  className="forgot-password-link"
+  onClick={() => navigate("/forgot-password")}
+>
+  Forgot Password?
+</button>
             </div>
 
             <button

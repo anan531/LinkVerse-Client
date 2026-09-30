@@ -380,6 +380,8 @@
     color: white;
 
     box-shadow: 0 8px 25px rgba(4, 37, 88, 0.12);
+
+    margin-bottom: 32px;
 }
 
 .admin-welcome-icon {
@@ -799,6 +801,11 @@
     padding-top: 13px;
 
     border-top: 1px solid #e5edf3;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
 }
 
 
@@ -834,6 +841,74 @@
 
 
 /* =========================================
+   EDIT BUTTON
+========================================= */
+
+.admin-edit-button {
+    padding: 8px 12px;
+
+    border: 1px solid #547eb0;
+
+    border-radius: 7px;
+
+    background: white;
+
+    color: #042558;
+
+    font-family: inherit;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.admin-edit-button:hover {
+    background: #042558;
+
+    color: white;
+}
+
+
+/* =========================================
+   LOGOUT BUTTON
+========================================= */
+
+.admin-logout-button {
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding: 10px 12px;
+
+    border: 1px solid rgba(194, 232, 255, 0.2);
+
+    border-radius: 8px;
+
+    background: rgba(194, 232, 255, 0.06);
+
+    color: #c2e8ff;
+
+    font-family: inherit;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.admin-logout-button:hover {
+    background: #c2e8ff;
+
+    color: #042558;
+}
+
+
+/* =========================================
    EMPTY STATE
 ========================================= */
 
@@ -843,6 +918,7 @@
     background: white;
 
     border: 1px dashed #cddde9;
+
     border-radius: 10px;
 
     color: #7890a4;
@@ -880,10 +956,387 @@
 
 
 /* =========================================
-   RESPONSIVE
+   LINKVERSE ADMIN ANALYTICS
 ========================================= */
 
-@media (max-width: 1050px) {
+.admin-analytics-section {
+    margin-top: 32px !important;
+
+    width: 100% !important;
+}
+
+
+/* ANALYTICS HEADING */
+
+.admin-analytics-heading {
+    display: flex !important;
+
+    align-items: center !important;
+
+    justify-content: space-between !important;
+
+    margin-bottom: 18px !important;
+}
+
+.admin-analytics-heading h2 {
+    margin: 5px 0 0 !important;
+
+    color: #102a43 !important;
+
+    font-size: 22px !important;
+
+    font-weight: 700 !important;
+}
+
+.admin-analytics-heading .admin-small-title {
+    margin: 0 !important;
+
+    color: #5d82a6 !important;
+
+    font-size: 11px !important;
+
+    font-weight: 700 !important;
+
+    letter-spacing: 1.4px !important;
+}
+
+
+/* =========================================
+   STUDENT ACTIVITY
+========================================= */
+
+.admin-analytics-grid {
+    display: grid !important;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+
+    gap: 18px !important;
+
+    width: 100% !important;
+}
+
+.admin-analytics-card {
+    position: relative !important;
+
+    min-height: 125px !important;
+
+    background: #ffffff !important;
+
+    border: 1px solid #e1eaf2 !important;
+
+    border-radius: 16px !important;
+
+    padding: 22px !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    gap: 18px !important;
+
+    box-shadow: 0 5px 18px rgba(30, 67, 100, 0.07) !important;
+
+    transition: all 0.2s ease !important;
+
+    box-sizing: border-box !important;
+}
+
+.admin-analytics-card:hover {
+    transform: translateY(-3px) !important;
+
+    border-color: #c7d9e8 !important;
+
+    box-shadow: 0 9px 25px rgba(30, 67, 100, 0.11) !important;
+}
+
+
+/* ANALYTICS ICON */
+
+.admin-analytics-icon {
+    width: 52px !important;
+    height: 52px !important;
+
+    min-width: 52px !important;
+
+    border-radius: 14px !important;
+
+    background: #edf7fd !important;
+
+    border: 1px solid #d8eaf5 !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    font-size: 22px !important;
+
+    box-sizing: border-box !important;
+}
+
+
+/* ANALYTICS TEXT */
+
+.admin-analytics-card p {
+    margin: 0 0 7px !important;
+
+    color: #6c8297 !important;
+
+    font-size: 13px !important;
+
+    font-weight: 500 !important;
+}
+
+.admin-analytics-card h3 {
+    margin: 0 !important;
+
+    color: #102a43 !important;
+
+    font-size: 29px !important;
+
+    font-weight: 700 !important;
+
+    line-height: 1 !important;
+}
+
+
+/* =========================================
+   OPPORTUNITY STATISTICS
+========================================= */
+
+.admin-analytics-total {
+    padding: 8px 15px !important;
+
+    background: #edf7fd !important;
+
+    border: 1px solid #d6e9f5 !important;
+
+    border-radius: 20px !important;
+
+    color: #285a7d !important;
+
+    font-size: 13px !important;
+
+    font-weight: 600 !important;
+}
+
+.admin-opportunity-stats {
+    display: grid !important;
+
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(220px, 1fr)
+    ) !important;
+
+    gap: 18px !important;
+
+    width: 100% !important;
+}
+
+.admin-opportunity-stat {
+    position: relative !important;
+
+    min-height: 105px !important;
+
+    background: #ffffff !important;
+
+    border: 1px solid #e1eaf2 !important;
+
+    border-radius: 16px !important;
+
+    padding: 20px 22px !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    justify-content: space-between !important;
+
+    box-shadow: 0 5px 18px rgba(30, 67, 100, 0.07) !important;
+
+    box-sizing: border-box !important;
+
+    transition: all 0.2s ease !important;
+}
+
+.admin-opportunity-stat:hover {
+    transform: translateY(-3px) !important;
+
+    box-shadow: 0 9px 25px rgba(30, 67, 100, 0.11) !important;
+}
+
+
+/* OPPORTUNITY ACCENT */
+
+.admin-opportunity-stat::before {
+    content: "" !important;
+
+    position: absolute !important;
+
+    left: 0 !important;
+
+    top: 18px !important;
+
+    bottom: 18px !important;
+
+    width: 4px !important;
+
+    background: #74afd0 !important;
+
+    border-radius: 0 5px 5px 0 !important;
+}
+
+.admin-opportunity-stat span {
+    margin-left: 6px !important;
+
+    color: #486783 !important;
+
+    font-size: 15px !important;
+
+    font-weight: 600 !important;
+}
+
+.admin-opportunity-stat strong {
+    width: 44px !important;
+
+    height: 44px !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    border-radius: 12px !important;
+
+    background: #edf7fd !important;
+
+    color: #245777 !important;
+
+    font-size: 19px !important;
+
+    font-weight: 700 !important;
+}
+
+
+/* =========================================
+   ADMIN MONITORING
+========================================= */
+
+.admin-monitoring-grid {
+    display: grid !important;
+
+    grid-template-columns: repeat(
+        4,
+        minmax(0, 1fr)
+    ) !important;
+
+    gap: 18px !important;
+
+    width: 100% !important;
+}
+
+.admin-monitoring-card {
+    position: relative !important;
+
+    min-height: 115px !important;
+
+    background: #ffffff !important;
+
+    border: 1px solid #e1eaf2 !important;
+
+    border-radius: 16px !important;
+
+    padding: 20px 21px !important;
+
+    display: flex !important;
+
+    flex-direction: column !important;
+
+    justify-content: center !important;
+
+    box-shadow: 0 5px 18px rgba(30, 67, 100, 0.07) !important;
+
+    box-sizing: border-box !important;
+
+    transition: all 0.2s ease !important;
+}
+
+.admin-monitoring-card:hover {
+    transform: translateY(-3px) !important;
+
+    box-shadow: 0 9px 25px rgba(30, 67, 100, 0.11) !important;
+}
+
+
+/* MONITORING INDICATOR */
+
+.admin-monitoring-card::before {
+    content: "" !important;
+
+    position: absolute !important;
+
+    top: 0 !important;
+
+    left: 20px !important;
+
+    right: 20px !important;
+
+    height: 3px !important;
+
+    background: #8bbbd8 !important;
+
+    border-radius: 0 0 5px 5px !important;
+}
+
+.admin-monitoring-card span {
+    margin-bottom: 9px !important;
+
+    color: #6c8297 !important;
+
+    font-size: 12px !important;
+
+    font-weight: 600 !important;
+
+    text-transform: uppercase !important;
+
+    letter-spacing: 0.5px !important;
+}
+
+.admin-monitoring-card strong {
+    color: #102a43 !important;
+
+    font-size: 28px !important;
+
+    font-weight: 700 !important;
+
+    line-height: 1 !important;
+}
+
+
+/* ANALYTICS EMPTY STATE */
+
+.admin-analytics-section .admin-empty {
+    background: #ffffff !important;
+
+    border: 1px dashed #d3e0eb !important;
+
+    border-radius: 15px !important;
+
+    padding: 25px !important;
+
+    color: #71869a !important;
+
+    text-align: center !important;
+}
+
+
+/* =========================================
+   RESPONSIVE - 1100px
+========================================= */
+
+@media (max-width: 1100px) {
 
     .admin-stats {
         grid-template-columns: repeat(2, 1fr);
@@ -892,8 +1345,26 @@
     .admin-student-grid {
         grid-template-columns: 1fr;
     }
+
+    .admin-analytics-grid {
+        grid-template-columns: repeat(
+            2,
+            minmax(0, 1fr)
+        ) !important;
+    }
+
+    .admin-monitoring-grid {
+        grid-template-columns: repeat(
+            2,
+            minmax(0, 1fr)
+        ) !important;
+    }
 }
 
+
+/* =========================================
+   RESPONSIVE - 800px
+========================================= */
 
 @media (max-width: 800px) {
 
@@ -921,10 +1392,43 @@
 }
 
 
+/* =========================================
+   RESPONSIVE - 700px
+========================================= */
+
+@media (max-width: 700px) {
+
+    .admin-analytics-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .admin-monitoring-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .admin-opportunity-stats {
+        grid-template-columns: 1fr !important;
+    }
+
+    .admin-analytics-heading {
+        align-items: flex-start !important;
+
+        flex-direction: column !important;
+
+        gap: 10px !important;
+    }
+}
+
+
+/* =========================================
+   RESPONSIVE - 650px
+========================================= */
+
 @media (max-width: 650px) {
 
     .admin-sidebar {
         width: 100%;
+
         height: auto;
 
         position: relative;
@@ -996,8 +1500,24 @@
     .admin-opportunity-info span {
         min-width: 0;
     }
+
+    .admin-opportunity-heading-actions {
+        align-items: stretch;
+    }
+
+    .admin-create-opportunity-button {
+        width: 100%;
+    }
+
+    .admin-opportunity-actions {
+        flex-wrap: wrap;
+    }
 }
 
+
+/* =========================================
+   RESPONSIVE - 430px
+========================================= */
 
 @media (max-width: 430px) {
 
@@ -1019,51 +1539,38 @@
         width: 100%;
     }
 
-    .admin-logout-button {
-    width: 100%;
-    margin-top: 12px;
-    padding: 10px 12px;
-    border: 1px solid rgba(194, 232, 255, 0.2);
-    border-radius: 8px;
-    background: rgba(194, 232, 255, 0.06);
-    color: #c2e8ff;
-    font-family: inherit;
-    font-size: 11px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.2s ease;
-}
+    .admin-welcome-card {
+        padding: 20px;
 
-.admin-logout-button:hover {
-    background: #c2e8ff;
-    color: #042558;
-}
-.admin-opportunity-actions {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin-top: 18px;
-}
+        align-items: flex-start;
+    }
 
-.admin-edit-button {
-    padding: 10px 16px;
-    border: 1px solid #547eb0;
-    border-radius: 8px;
-    background: white;
-    color: #042558;
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.2s ease;
-}
+    .admin-welcome-icon {
+        width: 48px;
+        height: 48px;
+    }
 
-.admin-edit-button:hover {
-    background: #042558;
-    color: white;
-}
+    .admin-welcome-card h2 {
+        font-size: 18px;
+    }
 
-.admin-opportunity-actions .admin-delete-button {
-    margin-top: 0;
-}
+    .admin-welcome-card p:last-child {
+        font-size: 12px;
+    }
+
+    .admin-analytics-card {
+        padding: 18px !important;
+    }
+
+    .admin-analytics-card h3 {
+        font-size: 25px !important;
+    }
+
+    .admin-monitoring-card strong {
+        font-size: 25px !important;
+    }
+
+    .admin-opportunity-stat {
+        padding: 18px !important;
+    }
 }

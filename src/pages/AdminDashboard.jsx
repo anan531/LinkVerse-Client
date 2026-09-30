@@ -11,13 +11,20 @@ function AdminDashboard() {
         navigate("/login");
     };
 
-    const [activeSection, setActiveSection] = useState("dashboard");
-
+const [activeSection, setActiveSection] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("section") || "dashboard";
+});
     const [stats, setStats] = useState({
         totalStudents: 0,
         totalPosts: 0,
         totalOpportunities: 0,
-        totalCollaborations: 0
+        totalCollaborations: 0,
+        totalConnections: 0,
+        collaborationParticipants: 0,
+        opportunitiesByType: [],
+        totalRegisteredUsers: 0,
+        totalPendingConnections: 0
     });
 
     const [students, setStudents] = useState([]);
@@ -239,6 +246,19 @@ function AdminDashboard() {
         fetchPosts();
         fetchOpportunities();
     }, []);
+    useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const section = params.get("section");
+
+    if (
+        section === "dashboard" ||
+        section === "students" ||
+        section === "posts" ||
+        section === "opportunities"
+    ) {
+        setActiveSection(section);
+    }
+}, []);
 
     const renderDashboard = () => {
         return (
@@ -267,6 +287,33 @@ function AdminDashboard() {
                         </div>
                     </div>
                 </div>
+
+                {/* WELCOME BANNER */}
+
+                <section className="admin-welcome-card">
+
+                    <div className="admin-welcome-icon">
+                        LV
+                    </div>
+
+                    <div>
+                        <p className="admin-section-label">
+                            LINKVERSE ADMINISTRATION
+                        </p>
+
+                        <h2>
+                            Welcome, Administrator
+                        </h2>
+
+                        <p>
+                            Use the sidebar to manage students,
+                            posts and opportunities.
+                        </p>
+                    </div>
+
+                </section>
+
+                {/* BASIC STATISTICS */}
 
                 <section className="admin-stats">
 
@@ -316,28 +363,183 @@ function AdminDashboard() {
 
                 </section>
 
-                <section className="admin-welcome-card">
+                {/* STUDENT ACTIVITY */}
 
-                    <div className="admin-welcome-icon">
-                        LV
+                <section className="admin-analytics-section">
+
+                    <div className="admin-analytics-heading">
+                        <div>
+                            <p className="admin-small-title">
+                                STUDENT ACTIVITY
+                            </p>
+
+                            <h2>
+                                Student Activity Statistics
+                            </h2>
+                        </div>
                     </div>
 
-                    <div>
-                        <p className="admin-section-label">
-                            LINKVERSE ADMINISTRATION
-                        </p>
+                    <div className="admin-analytics-grid">
 
-                        <h2>
-                            Welcome, Administrator
-                        </h2>
+                        <div className="admin-analytics-card">
+                            <div className="admin-analytics-icon">
+                                🔗
+                            </div>
 
-                        <p>
-                            Use the sidebar to manage students,
-                            posts and opportunities.
-                        </p>
+                            <div>
+                                <p>Total Connections</p>
+                                <h3>
+                                    {stats.totalConnections}
+                                </h3>
+                            </div>
+                        </div>
+
+                        <div className="admin-analytics-card">
+                            <div className="admin-analytics-icon">
+                                📝
+                            </div>
+
+                            <div>
+                                <p>Total Posts</p>
+                                <h3>
+                                    {stats.totalPosts}
+                                </h3>
+                            </div>
+                        </div>
+
+                        <div className="admin-analytics-card">
+                            <div className="admin-analytics-icon">
+                                👥
+                            </div>
+
+                            <div>
+                                <p>Collaboration Participants</p>
+                                <h3>
+                                    {stats.collaborationParticipants}
+                                </h3>
+                            </div>
+                        </div>
+
                     </div>
 
                 </section>
+
+                {/* OPPORTUNITY STATISTICS */}
+
+                <section className="admin-analytics-section">
+
+                    <div className="admin-analytics-heading">
+                        <div>
+                            <p className="admin-small-title">
+                                OPPORTUNITIES
+                            </p>
+
+                            <h2>
+                                Opportunity Statistics
+                            </h2>
+                        </div>
+
+                        <div className="admin-analytics-total">
+                            Total: {stats.totalOpportunities}
+                        </div>
+                    </div>
+
+                    <div className="admin-opportunity-stats">
+
+                        {stats.opportunitiesByType &&
+                        stats.opportunitiesByType.length > 0 ? (
+
+                            stats.opportunitiesByType.map(
+                                (item) => (
+                                    <div
+                                        className="admin-opportunity-stat"
+                                        key={item.type}
+                                    >
+                                        <span>
+                                            {item.type}
+                                        </span>
+
+                                        <strong>
+                                            {item.count}
+                                        </strong>
+                                    </div>
+                                )
+                            )
+
+                        ) : (
+
+                            <div className="admin-empty">
+                                No opportunity data available.
+                            </div>
+
+                        )}
+
+                    </div>
+
+                </section>
+
+                {/* ADMIN MONITORING */}
+
+                <section className="admin-analytics-section">
+
+                    <div className="admin-analytics-heading">
+                        <div>
+                            <p className="admin-small-title">
+                                PLATFORM MONITORING
+                            </p>
+
+                            <h2>
+                                Admin Monitoring
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div className="admin-monitoring-grid">
+
+                        <div className="admin-monitoring-card">
+                            <span>
+                                Registered Users
+                            </span>
+
+                            <strong>
+                                {stats.totalRegisteredUsers}
+                            </strong>
+                        </div>
+
+                        <div className="admin-monitoring-card">
+                            <span>
+                                Pending Connections
+                            </span>
+
+                            <strong>
+                                {stats.totalPendingConnections}
+                            </strong>
+                        </div>
+
+                        <div className="admin-monitoring-card">
+                            <span>
+                                Active Collaborations
+                            </span>
+
+                            <strong>
+                                {stats.totalCollaborations}
+                            </strong>
+                        </div>
+
+                        <div className="admin-monitoring-card">
+                            <span>
+                                Available Opportunities
+                            </span>
+
+                            <strong>
+                                {stats.totalOpportunities}
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </section>
+
             </>
         );
     };
@@ -682,8 +884,6 @@ function AdminDashboard() {
                                     </a>
                                 )}
 
-                                {/* OPPORTUNITY ACTIONS */}
-
                                 <div className="admin-opportunity-actions">
 
                                     <button
@@ -725,8 +925,6 @@ function AdminDashboard() {
     return (
         <div className="admin-dashboard">
 
-            {/* SIDEBAR */}
-
             <aside className="admin-sidebar">
 
                 <div className="admin-brand">
@@ -753,9 +951,10 @@ function AdminDashboard() {
                                 ? "active"
                                 : ""
                         }`}
-                        onClick={() =>
-                            setActiveSection("dashboard")
-                        }
+onClick={() => {
+    setActiveSection("dashboard");
+    navigate("/admin-dashboard?section=dashboard");
+}}
                     >
                         <span>▦</span>
                         Dashboard
@@ -767,9 +966,10 @@ function AdminDashboard() {
                                 ? "active"
                                 : ""
                         }`}
-                        onClick={() =>
-                            setActiveSection("students")
-                        }
+onClick={() => {
+    setActiveSection("students");
+    navigate("/admin-dashboard?section=students");
+}}
                     >
                         <span>♙</span>
                         Students
@@ -781,9 +981,10 @@ function AdminDashboard() {
                                 ? "active"
                                 : ""
                         }`}
-                        onClick={() =>
-                            setActiveSection("posts")
-                        }
+onClick={() => {
+    setActiveSection("posts");
+    navigate("/admin-dashboard?section=posts");
+}}
                     >
                         <span>◫</span>
                         Posts
@@ -795,9 +996,10 @@ function AdminDashboard() {
                                 ? "active"
                                 : ""
                         }`}
-                        onClick={() =>
-                            setActiveSection("opportunities")
-                        }
+onClick={() => {
+    setActiveSection("opportunities");
+    navigate("/admin-dashboard?section=opportunities");
+}}
                     >
                         <span>◆</span>
                         Opportunities
@@ -831,9 +1033,6 @@ function AdminDashboard() {
                 </div>
 
             </aside>
-
-
-            {/* MAIN CONTENT */}
 
             <main className="admin-main">
 

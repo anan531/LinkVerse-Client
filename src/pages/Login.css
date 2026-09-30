@@ -582,4 +582,19 @@
   .login-right {
     padding: 35px 25px;
   }
+  .forgot-password-link {
+  display: block;
+  margin-top: 8px;
+  margin-left: auto;
+  border: none;
+  background: none;
+  color: #507ca9;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.forgot-password-link:hover {
+  text-decoration: underline;
+}
 }

@@ -1,0 +1,262 @@
+.group-chat-page {
+    min-height: 100vh;
+    background: #011023;
+    color: #ffffff;
+}
+
+.group-chat-topbar {
+    height: 72px;
+    padding: 0 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #042558;
+    border-bottom: 1px solid rgba(194, 232, 255, 0.15);
+}
+
+.group-chat-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.group-chat-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #547eb0;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.group-chat-brand h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.group-chat-brand span {
+    font-size: 12px;
+    color: #c2e8ff;
+}
+
+.group-chat-back {
+    padding: 10px 18px;
+    border: 1px solid #547eb0;
+    border-radius: 8px;
+    background: transparent;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.group-chat-back:hover {
+    background: #547eb0;
+}
+
+.group-chat-main {
+    padding: 40px;
+}
+
+.group-chat-container {
+    max-width: 1000px;
+    height: calc(100vh - 152px);
+    min-height: 600px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    color: #011023;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.group-chat-header {
+    padding: 24px 30px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #042558;
+    color: #ffffff;
+}
+
+.group-chat-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #547eb0;
+    font-size: 24px;
+}
+
+.group-chat-eyebrow {
+    margin: 0 0 4px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: #c2e8ff;
+}
+
+.group-chat-header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.group-chat-header span {
+    font-size: 13px;
+    color: #c2e8ff;
+}
+
+.group-chat-messages {
+    flex: 1;
+    padding: 25px;
+    overflow-y: auto;
+    background: #f5f8fc;
+}
+
+.group-chat-empty {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.group-chat-empty-icon {
+    font-size: 42px;
+    margin-bottom: 12px;
+}
+
+.group-chat-empty h3 {
+    margin: 0 0 8px;
+}
+
+.group-chat-empty p {
+    margin: 0;
+    color: #6b7b8f;
+}
+
+.group-message {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    max-width: 75%;
+}
+
+.group-message-own {
+    margin-left: auto;
+    flex-direction: row-reverse;
+}
+
+.group-message-avatar {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #547eb0;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.group-message-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.group-message-own .group-message-content {
+    align-items: flex-end;
+}
+
+.group-message-sender {
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #547eb0;
+}
+
+.group-message-bubble {
+    padding: 11px 15px;
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid #dce5ef;
+    line-height: 1.5;
+}
+
+.group-message-own .group-message-bubble {
+    background: #042558;
+    color: #ffffff;
+    border: none;
+}
+
+.group-message-content small {
+    margin-top: 4px;
+    font-size: 10px;
+    color: #8795a6;
+}
+
+.group-chat-input {
+    padding: 18px 22px;
+    display: flex;
+    gap: 12px;
+    background: #ffffff;
+    border-top: 1px solid #dce5ef;
+}
+
+.group-chat-input input {
+    flex: 1;
+    padding: 13px 16px;
+    border: 1px solid #cbd7e5;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+}
+
+.group-chat-input input:focus {
+    border-color: #547eb0;
+}
+
+.group-chat-input button {
+    padding: 0 24px;
+    border: none;
+    border-radius: 8px;
+    background: #042558;
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.group-chat-input button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+@media (max-width: 700px) {
+
+    .group-chat-topbar {
+        padding: 0 20px;
+    }
+
+    .group-chat-back {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .group-chat-main {
+        padding: 15px;
+    }
+
+    .group-chat-container {
+        height: calc(100vh - 102px);
+        min-height: 500px;
+    }
+
+    .group-message {
+        max-width: 90%;
+    }
+}

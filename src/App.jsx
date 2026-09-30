@@ -22,6 +22,8 @@ import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import EditOpportunity from "./pages/EditOpportunity";
 import EditCollaboration from "./pages/EditCollaboration";
+import CollaborationChat from "./pages/CollaborationChat";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
     return (
@@ -123,16 +125,14 @@ function App() {
     }
 />
 
-                <Route
-                    path="/create-opportunity"
-                    element={
-                        <ProtectedRoute>
-                            <Layout>
-                                <CreateOpportunity />
-                            </Layout>
-                        </ProtectedRoute>
-                    }
-                />
+<Route
+    path="/create-opportunity"
+    element={
+        <ProtectedRoute adminOnly={true}>
+            <CreateOpportunity />
+        </ProtectedRoute>
+    }
+/>
 
                 <Route
                     path="/collaborations"
@@ -144,6 +144,11 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
+
+                <Route
+    path="/collaboration-chat/:collaborationId"
+    element={<CollaborationChat />}
+/>
 
                 <Route
     path="/edit-collaboration/:collaborationId"
@@ -188,6 +193,10 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
+                <Route
+  path="/forgot-password"
+  element={<ForgotPassword />}
+/>
 
 
                 {/* ADMIN PAGE */}

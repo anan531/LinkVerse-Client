@@ -37,9 +37,10 @@ function Register() {
       );
 
       const data = await response.json();
+if (response.ok) {
+  alert("Registration successful! Please login.");
+  navigate("/login");
 
-      if (response.ok) {
-        alert("Registration successful!");
         console.log(data);
       } else {
         alert(data.message);

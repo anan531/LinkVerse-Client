@@ -8,13 +8,13 @@ function Chat() {
     const [receiverId, setReceiverId] = useState("");
     const [receiverName, setReceiverName] = useState("");
 
-    // Fetch students
+    // Fetch accepted connections
     const fetchStudents = async () => {
         const token = localStorage.getItem("token");
 
         try {
             const response = await fetch(
-                "http://localhost:5000/api/students",
+                "http://localhost:5000/api/connections",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -25,18 +25,42 @@ function Chat() {
             const data = await response.json();
 
             if (response.ok) {
-                setStudents(data.students);
+                const currentUser = JSON.parse(
+                    localStorage.getItem("user")
+                );
 
-                // Select first student automatically
-                if (data.students.length > 0) {
-                    setReceiverId(data.students[0]._id);
-                    setReceiverName(data.students[0].name);
+                const currentUserId =
+                    currentUser?._id || currentUser?.id;
+
+                const acceptedStudents = data.connections.map(
+                    (connection) => {
+                        const student =
+                            connection.sender._id === currentUserId
+                                ? connection.receiver
+                                : connection.sender;
+
+                        return student;
+                    }
+                );
+
+                setStudents(acceptedStudents);
+
+                // Select first accepted connection automatically
+                if (acceptedStudents.length > 0) {
+                    setReceiverId(acceptedStudents[0]._id);
+                    setReceiverName(acceptedStudents[0].name);
+                } else {
+                    setReceiverId("");
+                    setReceiverName("");
                 }
             } else {
                 console.error(data.message);
             }
         } catch (error) {
-            console.error("Error fetching students:", error);
+            console.error(
+                "Error fetching accepted connections:",
+                error
+            );
         }
     };
 
@@ -70,10 +94,12 @@ function Chat() {
         }
     };
 
+    // Fetch accepted connections when page loads
     useEffect(() => {
         fetchStudents();
     }, []);
 
+    // Fetch messages when receiver changes
     useEffect(() => {
         fetchMessages();
     }, [receiverId]);
@@ -172,7 +198,7 @@ function Chat() {
 
                         <div className="chat-sidebar-header">
                             <div>
-                                <h3>Students</h3>
+                                <h3>My Connections</h3>
                                 <p>Select someone to chat with</p>
                             </div>
 
@@ -189,7 +215,14 @@ function Chat() {
                                         👥
                                     </div>
 
-                                    <p>No students available.</p>
+                                    <p>
+                                        No accepted connections yet.
+                                    </p>
+
+                                    <span>
+                                        Connect with students to start
+                                        chatting.
+                                    </span>
                                 </div>
                             ) : (
                                 students.map((student) => (
@@ -251,13 +284,13 @@ function Chat() {
 
                                 <div>
                                     <h2>
-                                        {receiverName || "Select a student"}
+                                        {receiverName || "Select a connection"}
                                     </h2>
 
                                     <span>
                                         {receiverName
-                                            ? "Student connection"
-                                            : "Choose someone from the list"}
+                                            ? "Accepted connection"
+                                            : "Choose someone from your connections"}
                                     </span>
                                 </div>
 
@@ -274,11 +307,11 @@ function Chat() {
                                         💬
                                     </div>
 
-                                    <h3>Select a student</h3>
+                                    <h3>Select a connection</h3>
 
                                     <p>
-                                        Choose a student from the left to
-                                        start chatting.
+                                        Choose an accepted connection from
+                                        the left to start chatting.
                                     </p>
                                 </div>
                             ) : messages.length === 0 ? (
@@ -305,6 +338,7 @@ function Chat() {
                                         }`}
                                     >
                                         <div className="chat-message-bubble">
+
                                             <span className="chat-message-sender">
                                                 {msg.sender.name}
                                             </span>
@@ -319,6 +353,7 @@ function Chat() {
                                                     minute: "2-digit",
                                                 })}
                                             </small>
+
                                         </div>
                                     </div>
                                 ))
@@ -336,7 +371,7 @@ function Chat() {
                                 placeholder={
                                     receiverName
                                         ? `Message ${receiverName}...`
-                                        : "Select a student first..."
+                                        : "Select a connection first..."
                                 }
                                 value={message}
                                 onChange={(e) =>

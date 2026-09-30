@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CreateOpportunity.css";
+import "./AdminDashboard.css";
 
 function CreateOpportunity() {
     const navigate = useNavigate();
@@ -45,7 +46,7 @@ function CreateOpportunity() {
 
             if (response.ok) {
                 alert("Opportunity created successfully!");
-                navigate("/opportunities");
+                navigate("/admin-dashboard?section=opportunities");
             } else {
                 alert(data.message);
             }
@@ -60,10 +61,20 @@ function CreateOpportunity() {
             <div className="create-access-denied">
                 <div className="access-denied-card">
                     <div className="access-denied-icon">!</div>
-                    <h2>Access Denied</h2>
-                    <p>Only administrators can create opportunities.</p>
 
-                    <button onClick={() => navigate("/opportunities")}>
+                    <h2>Access Denied</h2>
+
+                    <p>
+                        Only administrators can create opportunities.
+                    </p>
+
+                    <button
+                        onClick={() =>
+                            navigate(
+                                "/admin-dashboard?section=opportunities"
+                            )
+                        }
+                    >
                         Back to Opportunities
                     </button>
                 </div>
@@ -72,227 +83,405 @@ function CreateOpportunity() {
     }
 
     return (
-        <div className="create-opportunity-page">
+        <div className="admin-dashboard">
 
-            {/* Top Bar */}
-            <header className="create-opportunity-topbar">
-                <div className="create-opportunity-brand">
-                    <div className="create-logo-box">
-                        LV
+            {/* ADMIN SIDEBAR */}
+
+            <aside className="admin-sidebar">
+
+                <div className="admin-brand">
+
+                    <div className="admin-brand-mark">
+                        L
                     </div>
 
-                    <div>
-                        <h2>LinkVerse</h2>
-                        <span>Student Opportunity Network</span>
-                    </div>
-                </div>
-
-                <button
-                    className="back-opportunity-button"
-                    onClick={() => navigate("/opportunities")}
-                >
-                    ← Opportunities
-                </button>
-            </header>
-
-            {/* Hero */}
-            <section className="create-opportunity-hero">
-                <div className="create-opportunity-hero-content">
-
-                    <span className="create-opportunity-eyebrow">
-                        ADMIN PANEL
+                    <span>
+                        LinkVerse
                     </span>
 
-                    <h1>Create Opportunity</h1>
+                </div>
 
-                    <p>
-                        Add internships, workshops, hackathons, scholarships
-                        and other opportunities for LinkVerse students.
+                <div className="admin-sidebar-content">
+
+                    <p className="admin-panel-label">
+                        ADMIN PANEL
                     </p>
 
-                </div>
-            </section>
-
-            {/* Main */}
-            <main className="create-opportunity-main">
-
-                <div className="create-opportunity-card">
-
-                    <div className="create-form-heading">
-                        <div className="create-form-icon">
-                            +
-                        </div>
-
-                        <div>
-                            <h2>Opportunity Details</h2>
-                            <p>
-                                Provide the details students need to discover
-                                and apply for this opportunity.
-                            </p>
-                        </div>
-                    </div>
-
-                    <form
-                        className="create-opportunity-form"
-                        onSubmit={handleSubmit}
+                    <button
+                        className="admin-sidebar-item"
+                        onClick={() =>
+                            navigate(
+                                "/admin-dashboard?section=dashboard"
+                            )
+                        }
                     >
+                        <span>▦</span>
+                        Dashboard
+                    </button>
 
-                        {/* Basic Information */}
-                        <div className="create-form-section">
+                    <button
+                        className="admin-sidebar-item"
+                        onClick={() =>
+                            navigate(
+                                "/admin-dashboard?section=students"
+                            )
+                        }
+                    >
+                        <span>♙</span>
+                        Students
+                    </button>
 
-                            <h3>Basic Information</h3>
+                    <button
+                        className="admin-sidebar-item"
+                        onClick={() =>
+                            navigate(
+                                "/admin-dashboard?section=posts"
+                            )
+                        }
+                    >
+                        <span>◫</span>
+                        Posts
+                    </button>
 
-                            <div className="create-form-grid">
+                    <button
+                        className="admin-sidebar-item"
+                        onClick={() =>
+                            navigate(
+                                "/admin-dashboard?section=opportunities"
+                            )
+                        }
+                    >
+                        <span>◆</span>
+                        Opportunities
+                    </button>
 
-                                <div className="create-form-group full-width">
-                                    <label>Opportunity Title</label>
+                    <button
+                        className="admin-sidebar-item active"
+                        onClick={() =>
+                            navigate("/create-opportunity")
+                        }
+                    >
+                        <span>＋</span>
+                        Create Opportunity
+                    </button>
 
-                                    <input
-                                        type="text"
-                                        name="title"
-                                        placeholder="e.g. Google Summer Internship"
-                                        value={formData.title}
-                                        onChange={handleChange}
-                                        required
-                                    />
-                                </div>
+                </div>
 
-                                <div className="create-form-group">
-                                    <label>Opportunity Type</label>
+                <div className="admin-sidebar-footer">
 
-                                    <select
-                                        name="type"
-                                        value={formData.type}
-                                        onChange={handleChange}
-                                    >
-                                        <option value="Internship">
-                                            Internship
-                                        </option>
+                    <span>
+                        Administrator
+                    </span>
 
-                                        <option value="Workshop">
-                                            Workshop
-                                        </option>
+                    <button
+                        className="admin-logout-button"
+                        onClick={() => {
+                            localStorage.removeItem("token");
+                            localStorage.removeItem("user");
+                            navigate("/login");
+                        }}
+                    >
+                        ↪ Logout
+                    </button>
 
-                                        <option value="Hackathon">
-                                            Hackathon
-                                        </option>
+                </div>
 
-                                        <option value="Scholarship">
-                                            Scholarship
-                                        </option>
+            </aside>
 
-                                        <option value="Exchange">
-                                            Exchange
-                                        </option>
-                                    </select>
-                                </div>
+            {/* CREATE OPPORTUNITY CONTENT */}
 
-                                <div className="create-form-group">
-                                    <label>Organization</label>
+            <main className="admin-main">
 
-                                    <input
-                                        type="text"
-                                        name="organization"
-                                        placeholder="e.g. Google"
-                                        value={formData.organization}
-                                        onChange={handleChange}
-                                        required
-                                    />
-                                </div>
+                <div className="create-opportunity-page">
 
+                    {/* Top Bar */}
+
+                    <header className="create-opportunity-topbar">
+
+                        <div className="create-opportunity-brand">
+
+                            <div className="create-logo-box">
+                                LV
+                            </div>
+
+                            <div>
+                                <h2>LinkVerse</h2>
+
+                                <span>
+                                    Student Opportunity Network
+                                </span>
                             </div>
 
                         </div>
 
-                        {/* Description */}
-                        <div className="create-form-section">
+                        <button
+                            className="back-opportunity-button"
+                            onClick={() =>
+                                navigate(
+                                    "/admin-dashboard?section=opportunities"
+                                )
+                            }
+                        >
+                            ← Opportunities
+                        </button>
 
-                            <h3>Description</h3>
+                    </header>
 
-                            <div className="create-form-group">
+                    {/* Hero */}
 
-                                <label>Opportunity Description</label>
+                    <section className="create-opportunity-hero">
 
-                                <textarea
-                                    name="description"
-                                    placeholder="Describe the opportunity, eligibility, benefits, application details, etc."
-                                    value={formData.description}
-                                    onChange={handleChange}
-                                    rows="6"
-                                    required
-                                />
+                        <div className="create-opportunity-hero-content">
 
-                            </div>
+                            <span className="create-opportunity-eyebrow">
+                                ADMIN PANEL
+                            </span>
 
-                        </div>
-
-                        {/* Additional Details */}
-                        <div className="create-form-section">
-
-                            <h3>Additional Details</h3>
-
-                            <div className="create-form-grid">
-
-                                <div className="create-form-group">
-                                    <label>Location</label>
-
-                                    <input
-                                        type="text"
-                                        name="location"
-                                        placeholder="e.g. Bangalore / Online"
-                                        value={formData.location}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-
-                                <div className="create-form-group">
-                                    <label>Application Deadline</label>
-
-                                    <input
-                                        type="date"
-                                        name="deadline"
-                                        value={formData.deadline}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-
-                                <div className="create-form-group full-width">
-                                    <label>Opportunity Link</label>
-
-                                    <input
-                                        type="url"
-                                        name="link"
-                                        placeholder="https://example.com/apply"
-                                        value={formData.link}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        {/* Footer */}
-                        <div className="create-form-footer">
-
-                            <button
-                                type="button"
-                                className="cancel-opportunity-button"
-                                onClick={() => navigate("/opportunities")}
-                            >
-                                Cancel
-                            </button>
-
-                            <button
-                                type="submit"
-                                className="create-opportunity-button"
-                            >
+                            <h1>
                                 Create Opportunity
-                            </button>
+                            </h1>
+
+                            <p>
+                                Add internships, workshops, hackathons,
+                                scholarships and other opportunities for
+                                LinkVerse students.
+                            </p>
 
                         </div>
 
-                    </form>
+                    </section>
+
+                    {/* Main */}
+
+                    <main className="create-opportunity-main">
+
+                        <div className="create-opportunity-card">
+
+                            <div className="create-form-heading">
+
+                                <div className="create-form-icon">
+                                    +
+                                </div>
+
+                                <div>
+                                    <h2>
+                                        Opportunity Details
+                                    </h2>
+
+                                    <p>
+                                        Provide the details students need
+                                        to discover and apply for this
+                                        opportunity.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                            <form
+                                className="create-opportunity-form"
+                                onSubmit={handleSubmit}
+                            >
+
+                                {/* Basic Information */}
+
+                                <div className="create-form-section">
+
+                                    <h3>
+                                        Basic Information
+                                    </h3>
+
+                                    <div className="create-form-grid">
+
+                                        <div className="create-form-group full-width">
+
+                                            <label>
+                                                Opportunity Title
+                                            </label>
+
+                                            <input
+                                                type="text"
+                                                name="title"
+                                                placeholder="e.g. Google Summer Internship"
+                                                value={formData.title}
+                                                onChange={handleChange}
+                                                required
+                                            />
+
+                                        </div>
+
+                                        <div className="create-form-group">
+
+                                            <label>
+                                                Opportunity Type
+                                            </label>
+
+                                            <select
+                                                name="type"
+                                                value={formData.type}
+                                                onChange={handleChange}
+                                            >
+                                                <option value="Internship">
+                                                    Internship
+                                                </option>
+
+                                                <option value="Workshop">
+                                                    Workshop
+                                                </option>
+
+                                                <option value="Hackathon">
+                                                    Hackathon
+                                                </option>
+
+                                                <option value="Scholarship">
+                                                    Scholarship
+                                                </option>
+
+                                                <option value="Exchange">
+                                                    Exchange
+                                                </option>
+                                            </select>
+
+                                        </div>
+
+                                        <div className="create-form-group">
+
+                                            <label>
+                                                Organization
+                                            </label>
+
+                                            <input
+                                                type="text"
+                                                name="organization"
+                                                placeholder="e.g. Google"
+                                                value={formData.organization}
+                                                onChange={handleChange}
+                                                required
+                                            />
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                {/* Description */}
+
+                                <div className="create-form-section">
+
+                                    <h3>
+                                        Description
+                                    </h3>
+
+                                    <div className="create-form-group">
+
+                                        <label>
+                                            Opportunity Description
+                                        </label>
+
+                                        <textarea
+                                            name="description"
+                                            placeholder="Describe the opportunity, eligibility, benefits, application details, etc."
+                                            value={formData.description}
+                                            onChange={handleChange}
+                                            rows="6"
+                                            required
+                                        />
+
+                                    </div>
+
+                                </div>
+
+                                {/* Additional Details */}
+
+                                <div className="create-form-section">
+
+                                    <h3>
+                                        Additional Details
+                                    </h3>
+
+                                    <div className="create-form-grid">
+
+                                        <div className="create-form-group">
+
+                                            <label>
+                                                Location
+                                            </label>
+
+                                            <input
+                                                type="text"
+                                                name="location"
+                                                placeholder="e.g. Bangalore / Online"
+                                                value={formData.location}
+                                                onChange={handleChange}
+                                            />
+
+                                        </div>
+
+                                        <div className="create-form-group">
+
+                                            <label>
+                                                Application Deadline
+                                            </label>
+
+                                            <input
+                                                type="date"
+                                                name="deadline"
+                                                value={formData.deadline}
+                                                onChange={handleChange}
+                                            />
+
+                                        </div>
+
+                                        <div className="create-form-group full-width">
+
+                                            <label>
+                                                Opportunity Link
+                                            </label>
+
+                                            <input
+                                                type="url"
+                                                name="link"
+                                                placeholder="https://example.com/apply"
+                                                value={formData.link}
+                                                onChange={handleChange}
+                                            />
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                {/* Footer */}
+
+                                <div className="create-form-footer">
+
+                                    <button
+                                        type="button"
+                                        className="cancel-opportunity-button"
+                                        onClick={() =>
+                                            navigate(
+                                                "/admin-dashboard?section=opportunities"
+                                            )
+                                        }
+                                    >
+                                        Cancel
+                                    </button>
+
+                                    <button
+                                        type="submit"
+                                        className="create-opportunity-button"
+                                    >
+                                        Create Opportunity
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </main>
 
                 </div>
 
