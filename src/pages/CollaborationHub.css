@@ -905,3 +905,125 @@
   }
 
 }
+/* Owner buttons */
+
+.collab-owner-area {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.collab-owner {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+/* Edit Collaboration button */
+
+.collab-edit-button {
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    background: #e8f2ff;
+    color: #0b2d52;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.collab-edit-button:hover {
+    background: #d7e9ff;
+}
+
+/* Open Group Chat button */
+
+.collab-chat-button {
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    background: #06284f;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.collab-chat-button:hover {
+    background: #0b3b70;
+}
+/* Request to Join button */
+
+.collab-join-button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    background: #06284f;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.collab-join-button:hover {
+    background: #0b3b70;
+}
+
+
+/* Group Chat button for members */
+
+.collab-chat-button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    background: #06284f;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.collab-chat-button:hover {
+    background: #0b3b70;
+}
+
+
+/* Creator buttons */
+
+.collab-owner-area {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.collab-edit-button {
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    background: #e8f2ff;
+    color: #0b2d52;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.collab-edit-button:hover {
+    background: #d7e9ff;
+}
+
+.collab-owner-area .collab-chat-button {
+    margin-top: 0;
+}

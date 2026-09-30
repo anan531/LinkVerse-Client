@@ -598,3 +598,13 @@
   text-decoration: underline;
 }
 }
+.hero-title {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    line-height: 1.05;
+}
+
+.hero-title span {
+    display: block;
+}

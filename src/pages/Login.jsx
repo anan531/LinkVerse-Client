@@ -73,13 +73,11 @@ function Login() {
         <div className="login-welcome">
           <p className="login-small-text">WELCOME BACK</p>
 
-          <h1>
-            Connect.
-            <br />
-            Collaborate.
-            <br />
-            <span>Grow.</span>
-          </h1>
+<h1 className="hero-title">
+  <span>Connect.</span>
+  <span>Collaborate.</span>
+  <span>Grow.</span>
+</h1>
 
           <p>
             Connect with students, discover opportunities,
