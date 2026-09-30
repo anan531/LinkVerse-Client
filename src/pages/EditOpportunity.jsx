@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import "./AdminDashboard.css";
 import "./EditOpportunity.css";
 
 function EditOpportunity() {
@@ -99,7 +100,7 @@ function EditOpportunity() {
 
             alert("Opportunity updated successfully!");
 
-            navigate("/opportunities");
+            navigate("/admin-dashboard");
 
         } catch (error) {
             console.error(error);
@@ -109,311 +110,643 @@ function EditOpportunity() {
         }
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        navigate("/login");
+    };
+
     if (loading) {
         return (
-            <div className="edit-opportunity-loading">
-                <div>
-                    <div className="edit-loading-icon">✧</div>
-                    <h3>Loading opportunity...</h3>
-                    <p>Please wait</p>
-                </div>
+            <div className="admin-dashboard">
+                <aside className="admin-sidebar">
+
+                    <div className="admin-brand">
+                        <div className="admin-brand-mark">
+                            L
+                        </div>
+
+                        <span>
+                            LinkVerse
+                        </span>
+                    </div>
+
+                    <div className="admin-sidebar-content">
+
+                        <p className="admin-panel-label">
+                            ADMIN PANEL
+                        </p>
+
+                        <button
+                            className="admin-sidebar-item"
+                            onClick={() =>
+                                navigate("/admin-dashboard")
+                            }
+                        >
+                            <span>▦</span>
+                            Dashboard
+                        </button>
+
+                        <button
+                            className="admin-sidebar-item"
+                            onClick={() =>
+                                navigate("/admin-dashboard")
+                            }
+                        >
+                            <span>♙</span>
+                            Students
+                        </button>
+
+                        <button
+                            className="admin-sidebar-item"
+                            onClick={() =>
+                                navigate("/admin-dashboard")
+                            }
+                        >
+                            <span>◫</span>
+                            Posts
+                        </button>
+
+                        <button
+                            className="admin-sidebar-item active"
+                            onClick={() =>
+                                navigate("/admin-dashboard")
+                            }
+                        >
+                            <span>◆</span>
+                            Opportunities
+                        </button>
+
+                        <button
+                            className="admin-sidebar-item"
+                            onClick={() =>
+                                navigate("/create-opportunity")
+                            }
+                        >
+                            <span>＋</span>
+                            Create Opportunity
+                        </button>
+
+                    </div>
+
+                    <div className="admin-sidebar-footer">
+
+                        <span>
+                            Administrator
+                        </span>
+
+                        <button
+                            className="admin-logout-button"
+                            onClick={handleLogout}
+                        >
+                            ↪ Logout
+                        </button>
+
+                    </div>
+
+                </aside>
+
+                <main className="admin-main">
+                    <div className="edit-opportunity-loading">
+                        <div>
+                            <div className="edit-loading-icon">
+                                ✧
+                            </div>
+
+                            <h3>
+                                Loading opportunity...
+                            </h3>
+
+                            <p>
+                                Please wait
+                            </p>
+                        </div>
+                    </div>
+                </main>
             </div>
         );
     }
 
     if (error && !formData.title) {
         return (
-            <div className="edit-opportunity-page">
-                <div className="edit-opportunity-error">
-                    <div className="edit-error-icon">!</div>
+            <div className="admin-dashboard">
 
-                    <h3>{error}</h3>
+                <aside className="admin-sidebar">
 
-                    <button
-                        onClick={() =>
-                            navigate("/opportunities")
-                        }
-                    >
-                        ← Back to Opportunities
-                    </button>
-                </div>
+                    <div className="admin-brand">
+                        <div className="admin-brand-mark">
+                            L
+                        </div>
+
+                        <span>
+                            LinkVerse
+                        </span>
+                    </div>
+
+                    <div className="admin-sidebar-content">
+
+                        <p className="admin-panel-label">
+                            ADMIN PANEL
+                        </p>
+
+                        <button
+                            className="admin-sidebar-item"
+                            onClick={() =>
+                                navigate("/admin-dashboard")
+                            }
+                        >
+                            <span>▦</span>
+                            Dashboard
+                        </button>
+
+                        <button
+                            className="admin-sidebar-item"
+                            onClick={() =>
+                                navigate("/admin-dashboard")
+                            }
+                        >
+                            <span>♙</span>
+                            Students
+                        </button>
+
+                        <button
+                            className="admin-sidebar-item"
+                            onClick={() =>
+                                navigate("/admin-dashboard")
+                            }
+                        >
+                            <span>◫</span>
+                            Posts
+                        </button>
+
+                        <button
+                            className="admin-sidebar-item active"
+                            onClick={() =>
+                                navigate("/admin-dashboard")
+                            }
+                        >
+                            <span>◆</span>
+                            Opportunities
+                        </button>
+
+                        <button
+                            className="admin-sidebar-item"
+                            onClick={() =>
+                                navigate("/create-opportunity")
+                            }
+                        >
+                            <span>＋</span>
+                            Create Opportunity
+                        </button>
+
+                    </div>
+
+                    <div className="admin-sidebar-footer">
+
+                        <span>
+                            Administrator
+                        </span>
+
+                        <button
+                            className="admin-logout-button"
+                            onClick={handleLogout}
+                        >
+                            ↪ Logout
+                        </button>
+
+                    </div>
+
+                </aside>
+
+                <main className="admin-main">
+
+                    <div className="edit-opportunity-error">
+
+                        <div className="edit-error-icon">
+                            !
+                        </div>
+
+                        <h3>
+                            {error}
+                        </h3>
+
+                        <button
+                            onClick={() =>
+                                navigate("/admin-dashboard")
+                            }
+                        >
+                            ← Back to Admin Dashboard
+                        </button>
+
+                    </div>
+
+                </main>
+
             </div>
         );
     }
 
     return (
-        <div className="edit-opportunity-page">
+        <div className="admin-dashboard">
 
-            {/* Top Bar */}
-            <header className="edit-opportunity-topbar">
+            {/* ADMIN SIDEBAR */}
 
-                <div className="edit-opportunity-brand">
+            <aside className="admin-sidebar">
 
-                    <div className="edit-logo-box">
+                <div className="admin-brand">
+
+                    <div className="admin-brand-mark">
                         L
                     </div>
 
-                    <div>
-                        <h2>LinkVerse</h2>
-                        <span>
-                            Student Networking Platform
-                        </span>
-                    </div>
+                    <span>
+                        LinkVerse
+                    </span>
 
                 </div>
 
-                <button
-                    className="back-opportunity-button"
-                    onClick={() =>
-                        navigate("/opportunities")
-                    }
-                >
-                    ← Back to Opportunities
-                </button>
+                <div className="admin-sidebar-content">
 
-            </header>
+                    <p className="admin-panel-label">
+                        ADMIN PANEL
+                    </p>
 
-            {/* Hero */}
-            <section className="edit-opportunity-hero">
-
-                <p className="edit-opportunity-eyebrow">
-                    ADMINISTRATION
-                </p>
-
-                <h1>Edit Opportunity</h1>
-
-                <p>
-                    Update the opportunity details and keep
-                    students informed with the latest information.
-                </p>
-
-            </section>
-
-            {/* Form */}
-            <main className="edit-opportunity-main">
-
-                <div className="edit-opportunity-card">
-
-                    <div className="edit-form-heading">
-                        <div className="edit-form-icon">
-                            ✎
-                        </div>
-
-                        <div>
-                            <h2>Opportunity Details</h2>
-                            <p>
-                                Update the information below.
-                            </p>
-                        </div>
-                    </div>
-
-                    {error && (
-                        <div className="edit-form-error">
-                            {error}
-                        </div>
-                    )}
-
-                    <form
-                        className="edit-opportunity-form"
-                        onSubmit={handleSubmit}
+                    <button
+                        className="admin-sidebar-item"
+                        onClick={() =>
+                            navigate("/admin-dashboard")
+                        }
                     >
+                        <span>▦</span>
+                        Dashboard
+                    </button>
 
-                        {/* Basic Information */}
-                        <div className="edit-form-section">
+                    <button
+                        className="admin-sidebar-item"
+                        onClick={() =>
+                            navigate("/admin-dashboard")
+                        }
+                    >
+                        <span>♙</span>
+                        Students
+                    </button>
 
-                            <h3>Basic Information</h3>
+                    <button
+                        className="admin-sidebar-item"
+                        onClick={() =>
+                            navigate("/admin-dashboard")
+                        }
+                    >
+                        <span>◫</span>
+                        Posts
+                    </button>
 
-                            <div className="edit-form-grid">
+                    <button
+                        className="admin-sidebar-item active"
+                        onClick={() =>
+                            navigate("/admin-dashboard")
+                        }
+                    >
+                        <span>◆</span>
+                        Opportunities
+                    </button>
 
-                                <div className="edit-form-group">
+                    <button
+                        className="admin-sidebar-item"
+                        onClick={() =>
+                            navigate("/create-opportunity")
+                        }
+                    >
+                        <span>＋</span>
+                        Create Opportunity
+                    </button>
 
-                                    <label>
-                                        Opportunity Title
-                                    </label>
+                </div>
 
-                                    <input
-                                        type="text"
-                                        name="title"
-                                        value={formData.title}
-                                        onChange={handleChange}
-                                        required
-                                    />
+                <div className="admin-sidebar-footer">
+
+                    <span>
+                        Administrator
+                    </span>
+
+                    <button
+                        className="admin-logout-button"
+                        onClick={handleLogout}
+                    >
+                        ↪ Logout
+                    </button>
+
+                </div>
+
+            </aside>
+
+            {/* EDIT PAGE */}
+
+            <main className="admin-main">
+
+                <div className="edit-opportunity-page">
+
+                    {/* Top Bar */}
+
+                    <header className="edit-opportunity-topbar">
+
+                        <div className="edit-opportunity-brand">
+
+                            <div className="edit-logo-box">
+                                L
+                            </div>
+
+                            <div>
+                                <h2>
+                                    LinkVerse
+                                </h2>
+
+                                <span>
+                                    Student Networking Platform
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <button
+                            className="back-opportunity-button"
+                            onClick={() =>
+                                navigate("/admin-dashboard")
+                            }
+                        >
+                            ← Back to Admin Dashboard
+                        </button>
+
+                    </header>
+
+                    {/* Hero */}
+
+                    <section className="edit-opportunity-hero">
+
+                        <p className="edit-opportunity-eyebrow">
+                            ADMINISTRATION
+                        </p>
+
+                        <h1>
+                            Edit Opportunity
+                        </h1>
+
+                        <p>
+                            Update the opportunity details and keep
+                            students informed with the latest information.
+                        </p>
+
+                    </section>
+
+                    {/* Form */}
+
+                    <main className="edit-opportunity-main">
+
+                        <div className="edit-opportunity-card">
+
+                            <div className="edit-form-heading">
+
+                                <div className="edit-form-icon">
+                                    ✎
+                                </div>
+
+                                <div>
+                                    <h2>
+                                        Opportunity Details
+                                    </h2>
+
+                                    <p>
+                                        Update the information below.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                            {error && (
+                                <div className="edit-form-error">
+                                    {error}
+                                </div>
+                            )}
+
+                            <form
+                                className="edit-opportunity-form"
+                                onSubmit={handleSubmit}
+                            >
+
+                                {/* Basic Information */}
+
+                                <div className="edit-form-section">
+
+                                    <h3>
+                                        Basic Information
+                                    </h3>
+
+                                    <div className="edit-form-grid">
+
+                                        <div className="edit-form-group">
+
+                                            <label>
+                                                Opportunity Title
+                                            </label>
+
+                                            <input
+                                                type="text"
+                                                name="title"
+                                                value={formData.title}
+                                                onChange={handleChange}
+                                                required
+                                            />
+
+                                        </div>
+
+                                        <div className="edit-form-group">
+
+                                            <label>
+                                                Opportunity Type
+                                            </label>
+
+                                            <select
+                                                name="type"
+                                                value={formData.type}
+                                                onChange={handleChange}
+                                                required
+                                            >
+                                                <option value="Internship">
+                                                    Internship
+                                                </option>
+
+                                                <option value="Workshop">
+                                                    Workshop
+                                                </option>
+
+                                                <option value="Hackathon">
+                                                    Hackathon
+                                                </option>
+
+                                                <option value="Scholarship">
+                                                    Scholarship
+                                                </option>
+
+                                                <option value="Exchange">
+                                                    Exchange
+                                                </option>
+
+                                            </select>
+
+                                        </div>
+
+                                    </div>
 
                                 </div>
 
-                                <div className="edit-form-group">
+                                {/* Organization */}
 
-                                    <label>
-                                        Opportunity Type
-                                    </label>
+                                <div className="edit-form-section">
 
-                                    <select
-                                        name="type"
-                                        value={formData.type}
-                                        onChange={handleChange}
-                                        required
+                                    <h3>
+                                        Organization
+                                    </h3>
+
+                                    <div className="edit-form-grid">
+
+                                        <div className="edit-form-group">
+
+                                            <label>
+                                                Organization Name
+                                            </label>
+
+                                            <input
+                                                type="text"
+                                                name="organization"
+                                                value={formData.organization}
+                                                onChange={handleChange}
+                                                required
+                                            />
+
+                                        </div>
+
+                                        <div className="edit-form-group">
+
+                                            <label>
+                                                Location
+                                            </label>
+
+                                            <input
+                                                type="text"
+                                                name="location"
+                                                value={formData.location}
+                                                onChange={handleChange}
+                                                placeholder="e.g. Bangalore / Online"
+                                            />
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                {/* Description */}
+
+                                <div className="edit-form-section">
+
+                                    <h3>
+                                        Description
+                                    </h3>
+
+                                    <div className="edit-form-group">
+
+                                        <label>
+                                            Opportunity Description
+                                        </label>
+
+                                        <textarea
+                                            name="description"
+                                            value={formData.description}
+                                            onChange={handleChange}
+                                            rows="6"
+                                            required
+                                        />
+
+                                    </div>
+
+                                </div>
+
+                                {/* Additional Information */}
+
+                                <div className="edit-form-section">
+
+                                    <h3>
+                                        Additional Information
+                                    </h3>
+
+                                    <div className="edit-form-grid">
+
+                                        <div className="edit-form-group">
+
+                                            <label>
+                                                Opportunity Link
+                                            </label>
+
+                                            <input
+                                                type="url"
+                                                name="link"
+                                                value={formData.link}
+                                                onChange={handleChange}
+                                                placeholder="https://example.com"
+                                            />
+
+                                        </div>
+
+                                        <div className="edit-form-group">
+
+                                            <label>
+                                                Application Deadline
+                                            </label>
+
+                                            <input
+                                                type="date"
+                                                name="deadline"
+                                                value={formData.deadline}
+                                                onChange={handleChange}
+                                            />
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                {/* Footer */}
+
+                                <div className="edit-form-footer">
+
+                                    <button
+                                        type="button"
+                                        className="cancel-edit-button"
+                                        onClick={() =>
+                                            navigate("/admin-dashboard")
+                                        }
                                     >
-                                        <option value="Internship">
-                                            Internship
-                                        </option>
+                                        Cancel
+                                    </button>
 
-                                        <option value="Workshop">
-                                            Workshop
-                                        </option>
-
-                                        <option value="Hackathon">
-                                            Hackathon
-                                        </option>
-
-                                        <option value="Scholarship">
-                                            Scholarship
-                                        </option>
-
-                                        <option value="Exchange">
-                                            Exchange
-                                        </option>
-                                    </select>
+                                    <button
+                                        type="submit"
+                                        className="save-opportunity-button"
+                                        disabled={saving}
+                                    >
+                                        {saving
+                                            ? "Saving..."
+                                            : "Save Changes"}
+                                    </button>
 
                                 </div>
 
-                            </div>
+                            </form>
 
                         </div>
 
-                        {/* Organization */}
-                        <div className="edit-form-section">
-
-                            <h3>Organization</h3>
-
-                            <div className="edit-form-grid">
-
-                                <div className="edit-form-group">
-
-                                    <label>
-                                        Organization Name
-                                    </label>
-
-                                    <input
-                                        type="text"
-                                        name="organization"
-                                        value={formData.organization}
-                                        onChange={handleChange}
-                                        required
-                                    />
-
-                                </div>
-
-                                <div className="edit-form-group">
-
-                                    <label>
-                                        Location
-                                    </label>
-
-                                    <input
-                                        type="text"
-                                        name="location"
-                                        value={formData.location}
-                                        onChange={handleChange}
-                                        placeholder="e.g. Bangalore / Online"
-                                    />
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        {/* Description */}
-                        <div className="edit-form-section">
-
-                            <h3>Description</h3>
-
-                            <div className="edit-form-group">
-
-                                <label>
-                                    Opportunity Description
-                                </label>
-
-                                <textarea
-                                    name="description"
-                                    value={formData.description}
-                                    onChange={handleChange}
-                                    rows="6"
-                                    required
-                                />
-
-                            </div>
-
-                        </div>
-
-                        {/* Link & Deadline */}
-                        <div className="edit-form-section">
-
-                            <h3>Additional Information</h3>
-
-                            <div className="edit-form-grid">
-
-                                <div className="edit-form-group">
-
-                                    <label>
-                                        Opportunity Link
-                                    </label>
-
-                                    <input
-                                        type="url"
-                                        name="link"
-                                        value={formData.link}
-                                        onChange={handleChange}
-                                        placeholder="https://example.com"
-                                    />
-
-                                </div>
-
-                                <div className="edit-form-group">
-
-                                    <label>
-                                        Application Deadline
-                                    </label>
-
-                                    <input
-                                        type="date"
-                                        name="deadline"
-                                        value={formData.deadline}
-                                        onChange={handleChange}
-                                    />
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        {/* Footer */}
-                        <div className="edit-form-footer">
-
-                            <button
-                                type="button"
-                                className="cancel-edit-button"
-                                onClick={() =>
-                                    navigate("/opportunities")
-                                }
-                            >
-                                Cancel
-                            </button>
-
-                            <button
-                                type="submit"
-                                className="save-opportunity-button"
-                                disabled={saving}
-                            >
-                                {saving
-                                    ? "Saving..."
-                                    : "Save Changes"}
-                            </button>
-
-                        </div>
-
-                    </form>
+                    </main>
 
                 </div>
 

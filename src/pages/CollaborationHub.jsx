@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./CollaborationHub.css";
 
 function CollaborationHub() {
+    const navigate = useNavigate();
+
     const [collaborations, setCollaborations] = useState([]);
     const [joinRequests, setJoinRequests] = useState([]);
     const [requestedCollaborations, setRequestedCollaborations] = useState([]);
@@ -583,13 +586,28 @@ function CollaborationHub() {
                                                 )}
 
 
-                                            {isCreator && (
+                                       {isCreator && (
 
-                                                <div className="collab-owner">
-                                                    Your Collaboration
-                                                </div>
+    <div className="collab-owner-area">
 
-                                            )}
+        <div className="collab-owner">
+            Your Collaboration
+        </div>
+
+        <button
+            className="collab-edit-button"
+            onClick={() =>
+                navigate(
+                    `/edit-collaboration/${collaboration._id}`
+                )
+            }
+        >
+            Edit Collaboration
+        </button>
+
+    </div>
+
+)}
 
                                         </div>
 

@@ -3,8 +3,11 @@ import "./StudentFeed.css";
 
 function StudentFeed() {
     const [posts, setPosts] = useState([]);
-    const [content, setContent] = useState("");
-    const [currentUserId, setCurrentUserId] = useState("");
+const [content, setContent] = useState("");
+const [currentUserId, setCurrentUserId] = useState("");
+
+const [editingPostId, setEditingPostId] = useState(null);
+const [editContent, setEditContent] = useState("");
 
     const [comments, setComments] = useState({});
     const [commentText, setCommentText] = useState({});

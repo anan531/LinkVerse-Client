@@ -21,6 +21,7 @@ import StudentProfile from "./pages/StudentProfile";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import EditOpportunity from "./pages/EditOpportunity";
+import EditCollaboration from "./pages/EditCollaboration";
 
 function App() {
     return (
@@ -113,14 +114,11 @@ function App() {
                     }
                 />
 
-
-                <Route
+<Route
     path="/edit-opportunity/:opportunityId"
     element={
-        <ProtectedRoute>
-            <Layout>
-                <EditOpportunity />
-            </Layout>
+        <ProtectedRoute adminOnly={true}>
+            <EditOpportunity />
         </ProtectedRoute>
     }
 />
@@ -146,6 +144,17 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
+
+                <Route
+    path="/edit-collaboration/:collaborationId"
+    element={
+        <ProtectedRoute>
+            <Layout>
+                <EditCollaboration />
+            </Layout>
+        </ProtectedRoute>
+    }
+/>
 
                 <Route
                     path="/chat"

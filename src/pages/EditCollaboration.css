@@ -1,0 +1,245 @@
+.edit-collab-page {
+    min-height: 100vh;
+    background: #f5f9fd;
+    padding: 40px 55px;
+    box-sizing: border-box;
+}
+
+/* Header */
+
+.edit-collab-header {
+    max-width: 1000px;
+    margin: 0 auto 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.edit-collab-label {
+    margin: 0 0 8px;
+    color: #547eb0;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.edit-collab-header h1 {
+    margin: 0;
+    color: #011023;
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.edit-collab-header p:last-child {
+    margin: 10px 0 0;
+    color: #64748b;
+    font-size: 15px;
+}
+
+.edit-collab-back {
+    border: none;
+    background: white;
+    color: #042558;
+    padding: 11px 18px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 3px 12px rgba(4, 37, 88, 0.08);
+    transition: 0.2s ease;
+}
+
+.edit-collab-back:hover {
+    background: #eaf5ff;
+}
+
+/* Form */
+
+.edit-collab-form {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(4, 37, 88, 0.08);
+    overflow: hidden;
+}
+
+.edit-collab-section {
+    padding: 30px 35px;
+    border-bottom: 1px solid #e5edf5;
+}
+
+.edit-collab-section h2 {
+    margin: 0 0 24px;
+    color: #042558;
+    font-size: 20px;
+}
+
+/* Fields */
+
+.edit-collab-field {
+    margin-bottom: 22px;
+}
+
+.edit-collab-field:last-child {
+    margin-bottom: 0;
+}
+
+.edit-collab-field label {
+    display: block;
+    margin-bottom: 8px;
+    color: #011023;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.edit-collab-field input,
+.edit-collab-field textarea,
+.edit-collab-field select {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #d5e2ee;
+    border-radius: 9px;
+    padding: 13px 14px;
+    background: #fbfdff;
+    color: #011023;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.edit-collab-field input:focus,
+.edit-collab-field textarea:focus,
+.edit-collab-field select:focus {
+    border-color: #547eb0;
+    box-shadow: 0 0 0 3px rgba(84, 126, 176, 0.12);
+    background: white;
+}
+
+.edit-collab-field textarea {
+    resize: vertical;
+    min-height: 140px;
+}
+
+.edit-collab-field small {
+    display: block;
+    margin-top: 7px;
+    color: #7b8da1;
+    font-size: 12px;
+}
+
+/* Buttons */
+
+.edit-collab-actions {
+    padding: 22px 35px;
+    background: #f9fbfd;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.edit-collab-cancel,
+.edit-collab-save {
+    border: none;
+    padding: 12px 22px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.edit-collab-cancel {
+    background: white;
+    color: #042558;
+    border: 1px solid #d5e2ee;
+}
+
+.edit-collab-cancel:hover {
+    background: #eef5fb;
+}
+
+.edit-collab-save {
+    background: #042558;
+    color: white;
+}
+
+.edit-collab-save:hover {
+    background: #011023;
+}
+
+.edit-collab-save:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Loading */
+
+.edit-collab-loading {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f9fd;
+    color: #042558;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Error */
+
+.edit-collab-error {
+    min-height: 100vh;
+    background: #f5f9fd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}
+
+.edit-collab-error h2 {
+    color: #042558;
+}
+
+.edit-collab-error button {
+    border: none;
+    background: #042558;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 9px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Responsive */
+
+@media (max-width: 700px) {
+    .edit-collab-page {
+        padding: 25px 18px;
+    }
+
+    .edit-collab-header {
+        flex-direction: column;
+    }
+
+    .edit-collab-header h1 {
+        font-size: 28px;
+    }
+
+    .edit-collab-section {
+        padding: 25px 20px;
+    }
+
+    .edit-collab-actions {
+        padding: 20px;
+        flex-direction: column;
+    }
+
+    .edit-collab-cancel,
+    .edit-collab-save {
+        width: 100%;
+    }
+}
