@@ -7,6 +7,7 @@ function Profile() {
     const [formData, setFormData] = useState({
         name: "",
         college: "",
+        department: "",
         course: "",
         year: "",
         bio: "",
@@ -37,6 +38,7 @@ function Profile() {
                     setFormData({
                         name: data.user.name || "",
                         college: data.user.college || "",
+                        department: data.user.department || "",
                         course: data.user.course || "",
                         year: data.user.year || "",
                         bio: data.user.bio || "",
@@ -200,6 +202,13 @@ function Profile() {
                                     "Not specified"}
                             </strong>
                         </div>
+                        
+<div className="profile-summary-item">
+    <span>Department</span>
+    <strong>
+        {profile.department || "Not specified"}
+    </strong>
+</div>
 
                         <div className="profile-summary-item">
                             <span>Course</span>
@@ -278,6 +287,19 @@ function Profile() {
                                             }
                                         />
                                     </div>
+
+                                <div className="profile-field">
+    <label>Department</label>
+
+    <input
+        type="text"
+        name="department"
+        placeholder="e.g. Computer Applications"
+        value={formData.department}
+        onChange={handleChange}
+    />
+</div>
+
 
                                     <div className="profile-field">
                                         <label>Course</label>

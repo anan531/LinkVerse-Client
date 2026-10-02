@@ -122,6 +122,13 @@
   background: #f4f8fc;
 }
 
+/* Center the Email box */
+.student-profile-info-grid > div:last-child {
+  grid-column: 1 / -1;
+  width: 50%;
+  justify-self: center;
+}
+
 .student-profile-info-grid span,
 .student-profile-bio span {
   display: block;
@@ -155,6 +162,8 @@
 .student-profile-tags {
   display: flex;
   flex-wrap: wrap;
+    justify-content: center;
+
   gap: 8px;
 }
 

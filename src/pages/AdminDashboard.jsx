@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import jsPDF from "jspdf";
 import { useNavigate } from "react-router-dom";
 import "./AdminDashboard.css";
 
@@ -11,10 +12,11 @@ function AdminDashboard() {
         navigate("/login");
     };
 
-const [activeSection, setActiveSection] = useState(() => {
-    const params = new URLSearchParams(window.location.search);
-    return params.get("section") || "dashboard";
-});
+    const [activeSection, setActiveSection] = useState(() => {
+        const params = new URLSearchParams(window.location.search);
+        return params.get("section") || "dashboard";
+    });
+
     const [stats, setStats] = useState({
         totalStudents: 0,
         totalPosts: 0,
@@ -240,25 +242,108 @@ const [activeSection, setActiveSection] = useState(() => {
         navigate(`/edit-opportunity/${opportunityId}`);
     };
 
+    const generateStudentReport = () => {
+        const doc = new jsPDF();
+
+        doc.setFontSize(18);
+        doc.text("LinkVerse - Student Report", 20, 20);
+
+        doc.setFontSize(11);
+        doc.text(`Total Students: ${students.length}`, 20, 30);
+
+        let y = 45;
+
+        students.forEach((student, index) => {
+            if (y > 270) {
+                doc.addPage();
+                y = 20;
+            }
+
+            doc.setFontSize(12);
+            doc.text(
+                `${index + 1}. ${student.name || "Not specified"}`,
+                20,
+                y
+            );
+
+            doc.setFontSize(10);
+
+            doc.text(
+                `Email: ${student.email || "Not specified"}`,
+                25,
+                y + 7
+            );
+
+            doc.text(
+                `College: ${student.college || "Not specified"}`,
+                25,
+                y + 14
+            );
+
+            doc.text(
+                `Department: ${student.department || "Not specified"}`,
+                25,
+                y + 21
+            );
+
+            doc.text(
+                `Course: ${student.course || "Not specified"}`,
+                25,
+                y + 28
+            );
+
+            doc.text(
+                `Year: ${student.year || "Not specified"}`,
+                25,
+                y + 35
+            );
+
+            doc.text(
+                `Skills: ${
+                    student.skills && student.skills.length > 0
+                        ? student.skills.join(", ")
+                        : "None"
+                }`,
+                25,
+                y + 42
+            );
+
+            doc.text(
+                `Interests: ${
+                    student.interests && student.interests.length > 0
+                        ? student.interests.join(", ")
+                        : "None"
+                }`,
+                25,
+                y + 49
+            );
+
+            y += 62;
+        });
+
+        doc.save("LinkVerse-Student-Report.pdf");
+    };
+
     useEffect(() => {
         fetchDashboard();
         fetchStudents();
         fetchPosts();
         fetchOpportunities();
     }, []);
-    useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const section = params.get("section");
 
-    if (
-        section === "dashboard" ||
-        section === "students" ||
-        section === "posts" ||
-        section === "opportunities"
-    ) {
-        setActiveSection(section);
-    }
-}, []);
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const section = params.get("section");
+
+        if (
+            section === "dashboard" ||
+            section === "students" ||
+            section === "posts" ||
+            section === "opportunities"
+        ) {
+            setActiveSection(section);
+        }
+    }, []);
 
     const renderDashboard = () => {
         return (
@@ -562,9 +647,20 @@ const [activeSection, setActiveSection] = useState(() => {
                         </p>
                     </div>
 
-                    <span className="admin-count">
-                        {students.length} students
-                    </span>
+                    <div className="admin-opportunity-heading-actions">
+
+                        <span className="admin-count">
+                            {students.length} students
+                        </span>
+
+                        <button
+                            className="admin-edit-button"
+                            onClick={generateStudentReport}
+                        >
+                            Generate Student Report PDF
+                        </button>
+
+                    </div>
 
                 </div>
 
@@ -615,6 +711,15 @@ const [activeSection, setActiveSection] = useState(() => {
                                         </strong>
 
                                         {student.college ||
+                                            "Not specified"}
+                                    </span>
+
+                                    <span>
+                                        <strong>
+                                            Department
+                                        </strong>
+
+                                        {student.department ||
                                             "Not specified"}
                                     </span>
 
@@ -951,10 +1056,10 @@ const [activeSection, setActiveSection] = useState(() => {
                                 ? "active"
                                 : ""
                         }`}
-onClick={() => {
-    setActiveSection("dashboard");
-    navigate("/admin-dashboard?section=dashboard");
-}}
+                        onClick={() => {
+                            setActiveSection("dashboard");
+                            navigate("/admin-dashboard?section=dashboard");
+                        }}
                     >
                         <span>▦</span>
                         Dashboard
@@ -966,10 +1071,10 @@ onClick={() => {
                                 ? "active"
                                 : ""
                         }`}
-onClick={() => {
-    setActiveSection("students");
-    navigate("/admin-dashboard?section=students");
-}}
+                        onClick={() => {
+                            setActiveSection("students");
+                            navigate("/admin-dashboard?section=students");
+                        }}
                     >
                         <span>♙</span>
                         Students
@@ -981,10 +1086,10 @@ onClick={() => {
                                 ? "active"
                                 : ""
                         }`}
-onClick={() => {
-    setActiveSection("posts");
-    navigate("/admin-dashboard?section=posts");
-}}
+                        onClick={() => {
+                            setActiveSection("posts");
+                            navigate("/admin-dashboard?section=posts");
+                        }}
                     >
                         <span>◫</span>
                         Posts
@@ -996,10 +1101,10 @@ onClick={() => {
                                 ? "active"
                                 : ""
                         }`}
-onClick={() => {
-    setActiveSection("opportunities");
-    navigate("/admin-dashboard?section=opportunities");
-}}
+                        onClick={() => {
+                            setActiveSection("opportunities");
+                            navigate("/admin-dashboard?section=opportunities");
+                        }}
                     >
                         <span>◆</span>
                         Opportunities

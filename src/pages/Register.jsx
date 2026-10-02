@@ -220,7 +220,7 @@ if (response.ok) {
                 id="year"
                 type="text"
                 name="year"
-                placeholder="Enter your graduation year"
+                placeholder="Enter current year of study (e.g., II)"
                 value={formData.year}
                 onChange={handleChange}
                 required

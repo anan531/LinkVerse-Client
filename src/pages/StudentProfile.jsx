@@ -106,6 +106,11 @@ function StudentProfile() {
               </div>
 
               <div>
+  <span>Department</span>
+  <strong>{student.department || "Not provided"}</strong>
+</div>
+
+              <div>
                 <span>Course</span>
                 <strong>{student.course || "Not provided"}</strong>
               </div>
