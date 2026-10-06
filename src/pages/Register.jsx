@@ -9,10 +9,37 @@ function Register() {
     name: "",
     email: "",
     password: "",
+    confirmPassword: "",
     college: "",
+    department: "",
     course: "",
     year: "",
   });
+
+  const [notification, setNotification] = useState({
+    show: false,
+    type: "",
+    title: "",
+    message: "",
+  });
+
+  const showNotification = (type, title, message) => {
+    setNotification({
+      show: true,
+      type,
+      title,
+      message,
+    });
+
+    setTimeout(() => {
+      setNotification({
+        show: false,
+        type: "",
+        title: "",
+        message: "",
+      });
+    }, 3500);
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -24,6 +51,141 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const name = formData.name.trim();
+    const email = formData.email.trim();
+    const password = formData.password;
+    const confirmPassword = formData.confirmPassword;
+    const college = formData.college.trim();
+    const department = formData.department.trim();
+    const course = formData.course.trim();
+    const year = formData.year.trim();
+
+    // NAME VALIDATION
+    if (!name) {
+      showNotification(
+        "error",
+        "Name required",
+        "Please enter your full name."
+      );
+      return;
+    }
+
+    if (name.length < 2) {
+      showNotification(
+        "error",
+        "Invalid name",
+        "Name must contain at least 2 characters."
+      );
+      return;
+    }
+
+    // EMAIL VALIDATION
+    if (!email) {
+      showNotification(
+        "error",
+        "Email required",
+        "Please enter your email address."
+      );
+      return;
+    }
+
+    if (!email.includes("@")) {
+      showNotification(
+        "error",
+        "Invalid email",
+        "Your email is missing the @ symbol."
+      );
+      return;
+    }
+
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      showNotification(
+        "error",
+        "Invalid email",
+        "Please enter a valid email address."
+      );
+      return;
+    }
+
+    // PASSWORD VALIDATION
+    if (!password) {
+      showNotification(
+        "error",
+        "Password required",
+        "Please create a password."
+      );
+      return;
+    }
+
+    if (password.length < 6) {
+      showNotification(
+        "error",
+        "Invalid password",
+        "Password must be at least 6 characters long."
+      );
+      return;
+    }
+
+    // CONFIRM PASSWORD
+    if (!confirmPassword) {
+      showNotification(
+        "error",
+        "Confirm password",
+        "Please confirm your password."
+      );
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      showNotification(
+        "error",
+        "Passwords do not match",
+        "Please make sure both passwords are the same."
+      );
+      return;
+    }
+
+    // COLLEGE
+    if (!college) {
+      showNotification(
+        "error",
+        "College required",
+        "Please enter your college name."
+      );
+      return;
+    }
+
+    // DEPARTMENT
+    if (!department) {
+      showNotification(
+        "error",
+        "Department required",
+        "Please enter your department."
+      );
+      return;
+    }
+
+    // COURSE
+    if (!course) {
+      showNotification(
+        "error",
+        "Course required",
+        "Please enter your course."
+      );
+      return;
+    }
+
+    // YEAR
+    if (!year) {
+      showNotification(
+        "error",
+        "Year required",
+        "Please enter your current year of study."
+      );
+      return;
+    }
+
     try {
       const response = await fetch(
         "http://localhost:5000/api/auth/register",
@@ -32,27 +194,86 @@ function Register() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({
+            name,
+            email,
+            password,
+            college,
+            department,
+            course,
+            year,
+          }),
         }
       );
 
       const data = await response.json();
-if (response.ok) {
-  alert("Registration successful! Please login.");
-  navigate("/login");
 
-        console.log(data);
+      if (response.ok) {
+        showNotification(
+          "success",
+          "Registration successful",
+          "Your account has been created. Redirecting to login..."
+        );
+
+        setTimeout(() => {
+          navigate("/login");
+        }, 1500);
       } else {
-        alert(data.message);
+        showNotification(
+          "error",
+          "Registration failed",
+          data.message || "Unable to create your account."
+        );
       }
     } catch (error) {
       console.error("Registration error:", error);
-      alert("Unable to connect to server");
+
+      showNotification(
+        "error",
+        "Connection error",
+        "Unable to connect to the server."
+      );
     }
   };
 
   return (
     <div className="register-page">
+
+      {/* NOTIFICATION */}
+      {notification.show && (
+        <div
+          className={`register-notification ${
+            notification.type === "success"
+              ? "register-notification-success"
+              : "register-notification-error"
+          }`}
+        >
+          <div className="register-notification-icon">
+            {notification.type === "success" ? "✓" : "!"}
+          </div>
+
+          <div className="register-notification-content">
+            <strong>{notification.title}</strong>
+
+            <p>{notification.message}</p>
+          </div>
+
+          <button
+            type="button"
+            className="register-notification-close"
+            onClick={() =>
+              setNotification({
+                show: false,
+                type: "",
+                title: "",
+                message: "",
+              })
+            }
+          >
+            ×
+          </button>
+        </div>
+      )}
 
       {/* LEFT PANEL */}
       <div className="register-left">
@@ -68,13 +289,14 @@ if (response.ok) {
             JOIN LINKVERSE
           </p>
 
-          <h1>
-            Connect.
-            <br />
-            Collaborate.
-            <br />
-            <span>Grow.</span>
-          </h1>
+         <h1 className="register-hero-title">
+    <span>Connect.</span><br></br>
+    <br></br>
+    <span>Collaborate.</span><br></br>
+    <br></br>
+    <span>Grow.</span>
+    <br></br>
+</h1>
 
           <p>
             Create your account and connect with students,
@@ -90,7 +312,6 @@ if (response.ok) {
 
       </div>
 
-
       {/* RIGHT PANEL */}
       <div className="register-right">
 
@@ -105,7 +326,6 @@ if (response.ok) {
             </p>
 
           </div>
-
 
           <form onSubmit={handleSubmit}>
 
@@ -123,11 +343,9 @@ if (response.ok) {
                 placeholder="Enter your name"
                 value={formData.name}
                 onChange={handleChange}
-                required
               />
 
             </div>
-
 
             {/* EMAIL */}
             <div className="register-form-group">
@@ -138,16 +356,14 @@ if (response.ok) {
 
               <input
                 id="email"
-                type="email"
+                type="text"
                 name="email"
                 placeholder="Enter your email"
                 value={formData.email}
                 onChange={handleChange}
-                required
               />
 
             </div>
-
 
             {/* PASSWORD */}
             <div className="register-form-group">
@@ -163,11 +379,27 @@ if (response.ok) {
                 placeholder="Create a password"
                 value={formData.password}
                 onChange={handleChange}
-                required
               />
 
             </div>
 
+            {/* CONFIRM PASSWORD */}
+            <div className="register-form-group">
+
+              <label htmlFor="confirmPassword">
+                Confirm Password
+              </label>
+
+              <input
+                id="confirmPassword"
+                type="password"
+                name="confirmPassword"
+                placeholder="Re-enter your password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+              />
+
+            </div>
 
             {/* COLLEGE */}
             <div className="register-form-group">
@@ -183,11 +415,27 @@ if (response.ok) {
                 placeholder="Enter your college"
                 value={formData.college}
                 onChange={handleChange}
-                required
               />
 
             </div>
 
+            {/* DEPARTMENT */}
+            <div className="register-form-group">
+
+              <label htmlFor="department">
+                Department
+              </label>
+
+              <input
+                id="department"
+                type="text"
+                name="department"
+                placeholder="Enter your department"
+                value={formData.department}
+                onChange={handleChange}
+              />
+
+            </div>
 
             {/* COURSE */}
             <div className="register-form-group">
@@ -203,31 +451,27 @@ if (response.ok) {
                 placeholder="Enter your course"
                 value={formData.course}
                 onChange={handleChange}
-                required
               />
 
             </div>
 
+<div className="register-form-group">
+    <label htmlFor="year">Year</label>
 
-            {/* YEAR */}
-            <div className="register-form-group">
-
-              <label htmlFor="year">
-                Year
-              </label>
-
-              <input
-                id="year"
-                type="text"
-                name="year"
-                placeholder="Enter current year of study (e.g., II)"
-                value={formData.year}
-                onChange={handleChange}
-                required
-              />
-
-            </div>
-
+<select
+    id="year"
+    name="year"
+    value={formData.year}
+    onChange={handleChange}
+    className={formData.year === "" ? "year-placeholder" : ""}
+>
+    <option value="">Select your academic year</option>
+    <option value="I">I</option>
+    <option value="II">II</option>
+    <option value="III">III</option>
+    <option value="IV">IV</option>
+</select>
+</div>
 
             {/* REGISTER BUTTON */}
             <button
@@ -238,7 +482,6 @@ if (response.ok) {
             </button>
 
           </form>
-
 
           {/* LOGIN LINK */}
           <div className="register-footer">

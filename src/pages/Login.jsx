@@ -10,6 +10,31 @@ function Login() {
     password: "",
   });
 
+  const [notification, setNotification] = useState({
+    show: false,
+    type: "",
+    title: "",
+    message: "",
+  });
+
+  const showNotification = (type, title, message) => {
+    setNotification({
+      show: true,
+      type,
+      title,
+      message,
+    });
+
+    setTimeout(() => {
+      setNotification({
+        show: false,
+        type: "",
+        title: "",
+        message: "",
+      });
+    }, 3500);
+  };
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -17,9 +42,60 @@ function Login() {
     });
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const email = formData.email.trim();
+    const password = formData.password;
+
+    // Email validation
+    if (!email) {
+      showNotification(
+        "error",
+        "Email required",
+        "Please enter your email address."
+      );
+      return;
+    }
+
+    if (!email.includes("@")) {
+      showNotification(
+        "error",
+        "Invalid email",
+        "Your email is missing the @ symbol."
+      );
+      return;
+    }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(email)) {
+      showNotification(
+        "error",
+        "Invalid email",
+        "Please enter a valid email address."
+      );
+      return;
+    }
+
+    // Password validation
+    if (password.trim() === "") {
+      showNotification(
+        "error",
+        "Password required",
+        "Please enter your password."
+      );
+      return;
+    }
+
+    if (password.length < 6) {
+      showNotification(
+        "error",
+        "Invalid password",
+        "Password must be at least 6 characters long."
+      );
+      return;
+    }
 
     try {
       const response = await fetch(
@@ -29,38 +105,99 @@ function Login() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
         }
       );
 
       const data = await response.json();
 
       if (response.ok) {
-        // Save JWT token
         localStorage.setItem("token", data.token);
+        localStorage.setItem(
+          "user",
+          JSON.stringify(data.user)
+        );
 
-        // Save user information
-        localStorage.setItem("user", JSON.stringify(data.user));
+        showNotification(
+          "success",
+          "Login successful",
+          "Welcome back to LinkVerse."
+        );
 
-        alert("Login successful!");
-
-        // Redirect based on user role
-        if (data.user.role === "admin") {
-          navigate("/admin-dashboard");
-        } else {
-          navigate("/dashboard");
-        }
+        setTimeout(() => {
+          if (data.user.role === "admin") {
+            navigate("/admin-dashboard");
+          } else {
+            navigate("/dashboard");
+          }
+        }, 1200);
       } else {
-        alert(data.message);
+        if (
+          data.message === "Invalid email or password"
+        ) {
+          showNotification(
+            "error",
+            "Login failed",
+            "Invalid email or password."
+          );
+        } else {
+          showNotification(
+            "error",
+            "Login failed",
+            data.message || "Unable to login."
+          );
+        }
       }
     } catch (error) {
       console.error("Login error:", error);
-      alert("Unable to connect to server");
+
+      showNotification(
+        "error",
+        "Connection error",
+        "Unable to connect to the server."
+      );
     }
   };
 
   return (
     <div className="login-page">
+
+      {/* Notification */}
+      {notification.show && (
+        <div
+          className={`login-notification ${
+            notification.type === "success"
+              ? "notification-success"
+              : "notification-error"
+          }`}
+        >
+          <div className="notification-icon">
+            {notification.type === "success" ? "✓" : "!"}
+          </div>
+
+          <div className="notification-content">
+            <strong>{notification.title}</strong>
+            <p>{notification.message}</p>
+          </div>
+
+          <button
+            className="notification-close"
+            onClick={() =>
+              setNotification({
+                show: false,
+                type: "",
+                title: "",
+                message: "",
+              })
+            }
+          >
+            ×
+          </button>
+        </div>
+      )}
 
       {/* Left Side */}
       <div className="login-left">
@@ -71,13 +208,15 @@ function Login() {
         </div>
 
         <div className="login-welcome">
-          <p className="login-small-text">WELCOME BACK</p>
+          <p className="login-small-text">
+            WELCOME BACK
+          </p>
 
-<h1 className="hero-title">
-  <span>Connect.</span>
-  <span>Collaborate.</span>
-  <span>Grow.</span>
-</h1>
+          <h1 className="hero-title">
+            <span>Connect.</span>
+            <span>Collaborate.</span>
+            <span>Grow.</span>
+          </h1>
 
           <p>
             Connect with students, discover opportunities,
@@ -104,21 +243,24 @@ function Login() {
           <form onSubmit={handleSubmit}>
 
             <div className="login-form-group">
-              <label htmlFor="email">Email Address</label>
+              <label htmlFor="email">
+                Email Address
+              </label>
 
               <input
                 id="email"
-                type="email"
+                type="text"
                 name="email"
                 placeholder="Enter your email"
                 value={formData.email}
                 onChange={handleChange}
-                required
               />
             </div>
 
             <div className="login-form-group">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">
+                Password
+              </label>
 
               <input
                 id="password"
@@ -127,15 +269,17 @@ function Login() {
                 placeholder="Enter your password"
                 value={formData.password}
                 onChange={handleChange}
-                required
               />
+
               <button
-  type="button"
-  className="forgot-password-link"
-  onClick={() => navigate("/forgot-password")}
->
-  Forgot Password?
-</button>
+                type="button"
+                className="forgot-password-link"
+                onClick={() =>
+                  navigate("/forgot-password")
+                }
+              >
+                Forgot Password?
+              </button>
             </div>
 
             <button
@@ -152,7 +296,9 @@ function Login() {
               Don't have an account?{" "}
               <button
                 type="button"
-                onClick={() => navigate("/register")}
+                onClick={() =>
+                  navigate("/register")
+                }
                 className="login-register-link"
               >
                 Create Account
