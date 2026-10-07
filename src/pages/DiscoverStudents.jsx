@@ -5,65 +5,93 @@ function DiscoverStudents() {
   const [students, setStudents] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
+  const [sentRequests, setSentRequests] = useState([]);
 
-  useEffect(() => {
-    const fetchStudents = async () => {
-      try {
-        const token = localStorage.getItem("token");
-
-        const response = await fetch(
-          "http://localhost:5000/api/students",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        const data = await response.json();
-
-        if (response.ok) {
-          setStudents(data.students);
-        } else {
-          alert(data.message);
-        }
-      } catch (error) {
-        console.error("Students error:", error);
-        alert("Unable to fetch students");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchStudents();
-  }, []);
-
-  const handleConnect = async (userId) => {
+useEffect(() => {
+  const fetchStudentsAndRequests = async () => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch(
-        `http://localhost:5000/api/connections/${userId}`,
+      // Fetch students
+      const studentsResponse = await fetch(
+        "http://localhost:5000/api/students",
         {
-          method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
 
-      const data = await response.json();
+      const studentsData = await studentsResponse.json();
 
-      if (response.ok) {
-        alert("Connection request sent successfully");
+      if (studentsResponse.ok) {
+        setStudents(studentsData.students);
       } else {
-        alert(data.message);
+        alert(studentsData.message);
+      }
+
+      // Fetch requests sent by current user
+      const requestsResponse = await fetch(
+        "http://localhost:5000/api/connections/sent-requests",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const requestsData = await requestsResponse.json();
+
+      if (requestsResponse.ok) {
+        const sentUserIds = requestsData.requests.map(
+          (request) => request.receiver._id
+        );
+
+        setSentRequests(sentUserIds);
       }
     } catch (error) {
-      console.error("Connection error:", error);
-      alert("Unable to send connection request");
+      console.error("Students error:", error);
+      alert("Unable to fetch students");
+    } finally {
+      setLoading(false);
     }
   };
+
+  fetchStudentsAndRequests();
+}, []);
+
+const handleConnect = async (userId) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(
+      `http://localhost:5000/api/connections/${userId}`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    if (response.ok) {
+      // Mark this student as having a request sent
+      setSentRequests((previous) => [
+        ...previous,
+        userId,
+      ]);
+
+      alert("Connection request sent successfully");
+    } else {
+      alert(data.message);
+    }
+  } catch (error) {
+    console.error("Connection error:", error);
+    alert("Unable to send connection request");
+  }
+};
 
   const filteredStudents = students.filter((student) => {
     const searchText = search.toLowerCase();
@@ -233,27 +261,32 @@ function DiscoverStudents() {
                 </div>
 
 
-                {/* COLLEGE / YEAR */}
+ {/* COLLEGE / DEPARTMENT / YEAR */}
 
-                <div className="discover-basic-info">
+<div className="discover-basic-info">
 
-                  <div>
-                    <span>COLLEGE</span>
-                    <p>
-                      {student.college || "Not specified"}
-                    </p>
-                  </div>
+  <div>
+    <span>COLLEGE</span>
+    <p>
+      {student.college || "Not specified"}
+    </p>
+  </div>
 
-                  
+  <div>
+    <span>DEPARTMENT</span>
+    <p>
+      {student.department || "Not specified"}
+    </p>
+  </div>
 
-                  <div>
-                    <span>YEAR</span>
-                    <p>
-                      {student.year || "Not specified"}
-                    </p>
-                  </div>
+  <div>
+    <span>YEAR</span>
+    <p>
+      {student.year || "Not specified"}
+    </p>
+  </div>
 
-                </div>
+</div>
 
 
                 {/* BIO */}
@@ -336,15 +369,19 @@ function DiscoverStudents() {
 
 
                 {/* CONNECT */}
-
-                <button
-                  className="discover-connect"
-                  onClick={() =>
-                    handleConnect(student._id)
-                  }
-                >
-                  Connect
-                </button>
+<button
+  className={`discover-connect ${
+    sentRequests.includes(student._id)
+      ? "request-sent"
+      : ""
+  }`}
+  onClick={() => handleConnect(student._id)}
+  disabled={sentRequests.includes(student._id)}
+>
+  {sentRequests.includes(student._id)
+    ? "Request Sent ✓"
+    : "Connect"}
+</button>
 
               </div>
 

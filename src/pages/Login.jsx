@@ -198,6 +198,13 @@ function Login() {
           </button>
         </div>
       )}
+      <button
+  className="back-home-button"
+  onClick={() => navigate("/")}
+>
+  ← Back to Home
+</button>
+
 
       {/* Left Side */}
       <div className="login-left">

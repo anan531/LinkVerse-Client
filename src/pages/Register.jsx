@@ -274,7 +274,12 @@ const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           </button>
         </div>
       )}
-
+      <button
+  className="back-home-button"
+  onClick={() => navigate("/")}
+>
+  ← Back to Home
+</button>
       {/* LEFT PANEL */}
       <div className="register-left">
 
@@ -282,6 +287,8 @@ const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           <div className="register-brand-mark">L</div>
           <span>LinkVerse</span>
         </div>
+
+
 
         <div className="register-welcome">
 

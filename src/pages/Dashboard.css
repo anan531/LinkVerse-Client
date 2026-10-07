@@ -98,7 +98,7 @@ button {
 
   color: var(--blue);
 
-  font-size: 10px;
+  font-size: 20px;
   font-weight: 700;
 
   letter-spacing: 2px;
@@ -111,7 +111,7 @@ button {
 
   font-family: "Space Grotesk", sans-serif;
 
-  font-size: 27px;
+  font-size: 30px;
 
   letter-spacing: -0.8px;
 }
@@ -161,7 +161,7 @@ button {
 
   color: var(--navy);
 
-  font-size: 12px;
+  font-size: 15px;
 }
 
 .profile-mini span {
@@ -171,7 +171,8 @@ button {
 
   color: var(--muted);
 
-  font-size: 10px;
+  font-size: 15px;
+  
 }
 
 
@@ -269,7 +270,7 @@ button {
 
   color: var(--light-blue);
 
-  font-size: 9px;
+  font-size: 12px;
 
   font-weight: 700;
 
@@ -281,7 +282,7 @@ button {
 
   font-family: "Space Grotesk", sans-serif;
 
-  font-size: clamp(38px, 4vw, 58px);
+  font-size: clamp(35px, 4vw, 40px);
 
   line-height: 1.02;
 
@@ -473,7 +474,7 @@ button {
 
   color: var(--blue);
 
-  font-size: 9px;
+  font-size: 20px;
 
   font-weight: 700;
 
@@ -493,7 +494,7 @@ button {
 .section-title > span {
   color: var(--muted);
 
-  font-size: 12px;
+  font-size: 19px;
 }
 
 
@@ -563,13 +564,13 @@ button {
 
   color: var(--dark-blue);
 
-  font-size: 22px;
+  font-size: 25px;
 }
 
 .arrow {
   color: var(--blue);
 
-  font-size: 17px;
+  font-size: 25px;
 }
 
 .feature-card h3 {
@@ -577,7 +578,7 @@ button {
 
   color: var(--navy);
 
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .feature-card p {
@@ -585,7 +586,7 @@ button {
 
   color: var(--muted);
 
-  font-size: 11px;
+  font-size: 13px;
 
   line-height: 1.6;
 }
@@ -854,6 +855,684 @@ button {
   }
 
   .section-title > span {
+    display: none;
+  }
+}
+/* =====================================================
+   STUDENT DASHBOARD CONTENT
+   Existing LinkVerse theme preserved
+===================================================== */
+
+.student-overview {
+  margin-top: 55px;
+}
+
+
+/* =========================
+   SECTION HEADING
+========================= */
+
+.student-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-bottom: 20px;
+}
+
+.student-section-heading p,
+.student-card-heading p {
+  margin: 0 0 5px;
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.student-section-heading h2,
+.student-card-heading h2 {
+  margin: 0;
+  color: var(--navy);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 22px;
+}
+
+.student-section-heading > span {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+
+/* =========================
+   STATISTICS
+========================= */
+
+.student-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.student-stat {
+  min-height: 125px;
+  padding: 22px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.72),
+      rgba(194, 232, 255, 0.42)
+    );
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  box-shadow:
+    0 12px 30px rgba(4, 37, 88, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.student-stat:hover {
+  transform: translateY(-4px);
+
+  border-color: rgba(80, 124, 169, 0.3);
+
+  box-shadow:
+    0 18px 38px rgba(4, 37, 88, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.student-stat-number {
+  color: var(--navy);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.student-stat-label {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+
+/* =========================
+   MAIN DASHBOARD GRID
+========================= */
+
+.student-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 25px;
+}
+
+
+/* =========================
+   DASHBOARD CARD
+========================= */
+
+.student-dashboard-card {
+  min-height: 250px;
+  padding: 25px;
+  box-sizing: border-box;
+
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.68),
+      rgba(194, 232, 255, 0.32)
+    );
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  box-shadow:
+    0 14px 35px rgba(4, 37, 88, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.student-dashboard-card:hover {
+  transform: translateY(-4px);
+
+  border-color: rgba(80, 124, 169, 0.28);
+
+  box-shadow:
+    0 20px 42px rgba(4, 37, 88, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.student-card-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.student-card-symbol {
+  width: 35px;
+  height: 35px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: var(--light-blue);
+  color: var(--dark-blue);
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* =========================
+   NETWORK PULSE
+========================= */
+
+.network-pulse {
+  margin-top: 8px;
+}
+
+.pulse-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 13px 0;
+
+  border-top:
+    1px solid rgba(80, 124, 169, 0.12);
+}
+
+.pulse-row:first-child {
+  border-top: none;
+}
+
+.pulse-row span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.pulse-row strong {
+  color: var(--navy);
+  font-size: 15px;
+}
+
+
+/* =========================
+   OPPORTUNITY RADAR
+========================= */
+
+.radar-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 12px 0;
+
+  border-top:
+    1px solid rgba(80, 124, 169, 0.12);
+}
+
+.radar-item:first-child {
+  border-top: none;
+}
+
+.radar-item strong {
+  display: block;
+  color: var(--navy);
+  font-size: 13px;
+}
+
+.radar-item span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.radar-item small {
+  color: var(--blue);
+  font-size: 10px;
+}
+
+
+/* =========================
+   AI PICKS
+========================= */
+
+.ai-pick {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px 0;
+
+  border-top:
+    1px solid rgba(80, 124, 169, 0.12);
+}
+
+.ai-pick:first-child {
+  border-top: none;
+}
+
+.ai-avatar {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: var(--light-blue);
+  color: var(--dark-blue);
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ai-pick strong {
+  display: block;
+  color: var(--navy);
+  font-size: 13px;
+}
+
+.ai-pick span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+
+/* =========================
+   UPCOMING
+========================= */
+
+.upcoming-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 10px 0;
+
+  border-top:
+    1px solid rgba(80, 124, 169, 0.12);
+}
+
+.upcoming-item:first-child {
+  border-top: none;
+}
+
+.upcoming-date {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: var(--light-blue);
+  color: var(--dark-blue);
+}
+
+.upcoming-date span {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.upcoming-item strong {
+  display: block;
+  color: var(--navy);
+  font-size: 13px;
+}
+
+.upcoming-item span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+
+/* =========================
+   TEXT BUTTON
+========================= */
+
+.student-text-button {
+  margin-top: 12px;
+
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  color: var(--blue);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.student-text-button:hover {
+  color: var(--dark-blue);
+}
+
+
+/* =========================
+   ACTIVITY
+========================= */
+
+.student-activity-card {
+  margin-top: 25px;
+  margin-bottom: 30px;
+
+  padding: 25px;
+  box-sizing: border-box;
+
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.68),
+      rgba(194, 232, 255, 0.32)
+    );
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  box-shadow:
+    0 14px 35px rgba(4, 37, 88, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.student-activity-card:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(80, 124, 169, 0.28);
+
+  box-shadow:
+    0 20px 42px rgba(4, 37, 88, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.student-activity-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.activity-stat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 15px;
+
+  border-radius: 12px;
+
+  background: rgba(194, 232, 255, 0.28);
+}
+
+.activity-dot {
+  width: 8px;
+  height: 8px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: var(--blue);
+}
+
+.activity-stat strong {
+  display: block;
+  color: var(--navy);
+  font-size: 18px;
+}
+
+.activity-stat span {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.student-muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1000px) {
+
+  .student-stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .student-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .student-activity-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .student-stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .student-section-heading {
+    display: block;
+  }
+
+  .student-section-heading > span {
+    display: block;
+    margin-top: 8px;
+  }
+
+  .student-dashboard-card,
+  .student-activity-card {
+    padding: 20px;
+  }
+}
+/* =====================================================
+   STUDENT DASHBOARD TOP
+===================================================== */
+
+.student-topbar {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 32px;
+}
+
+
+/* =========================
+   LEFT SIDE
+========================= */
+
+.student-topbar-left p {
+  margin: 0 0 8px;
+
+  color: var(--blue);
+
+  font-size: 22px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+}
+
+.student-topbar-left h1 {
+  margin: 0;
+
+  color: var(--navy);
+
+  font-family: "Space Grotesk", sans-serif;
+
+  font-size: 32px;
+  font-weight: 500;
+
+  letter-spacing: -1px;
+}
+
+
+/* =========================
+   PROFILE PILL
+========================= */
+
+.student-profile {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 8px 18px 8px 8px;
+
+  border-radius: 50px;
+
+  background: rgba(255, 255, 255, 0.85);
+
+  border: 1px solid
+    rgba(255, 255, 255, 0.9);
+
+  box-shadow:
+    0 10px 30px
+    rgba(4, 37, 88, 0.08);
+}
+
+
+/* =========================
+   PROFILE AVATAR
+========================= */
+
+.student-profile-avatar {
+  width: 70px;
+  height: 70px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--dark-blue);
+
+  color: var(--light-blue);
+
+  font-family: "Space Grotesk", sans-serif;
+
+  font-size: 27px;
+  font-weight: 600;
+}
+
+
+/* =========================
+   PROFILE TEXT
+========================= */
+
+.student-profile-info {
+  padding-right: 4px;
+}
+
+.student-profile-info strong {
+  display: block;
+
+  color: var(--navy);
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.student-profile-info span {
+  display: block;
+
+  margin-top: 5px;
+
+  color: var(--muted);
+
+  font-size: 14px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+
+  .student-topbar-left p {
+    font-size: 16px;
+  }
+
+  .student-topbar-left h1 {
+    font-size: 26px;
+  }
+
+  .student-profile {
+    padding-right: 10px;
+  }
+
+  .student-profile-avatar {
+    width: 52px;
+    height: 52px;
+
+    font-size: 21px;
+  }
+
+  .student-profile-info {
     display: none;
   }
 }

@@ -334,12 +334,8 @@
 
 .discover-basic-info {
   display: grid;
-
-  grid-template-columns: 1fr 1fr;
-
+  grid-template-columns: repeat(3, 1fr);
   gap: 12px;
-
-  margin-bottom: 17px;
 }
 
 .discover-basic-info div {
@@ -626,4 +622,14 @@
     padding: 17px;
   }
 
+}
+.discover-connect.request-sent {
+  background: #c2e8ff;
+  color: #042558;
+  cursor: default;
+  opacity: 0.8;
+}
+
+.discover-connect.request-sent:hover {
+  transform: none;
 }

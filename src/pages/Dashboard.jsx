@@ -6,431 +6,771 @@ function Dashboard() {
   const navigate = useNavigate();
 
   const [user, setUser] = useState(null);
+  const [connections, setConnections] = useState([]);
   const [requests, setRequests] = useState([]);
-
-  const handleAccept = (connectionId) => {
-    const token = localStorage.getItem("token");
-
-    fetch(
-      `http://localhost:5000/api/connections/${connectionId}/accept`,
-      {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`, 
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.message === "Connection request accepted") {
-          setRequests(
-            requests.filter(
-              (request) => request._id !== connectionId
-            )
-          );
-        }
-      })
-      .catch((error) => {
-        console.error("Error accepting request:", error);
-      });
-  };
-
-  const handleReject = (connectionId) => {
-    const token = localStorage.getItem("token");
-
-    fetch(
-      `http://localhost:5000/api/connections/${connectionId}/reject`,
-      {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.message === "Connection request rejected") {
-          setRequests(
-            requests.filter(
-              (request) => request._id !== connectionId
-            )
-          );
-        }
-      })
-      .catch((error) => {
-        console.error("Error rejecting request:", error);
-      });
-  };
+  const [collaborations, setCollaborations] = useState([]);
+  const [opportunities, setOpportunities] = useState([]);
+  const [recommendations, setRecommendations] = useState([]);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
+    const storedUser = JSON.parse(
+      localStorage.getItem("user")
+    );
 
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
+    setUser(storedUser);
 
     const token = localStorage.getItem("token");
 
-    if (token) {
-      fetch("http://localhost:5000/api/connections/requests", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+    if (!token) return;
+
+    // Connections
+    fetch("http://localhost:5000/api/connections/", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setConnections(data.connections || []);
       })
-        .then((response) => response.json())
-        .then((data) => {
-          setRequests(data.requests || []);
-        })
-        .catch((error) => {
-          console.error(
-            "Error fetching connection requests:",
-            error
-          );
-        });
-    }
+      .catch((error) => {
+        console.error(
+          "Error fetching connections:",
+          error
+        );
+      });
+
+    // Requests
+    fetch("http://localhost:5000/api/connections/requests", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setRequests(data.requests || []);
+      })
+      .catch((error) => {
+        console.error(
+          "Error fetching requests:",
+          error
+        );
+      });
+
+    // Collaborations
+    fetch("http://localhost:5000/api/collaborations", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setCollaborations(
+          data.collaborations || data || []
+        );
+      })
+      .catch((error) => {
+        console.error(
+          "Error fetching collaborations:",
+          error
+        );
+      });
+
+    // Opportunities
+    fetch("http://localhost:5000/api/opportunities")
+      .then((response) => response.json())
+      .then((data) => {
+        setOpportunities(
+          data.opportunities || data || []
+        );
+      })
+      .catch((error) => {
+        console.error(
+          "Error fetching opportunities:",
+          error
+        );
+      });
+
+    // AI Recommendations
+    fetch("http://localhost:5000/api/recommendations", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setRecommendations(
+          data.recommendations || []
+        );
+      })
+      .catch((error) => {
+        console.error(
+          "Error fetching recommendations:",
+          error
+        );
+      });
   }, []);
 
-  const features = [
-    {
-      title: "Discover Students",
-      description:
-        "Find students with similar interests and skills.",
-      icon: "⌕",
-      path: "/discover-students",
-    },
-    {
-      title: "Connections",
-      description:
-        "Build your academic and professional network.",
-      icon: "◈",
-      path: "/connections",
-    },
-    {
-      title: "Collaboration Hub",
-      description:
-        "Find projects, teams and collaboration opportunities.",
-      icon: "✦",
-      path: "/collaborations",
-    },
-    {
-      title: "Messages",
-      description:
-        "Connect privately with other students.",
-      icon: "◌",
-      path: "/chat",
-    },
-    {
-      title: "Opportunities",
-      description:
-        "Explore internships, workshops and opportunities.",
-      icon: "◎",
-      path: "/opportunities",
-    },
-    {
-      title: "Student Feed",
-      description:
-        "Share updates with your student community.",
-      icon: "▤",
-      path: "/feed",
-    },
-    {
-      title: "My Profile",
-      description:
-        "Manage your profile, skills and interests.",
-      icon: "○",
-      path: "/profile",
-    },
-    {
-      title: "AI Recommendations",
-      description:
-        "Discover students recommended based on your profile.",
-      icon: "✧",
-      path: "/recommendations",
-    },
-  ];
+  const getInitial = (name) => {
+    if (!name) return "U";
+
+    return name.charAt(0).toUpperCase();
+  };
 
   return (
     <div className="dashboard">
 
-
-
-      {/* Background decoration */}
-      <div className="glow glow-one"></div>
-      <div className="glow glow-two"></div>
-
-      {/* Main Content */}
       <main className="main-content">
 
-        {user ? (
-          <>
+        {/* =========================================
+            KEEPING ORIGINAL TOP BAR
+        ========================================= */}
 
-            {/* Top bar */}
-            <div className="topbar">
+<header className="student-topbar">
+
+  <div className="student-topbar-left">
+
+    <p>
+      STUDENT DASHBOARD
+    </p>
+
+    <h1>
+      Welcome back, {user?.name || "Student"}
+    </h1>
+
+  </div>
+
+
+  {user && (
+    <div className="student-profile">
+
+      <div className="student-profile-avatar">
+        {getInitial(user.name)}
+      </div>
+
+      <div className="student-profile-info">
+
+        <strong>
+          {user.name}
+        </strong>
+
+        <span>
+          student
+        </span>
+
+      </div>
+
+    </div>
+  )}
+
+</header>
+
+
+        {/* =========================================
+            ORIGINAL BANNER
+            DO NOT CHANGE
+        ========================================= */}
+
+       <section className="hero-card">
+
+  <div className="hero-content">
+
+    <p className="hero-tag">
+      YOUR DIGITAL CAMPUS
+    </p>
+
+    <h1>
+      Connect.
+      <br />
+      Collaborate.
+      <br />
+      <span>Grow together.</span>
+    </h1>
+
+    <p>
+      Discover people, opportunities and
+      collaborations that move your
+      student journey forward.
+    </p>
+
+
+
+  </div>
+
+
+  {/* =====================================
+      ORIGINAL HERO VISUAL
+  ===================================== */}
+
+  <div className="hero-visual">
+
+    <div className="orbit orbit-one"></div>
+
+    <div className="orbit orbit-two"></div>
+
+
+    <div className="hero-orb">
+
+      <span>
+        L
+      </span>
+
+    </div>
+
+
+    <div className="floating-card card-one">
+
+      <span>
+        ✦
+      </span>
+
+      Collaboration
+
+    </div>
+
+
+    <div className="floating-card card-two">
+
+      <span>
+        ◉
+      </span>
+
+      Opportunities
+
+    </div>
+
+
+    <div className="floating-card card-three">
+
+      <span>
+        ◇
+      </span>
+
+      Connections
+
+    </div>
+
+  </div>
+
+</section>
+
+
+        {/* =================================================
+            EVERYTHING BELOW HERE IS THE NEW STUDENT DASHBOARD
+        ================================================= */}
+
+
+        {/* =========================================
+            OVERVIEW
+        ========================================= */}
+
+        <section className="student-overview">
+
+          <div className="student-section-heading">
+
+            <div>
+
+              <p>
+                OVERVIEW
+              </p>
+
+              <h2>
+                Your LinkVerse at a glance
+              </h2>
+
+            </div>
+
+            <span>
+              LIVE SUMMARY
+            </span>
+
+          </div>
+
+
+          <div className="student-stat-grid">
+
+            <div className="student-stat">
+
+              <span className="student-stat-number">
+                {connections.length}
+              </span>
+
+              <span className="student-stat-label">
+                Connections
+              </span>
+
+            </div>
+
+
+            <div className="student-stat">
+
+              <span className="student-stat-number">
+                {requests.length}
+              </span>
+
+              <span className="student-stat-label">
+                Requests
+              </span>
+
+            </div>
+
+
+            <div className="student-stat">
+
+              <span className="student-stat-number">
+                {collaborations.length}
+              </span>
+
+              <span className="student-stat-label">
+                Projects
+              </span>
+
+            </div>
+
+
+            <div className="student-stat">
+
+              <span className="student-stat-number">
+                {opportunities.length}
+              </span>
+
+              <span className="student-stat-label">
+                Opportunities
+              </span>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        {/* =========================================
+            NETWORK PULSE + OPPORTUNITY RADAR
+        ========================================= */}
+
+        <section className="student-dashboard-grid">
+
+
+          {/* NETWORK PULSE */}
+
+          <div className="student-dashboard-card">
+
+            <div className="student-card-heading">
 
               <div>
-                <p className="page-label">
-                  STUDENT DASHBOARD
+
+                <p>
+                  NETWORK PULSE
                 </p>
 
                 <h2>
-                  Welcome back, {user.name}
+                  Your network
                 </h2>
+
               </div>
 
-              <div className="profile-mini">
+              <span className="student-card-symbol">
+                ◇
+              </span>
 
-                <div className="profile-avatar">
-                  {user.name.charAt(0).toUpperCase()}
-                </div>
+            </div>
 
-                <div>
-                  <strong>{user.name}</strong>
-                  <span>{user.role}</span>
-                </div>
+
+            <div className="network-pulse">
+
+              <div className="pulse-row">
+
+                <span>
+                  Students in your network
+                </span>
+
+                <strong>
+                  {connections.length}
+                </strong>
+
+              </div>
+
+
+              <div className="pulse-row">
+
+                <span>
+                  Pending requests
+                </span>
+
+                <strong>
+                  {requests.length}
+                </strong>
+
+              </div>
+
+
+              <div className="pulse-row">
+
+                <span>
+                  Active collaborations
+                </span>
+
+                <strong>
+                  {collaborations.length}
+                </strong>
 
               </div>
 
             </div>
 
 
-            {/* Hero */}
-            <section className="hero-card">
+            <button
+              className="student-text-button"
+              onClick={() =>
+                navigate("/discover-students")
+              }
+            >
+              Grow your network →
+            </button>
 
-              <div className="hero-content">
+          </div>
 
-                <div className="hero-tag">
-                  YOUR DIGITAL CAMPUS
-                </div>
 
-                <h1>
-                  Connect.
-                  <br />
-                  Collaborate.
-                  <br />
-                  <span>Grow together.</span>
-                </h1>
+          {/* OPPORTUNITY RADAR */}
+
+          <div className="student-dashboard-card">
+
+            <div className="student-card-heading">
+
+              <div>
 
                 <p>
-                  Discover people, opportunities and
-                  collaborations that move your student journey
-                  forward.
+                  OPPORTUNITY RADAR
                 </p>
 
-                <button
-                  className="hero-button"
-                  onClick={() =>
-                    navigate("/discover-students")
-                  }
-                >
-                  Discover Students
-                  <span>→</span>
-                </button>
+                <h2>
+                  What's open now
+                </h2>
 
               </div>
 
+              <span className="student-card-symbol">
+                ✦
+              </span>
 
-              <div className="hero-visual">
-
-                <div className="orbit orbit-one"></div>
-                <div className="orbit orbit-two"></div>
-
-                <div className="hero-orb">
-                  <span>L</span>
-                </div>
-
-                <div className="floating-card card-one">
-                  <span>✦</span>
-                  Collaboration
-                </div>
-
-                <div className="floating-card card-two">
-                  <span>◈</span>
-                  Connections
-                </div>
-
-                <div className="floating-card card-three">
-                  <span>◎</span>
-                  Opportunities
-                </div>
-
-              </div>
-
-            </section>
+            </div>
 
 
-            {/* Explore */}
-            <section className="explore-section">
+            <div className="opportunity-radar">
 
-              <div className="section-title">
+              {opportunities.length === 0 ? (
 
-                <div>
-                  <p>EXPLORE</p>
-                  <h2>Your LinkVerse</h2>
-                </div>
-
-                <span>
-                  Everything in one place
-                </span>
-
-              </div>
-
-
-              <div className="feature-grid">
-
-                {features.map((feature) => (
-
-                  <div
-                    className="feature-card"
-                    key={feature.path}
-                    onClick={() =>
-                      navigate(feature.path)
-                    }
-                  >
-
-                    <div className="feature-top">
-
-                      <div className="feature-icon">
-                        {feature.icon}
-                      </div>
-
-                      <span className="arrow">
-                        ↗
-                      </span>
-
-                    </div>
-
-                    <h3>
-                      {feature.title}
-                    </h3>
-
-                    <p>
-                      {feature.description}
-                    </p>
-
-                  </div>
-
-                ))}
-
-              </div>
-
-            </section>
-
-
-            {/* Connection Requests */}
-            <section className="requests-section">
-
-              <div className="section-title">
-
-                <div>
-                  <p>NETWORK</p>
-                  <h2>Connection Requests</h2>
-                </div>
-
-                <span>
-                  {requests.length} pending
-                </span>
-
-              </div>
-
-
-              {requests.length === 0 ? (
-
-                <div className="empty-state">
-
-                  <div className="empty-icon">
-                    ◈
-                  </div>
-
-                  <h3>
-                    Your network is waiting
-                  </h3>
-
-                  <p>
-                    No pending connection requests at
-                    the moment.
-                  </p>
-
-                </div>
+                <p className="student-muted">
+                  No opportunities available.
+                </p>
 
               ) : (
 
-                <div className="request-grid">
-
-                  {requests.map((request) => (
+                opportunities
+                  .slice(0, 3)
+                  .map((opportunity) => (
 
                     <div
-                      className="request-card"
-                      key={request._id}
+                      className="radar-item"
+                      key={opportunity._id}
                     >
 
-                      <div className="request-avatar">
-                        {request.sender.name
-                          .charAt(0)
-                          .toUpperCase()}
-                      </div>
+                      <div>
 
-
-                      <div className="request-info">
-
-                        <h3>
-                          {request.sender.name}
-                        </h3>
-
-                        <p>
-                          {request.sender.email}
-                        </p>
+                        <strong>
+                          {opportunity.title}
+                        </strong>
 
                         <span>
-                          wants to connect with you
+                          {opportunity.type}
                         </span>
 
+                      </div>
 
-                        <div className="request-buttons">
+                      {opportunity.deadline && (
 
-                          <button
-                            className="accept"
-                            onClick={() =>
-                              handleAccept(
-                                request._id
-                              )
-                            }
-                          >
-                            Accept
-                          </button>
+                        <small>
+                          {opportunity.deadline}
+                        </small>
 
-                          <button
-                            className="reject"
-                            onClick={() =>
-                              handleReject(
-                                request._id
-                              )
-                            }
-                          >
-                            Decline
-                          </button>
+                      )}
 
-                        </div>
+                    </div>
+
+                  ))
+              )}
+
+            </div>
+
+
+            <button
+              className="student-text-button"
+              onClick={() =>
+                navigate("/opportunities")
+              }
+            >
+              Explore opportunities →
+            </button>
+
+          </div>
+
+        </section>
+
+
+        {/* =========================================
+            AI PICKS + UPCOMING
+        ========================================= */}
+
+        <section className="student-dashboard-grid">
+
+
+          {/* AI PICKS */}
+
+          <div className="student-dashboard-card">
+
+            <div className="student-card-heading">
+
+              <div>
+
+                <p>
+                  AI PICKS
+                </p>
+
+                <h2>
+                  Students you may know
+                </h2>
+
+              </div>
+
+              <span className="student-card-symbol">
+                AI
+              </span>
+
+            </div>
+
+
+            <div className="ai-picks">
+
+              {recommendations.length === 0 ? (
+
+                <p className="student-muted">
+                  No recommendations available.
+                </p>
+
+              ) : (
+
+                recommendations
+                  .slice(0, 2)
+                  .map((recommendation) => (
+
+                    <div
+                      className="ai-pick"
+                      key={recommendation.student._id}
+                    >
+
+                      <div className="ai-avatar">
+                        {getInitial(
+                          recommendation.student.name
+                        )}
+                      </div>
+
+                      <div>
+
+                        <strong>
+                          {recommendation.student.name}
+                        </strong>
+
+                        <span>
+                          {recommendation.matchScore}%
+                          match
+                        </span>
 
                       </div>
 
                     </div>
 
-                  ))}
-
-                </div>
-
+                  ))
               )}
 
-            </section>
+            </div>
 
-          </>
-        ) : (
 
-          <div className="loading">
-            Loading LinkVerse...
+            <button
+              className="student-text-button"
+              onClick={() =>
+                navigate("/recommendations")
+              }
+            >
+              See all recommendations →
+            </button>
+
           </div>
 
-        )}
+
+          {/* UPCOMING */}
+
+          <div className="student-dashboard-card">
+
+            <div className="student-card-heading">
+
+              <div>
+
+                <p>
+                  UPCOMING
+                </p>
+
+                <h2>
+                  Don't miss out
+                </h2>
+
+              </div>
+
+              <span className="student-card-symbol">
+                ◷
+              </span>
+
+            </div>
+
+
+            <div className="upcoming-list">
+
+              {opportunities.length === 0 ? (
+
+                <p className="student-muted">
+                  Nothing upcoming.
+                </p>
+
+              ) : (
+
+                opportunities
+                  .slice(0, 3)
+                  .map((opportunity) => (
+
+                    <div
+                      className="upcoming-item"
+                      key={opportunity._id}
+                    >
+
+                      <div className="upcoming-date">
+
+                        <span>
+                          {opportunity.deadline
+                            ? opportunity.deadline
+                                .split("-")[2]
+                            : "—"}
+                        </span>
+
+                      </div>
+
+                      <div>
+
+                        <strong>
+                          {opportunity.title}
+                        </strong>
+
+                        <span>
+                          {opportunity.organization}
+                        </span>
+
+                      </div>
+
+                    </div>
+
+                  ))
+              )}
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        {/* =========================================
+            LINKVERSE ACTIVITY
+        ========================================= */}
+
+        <section className="student-activity-card">
+
+          <div className="student-section-heading">
+
+            <div>
+
+              <p>
+                YOUR LINKVERSE
+              </p>
+
+              <h2>
+                Activity snapshot
+              </h2>
+
+            </div>
+
+          </div>
+
+
+          <div className="student-activity-grid">
+
+            <div className="activity-stat">
+
+              <span className="activity-dot"></span>
+
+              <div>
+
+                <strong>
+                  {connections.length}
+                </strong>
+
+                <span>
+                  connections in your network
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div className="activity-stat">
+
+              <span className="activity-dot"></span>
+
+              <div>
+
+                <strong>
+                  {collaborations.length}
+                </strong>
+
+                <span>
+                  collaboration projects available
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div className="activity-stat">
+
+              <span className="activity-dot"></span>
+
+              <div>
+
+                <strong>
+                  {opportunities.length}
+                </strong>
+
+                <span>
+                  opportunities currently open
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
 
       </main>
 

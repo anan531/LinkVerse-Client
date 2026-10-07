@@ -482,3 +482,37 @@
   }
 
 }
+.connection-request-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.connection-request-actions button {
+  flex: 1;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.connection-accept-btn {
+  background: #042558;
+  color: white;
+}
+
+.connection-accept-btn:hover {
+  background: #063b83;
+}
+
+.connection-reject-btn {
+  background: #eef3f7;
+  color: #042558;
+}
+
+.connection-reject-btn:hover {
+  background: #dce7f0;
+}
