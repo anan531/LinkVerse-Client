@@ -883,7 +883,7 @@ button {
 .student-card-heading p {
   margin: 0 0 5px;
   color: var(--blue);
-  font-size: 11px;
+  font-size: 17px;
   font-weight: 700;
   letter-spacing: 2px;
 }
@@ -893,12 +893,12 @@ button {
   margin: 0;
   color: var(--navy);
   font-family: "Space Grotesk", sans-serif;
-  font-size: 22px;
+  font-size: 25px;
 }
 
 .student-section-heading > span {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 17px;
   letter-spacing: 1px;
 }
 
@@ -965,7 +965,7 @@ button {
 .student-stat-label {
   margin-top: 6px;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 18px;
 }
 
 
@@ -1031,8 +1031,8 @@ button {
 }
 
 .student-card-symbol {
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
 
   display: flex;
   align-items: center;
@@ -1043,7 +1043,7 @@ button {
   background: var(--light-blue);
   color: var(--dark-blue);
 
-  font-size: 12px;
+  font-size: 20px;
   font-weight: 700;
 }
 
@@ -1073,12 +1073,12 @@ button {
 
 .pulse-row span {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 17px;
 }
 
 .pulse-row strong {
   color: var(--navy);
-  font-size: 15px;
+  font-size: 18px;
 }
 
 
@@ -1089,8 +1089,7 @@ button {
 .radar-item {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-
+  align-items: flex-start;
   padding: 12px 0;
 
   border-top:
@@ -1104,21 +1103,23 @@ button {
 .radar-item strong {
   display: block;
   color: var(--navy);
-  font-size: 13px;
+  font-size: 17px;
 }
 
 .radar-item span {
   display: block;
   margin-top: 4px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 15px;
 }
 
 .radar-item small {
   color: var(--blue);
-  font-size: 10px;
+  font-size: 15px;
 }
-
+.radar-item > div {
+  text-align: left;
+}
 
 /* =========================
    AI PICKS
@@ -1140,8 +1141,8 @@ button {
 }
 
 .ai-avatar {
-  width: 38px;
-  height: 38px;
+  width: 50px;
+  height: 50px;
 
   display: flex;
   align-items: center;
@@ -1154,21 +1155,21 @@ button {
   background: var(--light-blue);
   color: var(--dark-blue);
 
-  font-size: 13px;
+  font-size: 17px;
   font-weight: 700;
 }
 
 .ai-pick strong {
   display: block;
   color: var(--navy);
-  font-size: 13px;
+  font-size: 17px;
 }
 
 .ai-pick span {
   display: block;
   margin-top: 4px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 15px;
 }
 
 
@@ -1179,7 +1180,9 @@ button {
 .upcoming-item {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 12px;
+
 
   padding: 10px 0;
 
@@ -1192,8 +1195,8 @@ button {
 }
 
 .upcoming-date {
-  width: 42px;
-  height: 42px;
+  width: 35px;
+  height: 35px;
 
   flex-shrink: 0;
 
@@ -1208,21 +1211,24 @@ button {
 }
 
 .upcoming-date span {
-  font-size: 13px;
+  font-size: 10px;
   font-weight: 700;
 }
 
 .upcoming-item strong {
   display: block;
-  color: var(--navy);
-  font-size: 13px;
+  color: var(--blue);
+  font-size: 12px;
 }
 
 .upcoming-item span {
   display: block;
   margin-top: 4px;
-  color: var(--muted);
-  font-size: 11px;
+  color: var(--navy);
+  font-size: 20px;
+}
+.upcoming-item > div:last-child {
+  text-align: left;
 }
 
 
@@ -1240,7 +1246,7 @@ button {
 
   color: var(--blue);
 
-  font-size: 11px;
+  font-size: 15px;
   font-weight: 700;
 
   cursor: pointer;
@@ -1314,8 +1320,8 @@ button {
 }
 
 .activity-dot {
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
 
   flex-shrink: 0;
 
@@ -1327,14 +1333,14 @@ button {
 .activity-stat strong {
   display: block;
   color: var(--navy);
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .activity-stat span {
   display: block;
   margin-top: 3px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 15px;
 }
 
 .student-muted {

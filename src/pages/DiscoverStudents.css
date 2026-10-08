@@ -103,12 +103,13 @@
 .discover-description {
   max-width: 600px;
 
-  margin: 12px 0 0;
+  margin: 12px auto 0;
 
   color: #c2e8ff;
 
   font-size: 14px;
   line-height: 1.7;
+
 }
 
 
@@ -144,7 +145,7 @@
 .discover-search-label {
   color: #042558;
 
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
 
   margin-bottom: 9px;
@@ -256,7 +257,7 @@
 
   border-radius: 16px;
 
-  padding: 20px;
+  padding: 45px;
 
   box-shadow: 0 5px 18px rgba(1, 16, 35, 0.05);
 
@@ -316,7 +317,7 @@
 
   color: #011023;
 
-  font-size: 16px;
+  font-size: 20px;
 }
 
 .discover-user-info p {
@@ -324,7 +325,7 @@
 
   color: #507ca9;
 
-  font-size: 12px;
+  font-size: 15px;
 }
 
 
@@ -352,7 +353,7 @@
 
   color: #7c9dc6;
 
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
 
   letter-spacing: 1px;

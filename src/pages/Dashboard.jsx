@@ -665,13 +665,16 @@ function Dashboard() {
 
                       <div>
 
-                        <strong>
-                          {opportunity.title}
-                        </strong>
 
                         <span>
                           {opportunity.organization}
                         </span>
+
+                        <strong>
+                          {opportunity.title}
+                        </strong>
+
+
 
                       </div>
 

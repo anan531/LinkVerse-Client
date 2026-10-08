@@ -382,10 +382,9 @@ function Profile() {
                                             }
                                         />
 
-                                        <small>
-                                            Separate multiple
-                                            skills with commas.
-                                        </small>
+<small>
+    Separate multiple skills with commas.
+</small>
 
                                     </div>
 
