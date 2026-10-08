@@ -383,117 +383,92 @@ function Connections() {
         </div>
 
 
-        {requests.length === 0 ? (
+{requests.length === 0 ? (
 
-          <div className="connections-empty">
+  <div className="connections-empty">
 
-            <div className="connections-empty-icon">
-              +
-            </div>
+    <div className="connections-empty-icon">
+      +
+    </div>
+
+    <h3>
+      No pending requests
+    </h3>
+
+    <p>
+      You do not have any connection requests
+      at the moment.
+    </p>
+
+  </div>
+
+) : (
+
+  <div className="connection-request-list">
+
+    {requests.map((request) => (
+
+      <div
+        className="connection-request-item"
+        key={request._id}
+      >
+
+        <div className="connection-request-user">
+
+          <div className="connection-request-avatar">
+
+            {request.sender.name
+              ? request.sender.name
+                  .charAt(0)
+                  .toUpperCase()
+              : "U"}
+
+          </div>
+
+          <div className="connection-request-info">
 
             <h3>
-              No pending requests
+              {request.sender.name}
             </h3>
 
             <p>
-              You do not have any connection requests
-              at the moment.
+              {request.sender.email}
             </p>
 
           </div>
 
-        ) : (
-
-          <div className="connections-grid">
-
-            {requests.map((request) => (
-
-              <div
-                className="connection-card"
-                key={request._id}
-              >
-
-                {/* REQUEST USER HEADER */}
-
-                <div className="connection-card-header">
-
-                  <div className="connection-avatar">
-
-                    {request.sender.name
-                      ? request.sender.name
-                          .charAt(0)
-                          .toUpperCase()
-                      : "U"}
-
-                  </div>
-
-                  <div className="connection-user-info">
-
-                    <h3>
-                      {request.sender.name}
-                    </h3>
-
-                    <span>
-                      Wants to connect with you
-                    </span>
-
-                  </div>
-
-                </div>
+        </div>
 
 
-                {/* DETAILS */}
+        <div className="connection-request-actions">
 
-                <div className="connection-details">
+          <button
+            className="connection-accept-btn"
+            onClick={() =>
+              handleAccept(request._id)
+            }
+          >
+            Accept
+          </button>
 
-                  <div className="connection-detail">
+          <button
+            className="connection-reject-btn"
+            onClick={() =>
+              handleReject(request._id)
+            }
+          >
+            Decline
+          </button>
 
-                    <span>
-                      EMAIL
-                    </span>
+        </div>
 
-                    <p>
-                      {request.sender.email}
-                    </p>
+      </div>
 
-                  </div>
+    ))}
 
-                </div>
+  </div>
 
-
-                {/* REQUEST ACTIONS */}
-
-                <div
-                  className="connection-request-actions"
-                >
-
-                  <button
-                    className="connection-accept-btn"
-                    onClick={() =>
-                      handleAccept(request._id)
-                    }
-                  >
-                    Accept
-                  </button>
-
-                  <button
-                    className="connection-reject-btn"
-                    onClick={() =>
-                      handleReject(request._id)
-                    }
-                  >
-                    Decline
-                  </button>
-
-                </div>
-
-              </div>
-
-            ))}
-
-          </div>
-
-        )}
+)}
 
       </main>
 

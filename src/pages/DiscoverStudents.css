@@ -109,7 +109,6 @@
 
   font-size: 14px;
   line-height: 1.7;
-
 }
 
 
@@ -190,11 +189,10 @@
 
 .discover-results-header {
   display: flex;
-
   align-items: center;
   justify-content: space-between;
-
   margin-bottom: 18px;
+  text-align: left;
 }
 
 .discover-results-header h2 {
@@ -257,7 +255,7 @@
 
   border-radius: 16px;
 
-  padding: 45px;
+  padding: 28px;
 
   box-shadow: 0 5px 18px rgba(1, 16, 35, 0.05);
 
@@ -265,6 +263,11 @@
     transform 0.2s ease,
     box-shadow 0.2s ease,
     border-color 0.2s ease;
+
+  display: flex;
+  flex-direction: column;
+
+  min-height: 600px;
 }
 
 .discover-card:hover {
@@ -284,18 +287,18 @@
   display: flex;
   align-items: center;
 
-  gap: 12px;
+  gap: 15px;
 
-  padding-bottom: 16px;
+  padding-bottom: 20px;
 
   border-bottom: 1px solid #edf2f6;
 
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .discover-avatar {
-  width: 48px;
-  height: 48px;
+  width: 54px;
+  height: 54px;
 
   flex-shrink: 0;
 
@@ -303,21 +306,22 @@
   align-items: center;
   justify-content: center;
 
-  border-radius: 13px;
+  border-radius: 14px;
 
   background: #042558;
   color: #c2e8ff;
 
-  font-size: 18px;
+  font-size: 21px;
   font-weight: 700;
 }
 
 .discover-user-info h3 {
-  margin: 0 0 4px;
+  margin: 0 0 5px;
 
   color: #011023;
 
-  font-size: 20px;
+  font-size: 22px;
+  font-weight: 700;
 }
 
 .discover-user-info p {
@@ -325,7 +329,7 @@
 
   color: #507ca9;
 
-  font-size: 15px;
+  font-size: 16px;
 }
 
 
@@ -335,16 +339,20 @@
 
 .discover-basic-info {
   display: grid;
+
   grid-template-columns: repeat(3, 1fr);
+
   gap: 12px;
+
+  margin-bottom: 20px;
 }
 
 .discover-basic-info div {
   background: #f6f9fc;
 
-  padding: 10px;
+  padding: 12px;
 
-  border-radius: 8px;
+  border-radius: 9px;
 }
 
 .discover-basic-info span,
@@ -353,18 +361,18 @@
 
   color: #7c9dc6;
 
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
 
   letter-spacing: 1px;
 }
 
 .discover-basic-info p {
-  margin: 4px 0 0;
+  margin: 5px 0 0;
 
   color: #34495e;
 
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1.4;
 }
 
@@ -374,16 +382,16 @@
    ========================= */
 
 .discover-info-section {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .discover-info-section > p {
-  margin: 5px 0 0;
+  margin: 7px 0 0;
 
   color: #53687b;
 
-  font-size: 11px;
-  line-height: 1.55;
+  font-size: 13px;
+  line-height: 1.6;
 }
 
 
@@ -396,23 +404,24 @@
 
   flex-wrap: wrap;
 
-  gap: 6px;
+  gap: 7px;
+  justify-content: center;
 
-  margin-top: 7px;
+  margin-top: 9px;
 }
 
 .discover-tag {
   display: inline-block;
 
-  padding: 5px 8px;
+  padding: 7px 10px;
 
-  border-radius: 6px;
+  border-radius: 7px;
 
   background: #e8f3fa;
 
   color: #042558;
 
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 600;
 }
 
@@ -430,9 +439,10 @@
 .discover-connect {
   width: 100%;
 
-  height: 40px;
+  height: 46px;
 
-  margin-top: 4px;
+  margin-top: auto;
+  padding: 0 15px;
 
   border: none;
 
@@ -441,7 +451,7 @@
   background: #042558;
   color: white;
 
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 700;
 
   cursor: pointer;
@@ -620,10 +630,17 @@
   }
 
   .discover-card {
-    padding: 17px;
+    padding: 20px;
+    min-height: 560px;
   }
 
 }
+
+
+/* =========================
+   REQUEST SENT
+   ========================= */
+
 .discover-connect.request-sent {
   background: #c2e8ff;
   color: #042558;

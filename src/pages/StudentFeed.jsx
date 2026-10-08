@@ -11,6 +11,7 @@ const [editContent, setEditContent] = useState("");
 
     const [comments, setComments] = useState({});
     const [commentText, setCommentText] = useState({});
+    const [showComments, setShowComments] = useState(null);
 
     // Fetch posts
     const fetchPosts = async () => {
@@ -462,22 +463,26 @@ const editPost = async (postId) => {
                                                 : "likes"}
                                         </span>
 
-                                        <button
-                                            className="comment-toggle"
-                                            onClick={() =>
-                                                fetchComments(
-                                                    post._id
-                                                )
-                                            }
-                                        >
-                                            💬 Comments
-                                        </button>
+<button
+    className="comment-toggle"
+    onClick={() => {
+        if (showComments === post._id) {
+            setShowComments(null);
+        } else {
+            setShowComments(post._id);
+            fetchComments(post._id);
+        }
+    }}
+>
+    💬 {showComments === post._id
+        ? "Hide Comments"
+        : "Comments"}
+</button>
 
                                     </div>
 
                                     {/* Comments */}
-                                    {comments[post._id] && (
-                                        <div className="comments-section">
+{showComments === post._id && comments[post._id] && (                                        <div className="comments-section">
 
                                             <div className="comments-heading">
                                                 Comments

@@ -1574,3 +1574,162 @@
         padding: 18px !important;
     }
 }
+/* Larger text */
+.admin-small-title {
+    font-size: 14px;
+}
+
+.admin-page-heading h1 {
+    font-size: 36px;
+}
+
+.admin-page-heading > div > p:last-child {
+    font-size: 16px;
+}
+
+.admin-profile strong {
+    font-size: 15px;
+}
+
+.admin-profile span {
+    font-size: 13px;
+}
+
+.admin-welcome-card .admin-section-label {
+    font-size: 13px;
+}
+
+.admin-welcome-card h2 {
+    font-size: 26px;
+}
+
+.admin-welcome-card p:last-child {
+    font-size: 15px;
+}
+
+.admin-stat-card p {
+    font-size: 14px;
+}
+
+.admin-stat-card h2 {
+    font-size: 28px;
+}
+
+.admin-analytics-heading h2 {
+    font-size: 24px;
+}
+
+.admin-analytics-card p {
+    font-size: 14px;
+}
+
+.admin-analytics-card h3 {
+    font-size: 25px;
+}
+
+.admin-analytics-total {
+    font-size: 14px;
+}
+
+.admin-opportunity-stat span {
+    font-size: 14px;
+}
+
+.admin-opportunity-stat strong {
+    font-size: 22px;
+}
+
+.admin-monitoring-card span {
+    font-size: 14px;
+}
+
+.admin-monitoring-card strong {
+    font-size: 25px;
+}
+
+.admin-count {
+    font-size: 14px;
+}
+
+.admin-student-card h3,
+.admin-content-card h3,
+.admin-opportunity-card h3 {
+    font-size: 20px;
+}
+
+.admin-card-top p {
+    font-size: 14px;
+}
+
+.admin-student-details span {
+    font-size: 14px;
+}
+
+.admin-student-details strong {
+    font-size: 12px;
+}
+
+.admin-post-content {
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.admin-content-footer span {
+    font-size: 14px;
+}
+
+.admin-opportunity-type {
+    font-size: 13px;
+}
+
+.admin-opportunity-card > .admin-opportunity-header p {
+    font-size: 14px;
+}
+
+.admin-opportunity-description {
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.admin-opportunity-info span {
+    font-size: 14px;
+}
+
+.admin-opportunity-info strong {
+    font-size: 12px;
+}
+
+.admin-opportunity-link {
+    font-size: 14px;
+}
+
+.admin-edit-button,
+.admin-delete-button,
+.admin-create-opportunity-button,
+.admin-empty-create-button {
+    font-size: 14px;
+}
+
+.admin-empty {
+    font-size: 15px;
+}
+
+.admin-brand span {
+    font-size: 19px;
+}
+
+.admin-panel-label {
+    font-size: 12px;
+}
+
+.admin-sidebar-item {
+    font-size: 15px;
+}
+
+.admin-sidebar-footer > span {
+    font-size: 13px;
+}
+
+.admin-logout-button {
+    font-size: 14px;
+}

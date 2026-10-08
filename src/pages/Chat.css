@@ -95,7 +95,7 @@
 
 .chat-hero p:last-child {
     max-width: 600px;
-    margin: 12px 0 0;
+    margin: 12px auto 0;
     color: #C2E8FF;
     font-size: 14px;
     line-height: 1.6;
@@ -614,4 +614,71 @@
     .chat-input-area button {
         padding: 0 15px;
     }
+}
+/* ================================
+   LARGER CHAT TEXT
+================================ */
+
+/* Chat sidebar heading */
+.chat-sidebar-header h3 {
+    font-size: 20px;
+}
+
+.chat-sidebar-header p {
+    font-size: 14px;
+}
+
+/* Student names */
+.chat-student-info strong {
+    font-size: 15px;
+}
+
+/* Student email / secondary text */
+.chat-student-info span {
+    font-size: 13px;
+}
+
+/* Current chat person's name */
+.chat-current-user h2 {
+    font-size: 19px;
+}
+
+/* Current chat secondary text */
+.chat-current-user span {
+    font-size: 13px;
+}
+
+/* Message sender name */
+.chat-message-sender {
+    font-size: 15px;
+}
+
+/* Message text */
+.chat-message-bubble p {
+    font-size: 17px;
+    line-height: 1.55;
+}
+
+/* Message timestamp */
+.chat-message-bubble small {
+    font-size: 13px;
+}
+
+/* Welcome text */
+.chat-welcome h3 {
+    font-size: 20px;
+}
+
+.chat-welcome p {
+    font-size: 14px;
+}
+
+/* Message input */
+.chat-input-area input {
+    font-size: 15px;
+}
+
+/* Send button */
+.chat-input-area button {
+    font-size: 14px;
 }

@@ -229,6 +229,17 @@ function Recommendations() {
                         </span>
                       </div>
                     )}
+                    {item.sameCollege && (
+  <div className="reason-row">
+    <span className="reason-icon">
+      ✓
+    </span>
+
+    <span>
+      Same college
+    </span>
+  </div>
+)}
 
                     {item.sameCourse && (
                       <div className="reason-row">

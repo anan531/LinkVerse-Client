@@ -109,7 +109,6 @@
 .edit-opportunity-hero p:last-child {
     max-width: 650px;
     margin-top: 12px;
-
     color: #c2e8ff;
 
     line-height: 1.7;
@@ -174,7 +173,7 @@
 
 .edit-form-heading p {
     margin: 4px 0 0;
-
+    text-align: center;
     color: #7c9dc6;
     font-size: 13px;
 }
@@ -455,4 +454,77 @@
     .save-opportunity-button {
         width: 100%;
     }
+}
+/* Larger Text */
+.edit-opportunity-brand h2 {
+    font-size: 22px;
+}
+
+.edit-opportunity-brand span {
+    font-size: 13px;
+    
+}
+
+.back-opportunity-button {
+    font-size: 14px;
+}
+
+.edit-opportunity-eyebrow {
+    font-size: 13px;
+}
+
+.edit-opportunity-hero h1 {
+    font-size: 42px;
+}
+
+.edit-opportunity-hero p:last-child {
+    font-size: 14px;    
+}
+
+.edit-form-heading h2 {
+    font-size: 24px;
+}
+
+.edit-form-heading p {
+    font-size: 14px;
+
+}
+
+.edit-form-section h3 {
+    font-size: 17px;
+}
+
+.edit-form-group label {
+    font-size: 14px;
+}
+
+.edit-form-group input,
+.edit-form-group select,
+.edit-form-group textarea {
+    font-size: 15px;
+}
+
+.edit-form-error {
+    font-size: 14px;
+}
+
+.cancel-edit-button,
+.save-opportunity-button {
+    font-size: 14px;
+}
+
+.edit-opportunity-loading h3 {
+    font-size: 20px;
+}
+
+.edit-opportunity-loading p {
+    font-size: 14px;
+}
+
+.edit-opportunity-error h3 {
+    font-size: 20px;
+}
+
+.edit-opportunity-error button {
+    font-size: 14px;
 }

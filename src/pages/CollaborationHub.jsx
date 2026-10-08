@@ -556,12 +556,12 @@ function CollaborationHub() {
 
                                             </div>
 
-
-                                            {!isCreator &&
-                                                !hasRequested &&
-                                                collaboration.status ===
-                                                "open" && (
-
+{!isCreator &&
+    !hasRequested &&
+    !collaboration.members.some(
+        (member) => member._id === currentUserId
+    ) &&
+    collaboration.status === "open" && (
                                                     <button
                                                         className="collab-join-button"
                                                         onClick={() =>

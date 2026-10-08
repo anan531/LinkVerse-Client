@@ -600,3 +600,110 @@
     grid-template-columns: 1fr;
   }
 }
+/* =========================================
+   LARGER RECOMMENDATIONS TEXT
+========================================= */
+
+/* Header */
+.recommendations-eyebrow {
+  font-size: 13px;
+}
+
+.recommendations-header h1 {
+  font-size: 40px;
+}
+
+.recommendations-header p:last-child {
+  font-size: 16px;
+}
+
+/* Back button */
+.recommendations-back {
+  font-size: 14px;
+}
+
+/* Intro */
+.recommendations-intro p {
+  font-size: 12px;
+}
+
+.recommendations-intro h2 {
+  font-size: 25px;
+}
+
+.recommendations-intro > span {
+  font-size: 13px;
+}
+
+/* Match score */
+.match-score strong {
+  font-size: 25px;
+}
+
+.match-score span {
+  font-size: 11px;
+}
+
+/* Student information */
+.recommendation-student h3 {
+  font-size: 19px;
+}
+
+.recommendation-student p {
+  font-size: 13px;
+}
+
+.recommendation-student span {
+  font-size: 12px;
+}
+
+/* Bio */
+.recommendation-bio {
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* Recommendation reasons */
+.recommendation-reasons h4 {
+  font-size: 13px;
+}
+
+.reason-row {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.reason-icon {
+  font-size: 10px;
+}
+
+/* View profile button */
+.view-profile-button {
+  font-size: 14px;
+}
+
+.view-profile-button span {
+  font-size: 16px;
+}
+
+/* Empty state */
+.recommendation-empty h3 {
+  font-size: 19px;
+}
+
+.recommendation-empty p {
+  font-size: 13px;
+}
+
+.recommendation-empty button {
+  font-size: 14px;
+}
+
+/* Loading */
+.recommendation-loading-card h3 {
+  font-size: 20px;
+}
+
+.recommendation-loading-card p {
+  font-size: 13px;
+}

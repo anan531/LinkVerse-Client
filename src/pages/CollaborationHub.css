@@ -97,16 +97,16 @@
 .collab-hero h1 {
   margin: 0;
 
-  font-size: 38px;
+  font-size: 29px;
   line-height: 1.2;
 
-  font-weight: 700;
+  font-weight: 650;
 }
 
 .collab-description {
   max-width: 620px;
 
-  margin: 12px 0 0;
+  margin: 12px auto 0;
 
   color: #c2e8ff;
 
@@ -454,7 +454,7 @@
   background: #e6f4ec;
   color: #456f59;
 
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
 
   text-transform: uppercase;
@@ -514,6 +514,7 @@
 
 .collab-tags {
   display: flex;
+  justify-content: center;
 
   flex-wrap: wrap;
 
@@ -528,7 +529,7 @@
   background: #e8f3fa;
   color: #042558;
 
-  font-size: 9px;
+  font-size: 19px;
   font-weight: 600;
 }
 
@@ -733,8 +734,12 @@
   color: #507ca9;
 }
 
+/* Red hover for Decline button */
 .collab-reject:hover {
-  background: #eef5fa;
+  background: #fff1f1;
+  color: #c0392b;
+  border-color: #e5a9a4;
+  transform: translateY(-1px);
 }
 
 
@@ -1026,4 +1031,215 @@
 
 .collab-owner-area .collab-chat-button {
     margin-top: 0;
+}
+/* =========================
+   LARGER PAGE CONTENT
+   ========================= */
+
+/* Hero */
+.collab-eyebrow {
+  font-size: 13px;
+}
+
+.collab-hero h1 {
+  font-size: 42px;
+}
+
+.collab-description {
+  font-size: 16px;
+}
+
+/* Section headings */
+.collab-section-heading h2,
+.collab-section-title h2 {
+  font-size: 24px;
+}
+
+.collab-section-heading p,
+.collab-section-title p {
+  font-size: 14px;
+}
+
+.collab-section-heading > div:first-child > span,
+.collab-section-title span {
+  font-size: 12px;
+}
+
+/* Create form */
+.collab-form-group label {
+  font-size: 13px;
+}
+
+.collab-form-group input,
+.collab-form-group textarea {
+  font-size: 15px;
+}
+
+.collab-form-group input {
+  height: 50px;
+}
+
+.collab-form-group textarea {
+  min-height: 120px;
+}
+
+.collab-form-group small {
+  font-size: 12px;
+}
+
+.collab-create-button {
+  height: 48px;
+  font-size: 14px;
+}
+
+/* Collaboration cards */
+.collab-card {
+  padding: 24px;
+}
+
+.collab-project-icon {
+  width: 48px;
+  height: 48px;
+  font-size: 18px;
+}
+
+.collab-status {
+  font-size: 11px;
+}
+
+.collab-card-title {
+  font-size: 20px;
+}
+
+.collab-card-description {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.collab-card-detail > span,
+.collab-team > span {
+  font-size: 11px;
+}
+
+.collab-card-detail > p,
+.collab-team > p {
+  font-size: 13px;
+}
+
+.collab-tag {
+  padding: 7px 10px;
+  font-size: 11px;
+}
+
+.collab-no-data {
+  font-size: 12px;
+}
+
+/* Buttons */
+.collab-join-button,
+.collab-requested,
+.collab-owner {
+  height: 44px;
+  font-size: 13px;
+}
+
+/* Request section */
+.collab-request-card {
+  padding: 18px;
+}
+
+.collab-request-avatar {
+  width: 48px;
+  height: 48px;
+  font-size: 17px;
+}
+
+.collab-request-info h3 {
+  font-size: 16px;
+}
+
+.collab-request-info p {
+  font-size: 13px;
+}
+
+.collab-request-info span {
+  font-size: 12px;
+}
+
+.collab-request-actions button {
+  height: 38px;
+  padding: 0 15px;
+  font-size: 12px;
+}
+
+/* Empty states */
+.collab-empty h3 {
+  font-size: 18px;
+}
+
+.collab-empty p {
+  font-size: 13px;
+}
+
+/* Creator / chat buttons */
+.collab-owner {
+  font-size: 14px;
+}
+
+.collab-edit-button,
+.collab-chat-button {
+  padding: 13px 16px;
+  font-size: 15px;
+}
+/* =========================
+   LARGER REQUIRED SKILLS
+   ========================= */
+
+.collab-card-detail > span {
+  font-size: 14px;
+}
+
+.collab-card-detail > p {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.collab-card-detail .collab-tags {
+  gap: 8px;
+}
+
+.collab-card-detail .collab-tag {
+  padding: 9px 13px;
+  font-size: 14px;
+}
+/* =========================
+   LARGER TEAM MEMBERS
+   ========================= */
+
+.collab-team > span {
+  font-size: 14px;
+}
+
+.collab-team > p {
+  font-size: 15px;
+  line-height: 1.6;
+}
+/* =========================
+   LARGER PENDING JOIN REQUEST
+   ========================= */
+
+.collab-request-info h3 {
+  font-size: 18px;
+}
+
+.collab-request-info p {
+  font-size: 14px;
+}
+
+.collab-request-info span {
+  font-size: 13px;
+}
+
+.collab-request-actions button {
+  font-size: 13px;
 }

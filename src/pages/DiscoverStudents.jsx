@@ -9,9 +9,9 @@ function DiscoverStudents() {
 
 useEffect(() => {
   const fetchStudentsAndRequests = async () => {
-    try {
-      const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
+    try {
       // Fetch students
       const studentsResponse = await fetch(
         "http://localhost:5000/api/students",
@@ -24,12 +24,20 @@ useEffect(() => {
 
       const studentsData = await studentsResponse.json();
 
-      if (studentsResponse.ok) {
-        setStudents(studentsData.students);
-      } else {
-        alert(studentsData.message);
+      if (!studentsResponse.ok) {
+        throw new Error(
+          studentsData.message || "Unable to fetch students"
+        );
       }
 
+      setStudents(studentsData.students);
+
+    } catch (error) {
+      console.error("Students fetch error:", error);
+      alert(error.message || "Unable to fetch students");
+    }
+
+    try {
       // Fetch requests sent by current user
       const requestsResponse = await fetch(
         "http://localhost:5000/api/connections/sent-requests",
@@ -48,10 +56,15 @@ useEffect(() => {
         );
 
         setSentRequests(sentUserIds);
+      } else {
+        console.error(
+          "Sent requests error:",
+          requestsData.message
+        );
       }
+
     } catch (error) {
-      console.error("Students error:", error);
-      alert("Unable to fetch students");
+      console.error("Sent requests fetch error:", error);
     } finally {
       setLoading(false);
     }

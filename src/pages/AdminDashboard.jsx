@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import jsPDF from "jspdf";
-import { useNavigate } from "react-router-dom";
-import "./AdminDashboard.css";
+import { useNavigate, useLocation } from "react-router-dom";import "./AdminDashboard.css";
 
 function AdminDashboard() {
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -12,11 +12,7 @@ function AdminDashboard() {
         navigate("/login");
     };
 
-    const [activeSection, setActiveSection] = useState(() => {
-        const params = new URLSearchParams(window.location.search);
-        return params.get("section") || "dashboard";
-    });
-
+const [activeSection, setActiveSection] = useState("dashboard");
     const [stats, setStats] = useState({
         totalStudents: 0,
         totalPosts: 0,
@@ -331,19 +327,21 @@ function AdminDashboard() {
         fetchOpportunities();
     }, []);
 
-    useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
-        const section = params.get("section");
+useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const section = params.get("section");
 
-        if (
-            section === "dashboard" ||
-            section === "students" ||
-            section === "posts" ||
-            section === "opportunities"
-        ) {
-            setActiveSection(section);
-        }
-    }, []);
+    if (
+        section === "dashboard" ||
+        section === "students" ||
+        section === "posts" ||
+        section === "opportunities"
+    ) {
+        setActiveSection(section);
+    } else {
+        setActiveSection("dashboard");
+    }
+}, [location.search]);
 
     const renderDashboard = () => {
         return (

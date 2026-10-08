@@ -303,3 +303,124 @@
     padding: 22px 20px;
   }
 }
+/* =========================================
+   LARGER STUDENT PROFILE TEXT
+========================================= */
+
+/* Back button */
+.student-profile-back {
+  font-size: 14px;
+}
+
+/* Header */
+.student-profile-eyebrow {
+  font-size: 13px;
+}
+
+.student-profile-header h1 {
+  font-size: 30px;
+}
+
+.student-profile-header-content p:last-child {
+  font-size: 15px;
+}
+
+/* Profile sections */
+.student-profile-label {
+  font-size: 12px;
+}
+
+.student-profile-section h2 {
+  font-size: 24px;
+}
+
+/* Information boxes */
+.student-profile-info-grid span,
+.student-profile-bio span {
+  font-size: 11px;
+}
+
+.student-profile-info-grid strong {
+  font-size: 15px;
+}
+
+/* Bio */
+.student-profile-bio p {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Skills / interests tags */
+.student-profile-tags span {
+  font-size: 12px;
+}
+
+/* Empty / muted text */
+.student-profile-muted {
+  font-size: 13px;
+}
+
+/* Loading */
+.student-profile-loading-card h3 {
+  font-size: 18px;
+}
+
+.student-profile-loading-card p {
+  font-size: 13px;
+}
+
+/* Error */
+.student-profile-error h3 {
+  font-size: 18px;
+}
+
+.student-profile-error button {
+  font-size: 14px;
+}
+/* =========================================
+   CONNECT BUTTON
+========================================= */
+
+.student-profile-connect {
+  display: block;
+
+  margin: 18px auto -3px;
+
+  padding: 12px 32px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #c2e8ff;
+  color: #042558;
+
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow: 0 5px 15px rgba(194, 232, 255, 0.3);
+
+  transition: 0.2s ease;
+}
+
+.student-profile-connect:hover {
+  background: white;
+  color: #042558;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 20px rgba(194, 232, 255, 0.4);
+}
+
+.student-profile-connect.request-sent {
+  background: #dce8f2;
+  color: #507ca9;
+  cursor: default;
+  box-shadow: none;
+}
+
+.student-profile-connect.request-sent:hover {
+  transform: none;
+}

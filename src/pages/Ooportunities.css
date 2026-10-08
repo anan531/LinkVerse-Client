@@ -105,7 +105,7 @@
 .opportunity-hero-content > p:last-child {
     max-width: 650px;
 
-    margin: 13px 0 0;
+    margin: 13px auto 0;
 
     color: #C2E8FF;
     font-size: 14px;
@@ -638,4 +638,104 @@
     .edit-opportunity-button {
         width: 100%;
     }
+}
+/* ================================
+   LARGER TEXT ONLY
+================================ */
+
+/* Top bar */
+.opportunity-brand h2 {
+    font-size: 24px;
+}
+
+.opportunity-brand span {
+    font-size: 13px;
+}
+
+/* Hero */
+.opportunity-eyebrow {
+    font-size: 14px;
+}
+
+.opportunity-hero h1 {
+    font-size: 40px;
+}
+
+.opportunity-hero-content > p:last-child {
+    font-size: 16px;
+}
+
+/* Main heading */
+.opportunity-heading h2 {
+    font-size: 26px;
+}
+
+.opportunity-heading p {
+    font-size: 15px;
+}
+
+.create-opportunity-button {
+    font-size: 14px;
+}
+
+/* Search and filter */
+.search-icon {
+    font-size: 15px;
+}
+
+.search-wrapper input {
+    font-size: 15px;
+}
+
+.opportunity-filter-card select {
+    font-size: 15px;
+}
+
+/* Result information */
+.opportunity-result-info {
+    font-size: 14px;
+}
+
+/* Opportunity cards */
+.opportunity-type {
+    font-size: 12px;
+}
+
+.opportunity-card h2 {
+    font-size: 21px;
+}
+
+.opportunity-organization {
+    font-size: 14px;
+}
+
+.opportunity-description {
+    font-size: 14px;
+}
+
+/* Details */
+.detail-label {
+    font-size: 12px;
+}
+
+.detail-value {
+    font-size: 14px;
+}
+
+/* Buttons */
+.opportunity-card-actions .view-opportunity-button {
+    font-size: 14px;
+}
+
+.edit-opportunity-button {
+    font-size: 14px;
+}
+
+/* Empty state */
+.opportunity-empty h3 {
+    font-size: 20px;
+}
+
+.opportunity-empty p {
+    font-size: 14px;
 }

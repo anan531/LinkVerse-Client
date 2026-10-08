@@ -103,7 +103,7 @@
 .feed-hero-content > p:last-child {
     max-width: 600px;
 
-    margin: 12px 0 0;
+    margin: 12px auto 0;
 
     color: #C2E8FF;
     font-size: 14px;
@@ -268,6 +268,7 @@
 
 .feed-title-row h2 {
     margin: 0;
+    color: #042558;
 
     font-size: 21px;
 }
@@ -275,7 +276,7 @@
 .feed-title-row p {
     margin: 5px 0 0;
 
-    color: #7C9DC6;
+    color: #042558;
     font-size: 12px;
 }
 
@@ -404,7 +405,7 @@
 
     color: #507CA9;
 
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 600;
 
     cursor: pointer;
@@ -431,8 +432,9 @@
 }
 
 .like-count {
-    color: #7C9DC6;
-    font-size: 10px;
+    color: #507CA9;
+    font-size: 13px;
+    font-weight: 600;
 }
 
 .comment-toggle {
@@ -696,7 +698,10 @@
     .comment-input-area button {
         min-height: 34px;
     }
-    /* Edit Post */
+}
+/* ================================
+   EDIT POST
+================================ */
 
 .edit-post-area {
     width: 100%;
@@ -704,67 +709,252 @@
 
 .edit-post-area textarea {
     width: 100%;
-    min-height: 110px;
+    min-height: 105px;
+
     box-sizing: border-box;
-    padding: 12px 14px;
-    border: 1px solid #d5e2ee;
+
+    border: 1px solid #cbdce9;
     border-radius: 9px;
-    background: #fbfdff;
-    color: #011023;
-    font-family: inherit;
-    font-size: 14px;
-    line-height: 1.5;
+
+    padding: 13px;
+
     resize: vertical;
+
+    background: #f8fbfe;
+    color: #011023;
+
+    font-family: inherit;
+    font-size: 15px;
+    line-height: 1.6;
+
     outline: none;
+
     transition: 0.2s ease;
 }
 
 .edit-post-area textarea:focus {
-    border-color: #547eb0;
-    box-shadow: 0 0 0 3px rgba(84, 126, 176, 0.12);
+    border-color: #507CA9;
     background: white;
 }
 
 .edit-post-buttons {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+
     gap: 10px;
-    margin-top: 10px;
+
+    margin-top: 11px;
 }
 
 .edit-post-buttons button {
     border: none;
-    padding: 9px 16px;
     border-radius: 8px;
+
+    padding: 10px 16px;
+
+    font-family: inherit;
     font-size: 13px;
     font-weight: 600;
+
     cursor: pointer;
+
     transition: 0.2s ease;
 }
 
+/* Save */
 .save-edit-button {
     background: #042558;
     color: white;
 }
 
 .save-edit-button:hover {
-    background: #011023;
+    background: #507CA9;
 }
 
+/* Cancel */
 .cancel-edit-button {
     background: #eef4f9;
     color: #042558;
 }
 
 .cancel-edit-button:hover {
-    background: #dceaf5;
+    background: #dce8f2;
 }
 
+/* Edit button */
 .edit-post-button {
-    color: #042558;
+    color: #507CA9;
 }
 
 .edit-post-button:hover {
-    color: #547eb0;
+    color: #042558;
 }
+/* ================================
+   LARGER STUDENT FEED TEXT
+================================ */
+
+/* Top bar */
+.feed-brand h2 {
+    font-size: 23px;
+}
+
+.feed-brand span {
+    font-size: 13px;
+}
+
+/* Hero */
+.feed-eyebrow {
+    font-size: 14px;
+}
+
+.feed-hero h1 {
+    font-size: 40px;
+}
+
+.feed-hero-content > p:last-child {
+    font-size: 16px;
+}
+
+/* Create Post */
+.feed-section-heading h2 {
+    font-size: 21px;
+    color: #011023;
+}
+
+.feed-section-heading p {
+    font-size: 13px;
+    color: #507CA9;
+}
+
+.create-post-card textarea {
+    font-size: 15px;
+}
+
+.create-post-footer span {
+    font-size: 12px;
+}
+
+.create-post-footer button {
+    font-size: 14px;
+}
+
+/* Feed heading */
+.feed-title-row h2 {
+    font-size: 24px;
+}
+
+.feed-title-row p {
+    font-size: 14px;
+}
+
+.post-count {
+    font-size: 12px;
+}
+
+/* Post cards */
+.post-user-info h3 {
+    font-size: 16px;
+}
+
+.post-user-info span {
+    font-size: 12px;
+}
+
+.post-content {
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* Post actions */
+.post-actions button {
+    font-size: 13px;
+}
+
+.post-actions button span {
+    font-size: 18px;
+}
+
+.like-count {
+    font-size: 12px;
+}
+
+/* Comments */
+.comments-heading {
+    font-size: 14px;
+}
+
+.comment-body strong {
+    font-size: 13px;
+}
+
+.comment-body p {
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.no-comments {
+    font-size: 13px;
+}
+
+/* Comment input */
+.comment-input-area input {
+    font-size: 13px;
+}
+
+.comment-input-area button {
+    font-size: 12px;
+}
+
+/* Empty state */
+.feed-empty h3 {
+    font-size: 20px;
+}
+
+.feed-empty p {
+    font-size: 14px;
+}
+
+/* Edit post */
+.edit-post-area textarea {
+    font-size: 15px;
+}
+
+.edit-post-buttons button {
+    font-size: 14px;
+}
+/* ================================
+   CUSTOM SCROLLBAR
+================================ */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f4f8fc;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #7C9DC6;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #507CA9;
+}
+
+/* Post actions */
+.post-actions button {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.post-actions button span {
+    font-size: 20px;
+}
+
+.like-count {
+    font-size: 16px;
+    font-weight: 600;
 }

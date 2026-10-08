@@ -98,9 +98,8 @@ function EditOpportunity() {
                 return;
             }
 
-            alert("Opportunity updated successfully!");
-
-            navigate("/admin-dashboard");
+alert("Opportunity updated successfully!");
+window.location.href = "/admin-dashboard?section=opportunities";
 
         } catch (error) {
             console.error(error);
@@ -332,10 +331,10 @@ function EditOpportunity() {
 
                         <button
                             onClick={() =>
-                                navigate("/admin-dashboard")
+                                navigate("/admin-dashboard?section=opportunities")
                             }
                         >
-                            ← Back to Admin Dashboard
+                            ← Back to Opportunities
                         </button>
 
                     </div>
@@ -471,10 +470,10 @@ function EditOpportunity() {
                         <button
                             className="back-opportunity-button"
                             onClick={() =>
-                                navigate("/admin-dashboard")
+                                navigate("/admin-dashboard?section=opportunities")
                             }
                         >
-                            ← Back to Admin Dashboard
+                            ← Back to Opportunities
                         </button>
 
                     </header>
@@ -724,8 +723,7 @@ function EditOpportunity() {
                                         type="button"
                                         className="cancel-edit-button"
                                         onClick={() =>
-                                            navigate("/admin-dashboard")
-                                        }
+window.location.href = "/admin-dashboard?section=opportunities"                                        }
                                     >
                                         Cancel
                                     </button>

@@ -9,6 +9,8 @@ function StudentProfile() {
   const [student, setStudent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [connectionStatus, setConnectionStatus] = useState("Connect");
+const [connectionLoading, setConnectionLoading] = useState(false);
 
   useEffect(() => {
     const fetchStudent = async () => {
@@ -41,6 +43,36 @@ function StudentProfile() {
 
     fetchStudent();
   }, [studentId]);
+  const handleConnect = async () => {
+  try {
+    setConnectionLoading(true);
+
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(
+      `http://localhost:5000/api/connections/${studentId}`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    if (response.ok) {
+      setConnectionStatus("Request Sent ✓");
+    } else {
+      alert(data.message || "Unable to send connection request");
+    }
+  } catch (error) {
+    console.error("Connection error:", error);
+    alert("Unable to connect to server");
+  } finally {
+    setConnectionLoading(false);
+  }
+};
 
   if (loading) {
     return (
@@ -70,28 +102,42 @@ function StudentProfile() {
 
   return (
     <div className="student-profile-page">
-      <header className="student-profile-header">
-        <button
-          className="student-profile-back"
-          onClick={() => navigate("/recommendations")}
-        >
-          ← Recommendations
-        </button>
+<header className="student-profile-header">
 
-        <div className="student-profile-header-content">
-          <div className="student-profile-avatar">
-            {student.name.charAt(0).toUpperCase()}
-          </div>
+  <button
+    className="student-profile-back"
+    onClick={() => navigate("/recommendations")}
+  >
+    ← Recommendations
+  </button>
 
-          <div>
-            <p className="student-profile-eyebrow">STUDENT PROFILE</p>
-            <h1>{student.name}</h1>
-            <p>
-              {student.course} · Year {student.year}
-            </p>
-          </div>
-        </div>
-      </header>
+  <div className="student-profile-header-content">
+    <div className="student-profile-avatar">
+      {student.name.charAt(0).toUpperCase()}
+    </div>
+
+    <div>
+      <p className="student-profile-eyebrow">STUDENT PROFILE</p>
+      <h1>{student.name}</h1>
+      <p>
+        {student.course} · Year {student.year}
+      </p>
+    </div>
+  </div>
+
+  <button
+    className={`student-profile-connect ${
+      connectionStatus === "Request Sent ✓" ? "request-sent" : ""
+    }`}
+    onClick={handleConnect}
+    disabled={
+      connectionLoading || connectionStatus === "Request Sent ✓"
+    }
+  >
+    {connectionLoading ? "Sending..." : connectionStatus}
+  </button>
+
+</header>
 
       <main className="student-profile-main">
         <section className="student-profile-card">
@@ -136,7 +182,6 @@ function StudentProfile() {
 
           <div className="student-profile-section">
             <p className="student-profile-label">SKILLS</p>
-            <h2>Skills</h2>
 
             {student.skills && student.skills.length > 0 ? (
               <div className="student-profile-tags">
@@ -153,7 +198,6 @@ function StudentProfile() {
 
           <div className="student-profile-section">
             <p className="student-profile-label">INTERESTS</p>
-            <h2>Interests</h2>
 
             {student.interests && student.interests.length > 0 ? (
               <div className="student-profile-tags">
