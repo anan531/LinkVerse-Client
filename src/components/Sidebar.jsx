@@ -1,11 +1,82 @@
 import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "./Sidebar.css";
+
 
 function Sidebar() {
   const navigate = useNavigate();
   const location = useLocation();
 
   const user = JSON.parse(localStorage.getItem("user"));
+
+  const [connectionRequestCount, setConnectionRequestCount] = useState(0);
+  const [collaborationRequestCount, setCollaborationRequestCount] = useState(0);
+
+  useEffect(() => {
+    const fetchConnectionRequestCount = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        const response = await fetch(
+          "http://localhost:5000/api/connections/requests",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch connection requests");
+        }
+
+        const data = await response.json();
+        setConnectionRequestCount(data.requests?.length || 0);
+      } catch (error) {
+        console.error("Error fetching connection request count:", error);
+      }
+    };
+
+    fetchConnectionRequestCount();
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const fetchCollaborationRequestCount = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        const response = await fetch(
+
+"http://localhost:5000/api/collaboration-requests/my-requests",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch collaboration requests");
+        }
+
+        const data = await response.json();
+
+        setCollaborationRequestCount(
+          Array.isArray(data) ? data.length : 0
+        );
+      } catch (error) {
+        console.error(
+          "Error fetching collaboration request count:",
+          error
+        );
+      }
+    };
+
+    fetchCollaborationRequestCount();
+  }, [location.pathname]);
+
+  // Keep your existing menuItems, handleLogout, and return below.
+
 
   const menuItems = [
     {
@@ -107,11 +178,27 @@ function Sidebar() {
             onClick={() => navigate(item.path)}
           >
 
-            <span className="sidebar-icon">
-              {item.icon}
-            </span>
 
-            <span>{item.label}</span>
+<span className="sidebar-icon">{item.icon}</span>
+
+<span className="sidebar-item-label">
+  {item.label}
+</span>
+
+{item.label === "Connections" &&
+  connectionRequestCount > 0 && (
+    <span className="sidebar-badge">
+      {connectionRequestCount}
+    </span>
+  )}
+
+{item.label === "Collaboration Hub" &&
+  collaborationRequestCount > 0 && (
+    <span className="sidebar-badge">
+      {collaborationRequestCount}
+    </span>
+  )}
+
 
           </button>
 

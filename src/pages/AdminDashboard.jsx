@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import jsPDF from "jspdf";
-import { useNavigate, useLocation } from "react-router-dom";import "./AdminDashboard.css";
+import PptxGenJS from "pptxgenjs";
+import { useNavigate, useLocation } from "react-router-dom";
+import "./AdminDashboard.css";
 
 function AdminDashboard() {
     const navigate = useNavigate();
@@ -28,6 +30,30 @@ const [activeSection, setActiveSection] = useState("dashboard");
     const [students, setStudents] = useState([]);
     const [posts, setPosts] = useState([]);
     const [opportunities, setOpportunities] = useState([]);
+
+    // Calculate the number of students in each department
+const departmentStats = [
+    ...students.reduce((counts, student) => {
+        const department =
+            (student.department || "").trim() || "Not specified";
+
+        // Group department names without case sensitivity
+        const key = department.toLowerCase();
+
+        if (!counts.has(key)) {
+            counts.set(key, {
+                department,
+                count: 0
+            });
+        }
+
+        counts.get(key).count += 1;
+
+        return counts;
+    }, new Map()).values()
+].sort((a, b) =>
+    a.department.localeCompare(b.department)
+);
 
     const fetchDashboard = async () => {
         const token = localStorage.getItem("token");
@@ -238,87 +264,557 @@ const [activeSection, setActiveSection] = useState("dashboard");
         navigate(`/edit-opportunity/${opportunityId}`);
     };
 
-    const generateStudentReport = () => {
-        const doc = new jsPDF();
+const generateStudentReportPDF = () => {
+    const doc = new jsPDF();
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
 
-        doc.setFontSize(18);
-        doc.text("LinkVerse - Student Report", 20, 20);
+    const navy = [4, 37, 88];
+    const blue = [37, 99, 235];
+    const gray = [90, 100, 115];
 
-        doc.setFontSize(11);
-        doc.text(`Total Students: ${students.length}`, 20, 30);
+    let y = 43;
 
-        let y = 45;
+    // LinkVerse branding
+    const addHeader = () => {
+        doc.setFillColor(...navy);
+        doc.rect(0, 0, pageWidth, 30, "F");
 
-        students.forEach((student, index) => {
-            if (y > 270) {
-                doc.addPage();
-                y = 20;
-            }
+        doc.setFillColor(255, 255, 255);
+        doc.roundedRect(14, 7, 16, 16, 2, 2, "F");
 
-            doc.setFontSize(12);
-            doc.text(
-                `${index + 1}. ${student.name || "Not specified"}`,
-                20,
-                y
-            );
+        doc.setTextColor(...navy);
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(15);
+        doc.text("L", 19.5, 18);
 
-            doc.setFontSize(10);
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(19);
+        doc.text("LinkVerse", 35, 18);
 
-            doc.text(
-                `Email: ${student.email || "Not specified"}`,
-                25,
-                y + 7
-            );
+        doc.setFontSize(9);
+        doc.setFont("helvetica", "normal");
+        doc.text("STUDENT DIRECTORY REPORT", pageWidth - 14, 18, {
+            align: "right"
+        });
+    };
 
-            doc.text(
-                `College: ${student.college || "Not specified"}`,
-                25,
-                y + 14
-            );
+    const addFooter = (pageNumber, totalPages) => {
+        doc.setDrawColor(220, 225, 235);
+        doc.line(14, pageHeight - 15, pageWidth - 14, pageHeight - 15);
 
-            doc.text(
-                `Department: ${student.department || "Not specified"}`,
-                25,
-                y + 21
-            );
+        doc.setTextColor(...gray);
+        doc.setFontSize(9);
+        doc.text("LinkVerse | Student Report", 14, pageHeight - 8);
+        doc.text(
+            `Page ${pageNumber} of ${totalPages}`,
+            pageWidth - 14,
+            pageHeight - 8,
+            { align: "right" }
+        );
+    };
 
-            doc.text(
-                `Course: ${student.course || "Not specified"}`,
-                25,
-                y + 28
-            );
+    addHeader();
 
-            doc.text(
-                `Year: ${student.year || "Not specified"}`,
-                25,
-                y + 35
-            );
+    doc.setTextColor(...navy);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(20);
+    doc.text("Student Directory", 14, y);
 
-            doc.text(
-                `Skills: ${
-                    student.skills && student.skills.length > 0
-                        ? student.skills.join(", ")
-                        : "None"
-                }`,
-                25,
-                y + 42
-            );
+    y += 10;
 
-            doc.text(
-                `Interests: ${
-                    student.interests && student.interests.length > 0
-                        ? student.interests.join(", ")
-                        : "None"
-                }`,
-                25,
-                y + 49
-            );
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    doc.setTextColor(...gray);
+    doc.text(
+        `Total registered students: ${students.length}`,
+        14,
+        y
+    );
+    doc.text(
+        `Generated: ${new Date().toLocaleDateString("en-IN")}`,
+        pageWidth - 14,
+        y,
+        { align: "right" }
+    );
 
-            y += 62;
+    y += 13;
+
+    if (students.length === 0) {
+        doc.setTextColor(...gray);
+        doc.text("No student records available.", 14, y);
+    }
+
+    students.forEach((student, index) => {
+        if (y + 52 > pageHeight - 22) {
+            doc.addPage();
+            addHeader();
+            y = 42;
+        }
+
+        // Student card
+        doc.setFillColor(245, 248, 253);
+        doc.roundedRect(
+            14,
+            y - 5,
+            pageWidth - 28,
+            47,
+            3,
+            3,
+            "F"
+        );
+
+        doc.setFillColor(...blue);
+        doc.roundedRect(18, y, 7, 7, 2, 2, "F");
+
+        doc.setTextColor(...navy);
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(12);
+        doc.text(
+            `${index + 1}. ${student.name || "Not specified"}`,
+            29,
+            y + 6
+        );
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(9);
+        doc.setTextColor(...gray);
+
+        const details = [
+            `Email: ${student.email || "Not specified"}`,
+            `College: ${student.college || "Not specified"}`,
+            `Department: ${student.department || "Not specified"}`,
+            `Course: ${student.course || "Not specified"}`,
+            `Year: ${student.year || "Not specified"}`,
+            `Skills: ${
+                Array.isArray(student.skills) && student.skills.length
+                    ? student.skills.join(", ")
+                    : "None"
+            }`,
+            `Interests: ${
+                Array.isArray(student.interests) && student.interests.length
+                    ? student.interests.join(", ")
+                    : "None"
+            }`
+        ];
+
+        let detailY = y + 14;
+
+        details.forEach((detail) => {
+            const lines = doc.splitTextToSize(detail, pageWidth - 48);
+
+            doc.text(lines, 20, detailY);
+            detailY += lines.length * 4.5;
         });
 
-        doc.save("LinkVerse-Student-Report.pdf");
+        y += 53;
+    });
+
+    const totalPages = doc.internal.getNumberOfPages();
+
+    for (let page = 1; page <= totalPages; page++) {
+        doc.setPage(page);
+        addFooter(page, totalPages);
+    }
+
+    doc.save("LinkVerse-Student-Report.pdf");
+};
+
+const generateStudentReportPPT = async () => {
+    const pptx = new PptxGenJS();
+
+    pptx.layout = "LAYOUT_WIDE";
+    pptx.author = "LinkVerse Administration";
+    pptx.subject = "Student Directory Report";
+    pptx.title = "LinkVerse Student Report";
+    pptx.company = "LinkVerse";
+
+    pptx.theme = {
+        headFontFace: "Aptos Display",
+        bodyFontFace: "Aptos",
+        lang: "en-US"
     };
+
+    const navy = "042558";
+    const blue = "2563EB";
+    const light = "F3F6FC";
+    const gray = "5A6473";
+
+    // Add consistent branding to slides
+    const addSlideBranding = (slide, slideNumber) => {
+        slide.background = { color: "FFFFFF" };
+
+        slide.addShape(pptx.ShapeType.rect, {
+            x: 0,
+            y: 0,
+            w: 13.333,
+            h: 0.75,
+            line: { color: navy },
+            fill: { color: navy }
+        });
+
+        slide.addShape(pptx.ShapeType.roundRect, {
+            x: 0.45,
+            y: 0.13,
+            w: 0.48,
+            h: 0.48,
+            rectRadius: 0.05,
+            line: { color: "FFFFFF" },
+            fill: { color: "FFFFFF" }
+        });
+
+        slide.addText("L", {
+            x: 0.45,
+            y: 0.16,
+            w: 0.48,
+            h: 0.4,
+            fontFace: "Aptos Display",
+            fontSize: 22,
+            bold: true,
+            color: navy,
+            align: "center",
+            margin: 0
+        });
+
+        slide.addText("LinkVerse", {
+            x: 1.08,
+            y: 0.18,
+            w: 3,
+            h: 0.35,
+            fontSize: 22,
+            bold: true,
+            color: "FFFFFF",
+            margin: 0
+        });
+
+        slide.addText("STUDENT REPORT", {
+            x: 9.5,
+            y: 0.25,
+            w: 3.3,
+            h: 0.25,
+            fontSize: 10,
+            color: "FFFFFF",
+            align: "right",
+            charSpacing: 1,
+            margin: 0
+        });
+
+        slide.addShape(pptx.ShapeType.line, {
+            x: 0.45,
+            y: 7.12,
+            w: 12.4,
+            h: 0,
+            line: { color: "DCE3EF", width: 1 }
+        });
+
+        slide.addText(`LinkVerse | ${slideNumber}`, {
+            x: 9.5,
+            y: 7.18,
+            w: 3.3,
+            h: 0.2,
+            fontSize: 9,
+            color: gray,
+            align: "right",
+            margin: 0
+        });
+    };
+
+    // Cover slide
+    const cover = pptx.addSlide();
+    cover.background = { color: navy };
+
+    cover.addShape(pptx.ShapeType.roundRect, {
+        x: 0.9,
+        y: 1.0,
+        w: 0.9,
+        h: 0.9,
+        line: { color: "FFFFFF" },
+        fill: { color: "FFFFFF" }
+    });
+
+    cover.addText("L", {
+        x: 0.9,
+        y: 1.12,
+        w: 0.9,
+        h: 0.6,
+        fontSize: 42,
+        bold: true,
+        color: navy,
+        align: "center",
+        margin: 0
+    });
+
+    cover.addText("LinkVerse", {
+        x: 0.9,
+        y: 2.25,
+        w: 10.5,
+        h: 0.8,
+        fontSize: 38,
+        bold: true,
+        color: "FFFFFF",
+        margin: 0
+    });
+
+    cover.addText("Student Directory Report", {
+        x: 0.9,
+        y: 3.2,
+        w: 10.5,
+        h: 0.6,
+        fontSize: 26,
+        color: "DCE8FF",
+        margin: 0
+    });
+
+    cover.addText(
+        `Total registered students: ${students.length}\nGenerated: ${new Date().toLocaleDateString("en-IN")}`,
+        {
+            x: 0.95,
+            y: 4.25,
+            w: 8,
+            h: 0.8,
+            fontSize: 17,
+            color: "FFFFFF",
+            breakLine: false,
+            lineSpacingMultiple: 1.2,
+            margin: 0
+        }
+    );
+
+    cover.addText("ADMINISTRATION", {
+        x: 0.95,
+        y: 6.55,
+        w: 5,
+        h: 0.3,
+        fontSize: 12,
+        bold: true,
+        charSpacing: 2,
+        color: "AFC8FF",
+        margin: 0
+    });
+
+    // Overview slide
+    const overview = pptx.addSlide();
+    addSlideBranding(overview, 2);
+
+    overview.addText("Student Overview", {
+        x: 0.6,
+        y: 1.1,
+        w: 8,
+        h: 0.55,
+        fontSize: 28,
+        bold: true,
+        color: navy,
+        margin: 0
+    });
+
+    overview.addShape(pptx.ShapeType.roundRect, {
+        x: 0.6,
+        y: 2.0,
+        w: 5.0,
+        h: 1.65,
+        rectRadius: 0.08,
+        line: { color: light },
+        fill: { color: light }
+    });
+
+    overview.addText("TOTAL STUDENTS", {
+        x: 0.95,
+        y: 2.35,
+        w: 4.3,
+        h: 0.3,
+        fontSize: 14,
+        bold: true,
+        color: gray,
+        margin: 0
+    });
+
+    overview.addText(String(students.length), {
+        x: 0.95,
+        y: 2.75,
+        w: 4.3,
+        h: 0.65,
+        fontSize: 36,
+        bold: true,
+        color: blue,
+        margin: 0
+    });
+
+    const departmentCounts = departmentStats
+        .map((item) => `${item.department}: ${item.count}`)
+        .join("\n");
+
+    overview.addText("Students by Department", {
+        x: 0.6,
+        y: 4.15,
+        w: 7,
+        h: 0.4,
+        fontSize: 20,
+        bold: true,
+        color: navy,
+        margin: 0
+    });
+
+    overview.addText(
+        departmentCounts || "No student data available.",
+        {
+            x: 0.7,
+            y: 4.75,
+            w: 7.5,
+            h: 1.7,
+            fontSize: 15,
+            color: gray,
+            breakLine: false,
+            margin: 0.05,
+            valign: "top",
+            fit: "shrink"
+        }
+    );
+
+    // Individual student slides
+    students.forEach((student, index) => {
+        const slide = pptx.addSlide();
+        addSlideBranding(slide, index + 3);
+
+        slide.addText("Student Profile", {
+            x: 0.6,
+            y: 1.05,
+            w: 8,
+            h: 0.5,
+            fontSize: 27,
+            bold: true,
+            color: navy,
+            margin: 0
+        });
+
+        slide.addText(student.name || "Not specified", {
+            x: 0.65,
+            y: 1.8,
+            w: 11.8,
+            h: 0.55,
+            fontSize: 23,
+            bold: true,
+            color: blue,
+            margin: 0
+        });
+
+        const details = [
+            ["Email", student.email],
+            ["College", student.college],
+            ["Department", student.department],
+            ["Course", student.course],
+            ["Year", student.year],
+            [
+                "Skills",
+                Array.isArray(student.skills)
+                    ? student.skills.join(", ")
+                    : student.skills
+            ],
+            [
+                "Interests",
+                Array.isArray(student.interests)
+                    ? student.interests.join(", ")
+                    : student.interests
+            ]
+        ];
+
+        let y = 2.65;
+
+        details.forEach(([label, value]) => {
+            slide.addShape(pptx.ShapeType.roundRect, {
+                x: 0.65,
+                y,
+                w: 12,
+                h: 0.48,
+                rectRadius: 0.04,
+                line: { color: light },
+                fill: { color: light }
+            });
+
+            slide.addText(label, {
+                x: 0.9,
+                y: y + 0.1,
+                w: 1.65,
+                h: 0.25,
+                fontSize: 12,
+                bold: true,
+                color: navy,
+                margin: 0
+            });
+
+            slide.addText(String(value || "Not specified"), {
+                x: 2.6,
+                y: y + 0.08,
+                w: 9.7,
+                h: 0.3,
+                fontSize: 12,
+                color: gray,
+                margin: 0,
+                breakLine: false,
+                fit: "shrink"
+            });
+
+            y += 0.58;
+        });
+    });
+
+    await pptx.writeFile({
+        fileName: "LinkVerse-Student-Report.pptx"
+    });
+};
+const generateStudentReportCSV = () => {
+    const headers = [
+        "Name",
+        "Email",
+        "College",
+        "Department",
+        "Course",
+        "Year",
+        "Skills",
+        "Interests"
+    ];
+
+    const escapeCSV = (value) => {
+        const text = Array.isArray(value)
+            ? value.join(", ")
+            : String(value ?? "");
+
+        return `"${text.replace(/"/g, '""')}"`;
+    };
+
+    const rows = students.map((student) => [
+        student.name,
+        student.email,
+        student.college,
+        student.department,
+        student.course,
+        student.year,
+        student.skills,
+        student.interests
+    ]);
+
+    const csvContent = [
+        headers.map(escapeCSV).join(","),
+        ...rows.map((row) => row.map(escapeCSV).join(","))
+    ].join("\r\n");
+
+    // BOM helps Excel display text correctly
+    const blob = new Blob(
+        ["\uFEFF" + csvContent],
+        { type: "text/csv;charset=utf-8;" }
+    );
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = "LinkVerse-Student-Report.csv";
+
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    URL.revokeObjectURL(url);
+};
 
     useEffect(() => {
         fetchDashboard();
@@ -344,6 +840,9 @@ useEffect(() => {
 }, [location.search]);
 
     const renderDashboard = () => {
+
+
+
         return (
             <>
                 <div className="admin-page-heading">
@@ -445,6 +944,39 @@ useEffect(() => {
                     </div>
 
                 </section>
+
+                
+{/* STUDENTS BY DEPARTMENT */}
+<section className="admin-analytics-section">
+    <div className="admin-analytics-heading">
+        <div>
+            <p className="admin-small-title">
+                STUDENT DISTRIBUTION
+            </p>
+
+            <h2>Students by Department</h2>
+        </div>
+    </div>
+
+    <div className="admin-opportunity-stats">
+        {departmentStats.length > 0 ? (
+            departmentStats.map((item) => (
+                <div
+                    className="admin-opportunity-stat"
+                    key={item.department.toLowerCase()}
+                >
+                    <span>{item.department}</span>
+                    <strong>{item.count}</strong>
+                </div>
+            ))
+        ) : (
+            <div className="admin-empty">
+                No student data available.
+            </div>
+        )}
+    </div>
+</section>
+
 
                 {/* STUDENT ACTIVITY */}
 
@@ -645,20 +1177,36 @@ useEffect(() => {
                         </p>
                     </div>
 
-                    <div className="admin-opportunity-heading-actions">
+<div className="admin-opportunity-heading-actions">
 
-                        <span className="admin-count">
-                            {students.length} students
-                        </span>
+    <span className="admin-count">
+        {students.length} students
+    </span>
 
-                        <button
-                            className="admin-edit-button"
-                            onClick={generateStudentReport}
-                        >
-                            Generate Student Report PDF
-                        </button>
+    <div className="student-export-actions">
+        <button
+            className="student-export-button"
+            onClick={generateStudentReportPDF}
+        >
+            Export PDF
+        </button>
 
-                    </div>
+        <button
+            className="student-export-button"
+            onClick={generateStudentReportPPT}
+        >
+            Export PPT
+        </button>
+
+        <button
+            className="student-export-button"
+            onClick={generateStudentReportCSV}
+        >
+            Export CSV
+        </button>
+    </div>
+
+</div>
 
                 </div>
 

@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
@@ -9,6 +10,8 @@ function Login() {
     email: "",
     password: "",
   });
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const [notification, setNotification] = useState({
     show: false,
@@ -135,9 +138,7 @@ function Login() {
           }
         }, 1200);
       } else {
-        if (
-          data.message === "Invalid email or password"
-        ) {
+        if (data.message === "Invalid email or password") {
           showNotification(
             "error",
             "Login failed",
@@ -164,7 +165,6 @@ function Login() {
 
   return (
     <div className="login-page">
-
       {/* Notification */}
       {notification.show && (
         <div
@@ -184,6 +184,7 @@ function Login() {
           </div>
 
           <button
+            type="button"
             className="notification-close"
             onClick={() =>
               setNotification({
@@ -198,17 +199,17 @@ function Login() {
           </button>
         </div>
       )}
-      <button
-  className="back-home-button"
-  onClick={() => navigate("/")}
->
-  ← Back to Home
-</button>
 
+      <button
+        type="button"
+        className="back-home-button"
+        onClick={() => navigate("/")}
+      >
+        ← Back to Home
+      </button>
 
       {/* Left Side */}
       <div className="login-left">
-
         <div className="login-brand">
           <div className="login-brand-mark">L</div>
           <span>LinkVerse</span>
@@ -234,21 +235,17 @@ function Login() {
         <div className="login-decoration decoration-one"></div>
         <div className="login-decoration decoration-two"></div>
         <div className="login-decoration decoration-three"></div>
-
       </div>
 
       {/* Right Side */}
       <div className="login-right">
-
         <div className="login-box">
-
           <div className="login-header">
             <h2>Welcome Back</h2>
             <p>Login to continue to LinkVerse</p>
           </div>
 
           <form onSubmit={handleSubmit}>
-
             <div className="login-form-group">
               <label htmlFor="email">
                 Email Address
@@ -269,21 +266,73 @@ function Login() {
                 Password
               </label>
 
-              <input
-                id="password"
-                type="password"
-                name="password"
-                placeholder="Enter your password"
-                value={formData.password}
-                onChange={handleChange}
-              />
+              <div className="password-input-wrapper">
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  placeholder="Enter your password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+
+                <button
+                  type="button"
+                  className="password-toggle"
+                  onClick={() =>
+                    setShowPassword((previous) => !previous)
+                  }
+                  aria-label={
+                    showPassword ? "Hide password" : "Show password"
+                  }
+                  title={
+                    showPassword ? "Hide password" : "Show password"
+                  }
+                >
+                  {showPassword ? (
+                    /* Eye with a slash: password is visible */
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="22"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M3 3l18 18" />
+                      <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8" />
+                      <path d="M9.9 5.2A10.8 10.8 0 0 1 12 5c5 0 9 5 10 7-0.5 1-1.4 2.3-2.8 3.5" />
+                      <path d="M6.2 6.2C3.8 7.7 2.5 10 2 12c1 2 5 7 10 7 1 0 2-.2 2.9-.6" />
+                    </svg>
+                  ) : (
+                    /* Normal eye: password is hidden */
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="22"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" />
+                      <circle cx="12" cy="12" r="3" />
+                    </svg>
+                  )}
+                </button>
+              </div>
 
               <button
                 type="button"
                 className="forgot-password-link"
-                onClick={() =>
-                  navigate("/forgot-password")
-                }
+                onClick={() => navigate("/forgot-password")}
               >
                 Forgot Password?
               </button>
@@ -295,7 +344,6 @@ function Login() {
             >
               Login
             </button>
-
           </form>
 
           <div className="login-footer">
@@ -303,20 +351,15 @@ function Login() {
               Don't have an account?{" "}
               <button
                 type="button"
-                onClick={() =>
-                  navigate("/register")
-                }
+                onClick={() => navigate("/register")}
                 className="login-register-link"
               >
                 Create Account
               </button>
             </p>
           </div>
-
         </div>
-
       </div>
-
     </div>
   );
 }

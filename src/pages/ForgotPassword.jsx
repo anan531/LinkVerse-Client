@@ -1,6 +1,45 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ForgotPassword.css";
+
+function EyeIcon({ visible }) {
+  return visible ? (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M3 3l18 18" />
+      <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8" />
+      <path d="M9.9 5.2A10.8 10.8 0 0 1 12 5c5 0 9 5 10 7-0.5 1-1.4 2.3-2.8 3.5" />
+      <path d="M6.2 6.2C3.8 7.7 2.5 10 2 12c1 2 5 7 10 7 1 0 2-.2 2.9-.6" />
+    </svg>
+  ) : (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  );
+}
 
 function ForgotPassword() {
   const navigate = useNavigate();
@@ -13,6 +52,9 @@ function ForgotPassword() {
     newPassword: "",
     confirmPassword: "",
   });
+
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [notification, setNotification] = useState({
     show: false,
@@ -46,11 +88,7 @@ function ForgotPassword() {
     });
   };
 
-
-  // =========================================
   // STEP 1 - SEND OTP
-  // =========================================
-
   const handleSendOTP = async (e) => {
     e.preventDefault();
 
@@ -132,11 +170,7 @@ function ForgotPassword() {
     }
   };
 
-
-  // =========================================
   // STEP 2 - VERIFY OTP
-  // =========================================
-
   const handleVerifyOTP = async (e) => {
     e.preventDefault();
 
@@ -201,11 +235,7 @@ function ForgotPassword() {
     }
   };
 
-
-  // =========================================
   // STEP 3 - RESET PASSWORD
-  // =========================================
-
   const handleResetPassword = async (e) => {
     e.preventDefault();
 
@@ -290,12 +320,9 @@ function ForgotPassword() {
     }
   };
 
-
   return (
     <div className="forgot-password-page">
-
       {/* Notification */}
-
       {notification.show && (
         <div
           className={`forgot-notification ${
@@ -310,7 +337,6 @@ function ForgotPassword() {
 
           <div className="forgot-notification-content">
             <strong>{notification.title}</strong>
-
             <p>{notification.message}</p>
           </div>
 
@@ -331,14 +357,9 @@ function ForgotPassword() {
         </div>
       )}
 
-
       <div className="forgot-password-box">
-
         <div className="forgot-password-header">
-
-          <div className="forgot-password-logo">
-            L
-          </div>
+          <div className="forgot-password-logo">L</div>
 
           <p className="forgot-password-step">
             STEP {step} OF 3
@@ -346,9 +367,7 @@ function ForgotPassword() {
 
           <h2>
             {step === 1 && "Reset Password"}
-
             {step === 2 && "Verify OTP"}
-
             {step === 3 && "Create New Password"}
           </h2>
 
@@ -362,22 +381,13 @@ function ForgotPassword() {
             {step === 3 &&
               "Create a new password for your LinkVerse account."}
           </p>
-
         </div>
 
-
-        {/* =====================================
-            STEP 1
-        ===================================== */}
-
+        {/* STEP 1 */}
         {step === 1 && (
           <form onSubmit={handleSendOTP}>
-
             <div className="forgot-password-form-group">
-
-              <label htmlFor="email">
-                Email Address
-              </label>
+              <label htmlFor="email">Email Address</label>
 
               <input
                 id="email"
@@ -387,7 +397,6 @@ function ForgotPassword() {
                 value={formData.email}
                 onChange={handleChange}
               />
-
             </div>
 
             <button
@@ -396,23 +405,14 @@ function ForgotPassword() {
             >
               Send OTP
             </button>
-
           </form>
         )}
 
-
-        {/* =====================================
-            STEP 2
-        ===================================== */}
-
+        {/* STEP 2 */}
         {step === 2 && (
           <form onSubmit={handleVerifyOTP}>
-
             <div className="forgot-password-form-group">
-
-              <label htmlFor="otp">
-                Verification Code
-              </label>
+              <label htmlFor="otp">Verification Code</label>
 
               <input
                 id="otp"
@@ -428,7 +428,6 @@ function ForgotPassword() {
               <p className="forgot-password-helper">
                 OTP expires in 5 minutes.
               </p>
-
             </div>
 
             <button
@@ -445,50 +444,78 @@ function ForgotPassword() {
             >
               ← Change Email
             </button>
-
           </form>
         )}
 
-
-        {/* =====================================
-            STEP 3
-        ===================================== */}
-
+        {/* STEP 3 */}
         {step === 3 && (
           <form onSubmit={handleResetPassword}>
-
             <div className="forgot-password-form-group">
-
               <label htmlFor="newPassword">
                 New Password
               </label>
 
-              <input
-                id="newPassword"
-                type="password"
-                name="newPassword"
-                placeholder="Enter your new password"
-                value={formData.newPassword}
-                onChange={handleChange}
-              />
+              <div className="password-input-wrapper">
+                <input
+                  id="newPassword"
+                  type={showNewPassword ? "text" : "password"}
+                  name="newPassword"
+                  placeholder="Enter your new password"
+                  value={formData.newPassword}
+                  onChange={handleChange}
+                />
 
+                <button
+                  type="button"
+                  className="password-toggle"
+                  onClick={() =>
+                    setShowNewPassword((previous) => !previous)
+                  }
+                  aria-label={
+                    showNewPassword ? "Hide new password" : "Show new password"
+                  }
+                  title={
+                    showNewPassword ? "Hide password" : "Show password"
+                  }
+                >
+                  <EyeIcon visible={showNewPassword} />
+                </button>
+              </div>
             </div>
 
             <div className="forgot-password-form-group">
-
               <label htmlFor="confirmPassword">
                 Confirm Password
               </label>
 
-              <input
-                id="confirmPassword"
-                type="password"
-                name="confirmPassword"
-                placeholder="Re-enter your new password"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-              />
+              <div className="password-input-wrapper">
+                <input
+                  id="confirmPassword"
+                  type={showConfirmPassword ? "text" : "password"}
+                  name="confirmPassword"
+                  placeholder="Re-enter your new password"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                />
 
+                <button
+                  type="button"
+                  className="password-toggle"
+                  onClick={() =>
+                    setShowConfirmPassword((previous) => !previous)
+                  }
+                  aria-label={
+                    showConfirmPassword
+                      ? "Hide confirm password"
+                      : "Show confirm password"
+                  }
+                  title={
+                    showConfirmPassword ? "Hide password" : "Show password"
+                  }
+                >
+                  <EyeIcon visible={showConfirmPassword} />
+                </button>
+              </div>
             </div>
 
             <button
@@ -497,10 +524,8 @@ function ForgotPassword() {
             >
               Reset Password
             </button>
-
           </form>
         )}
-
 
         <button
           type="button"
@@ -509,9 +534,7 @@ function ForgotPassword() {
         >
           ← Back to Login
         </button>
-
       </div>
-
     </div>
   );
 }
